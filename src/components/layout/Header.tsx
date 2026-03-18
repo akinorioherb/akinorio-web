@@ -9,7 +9,7 @@ import MobileMenu from './MobileMenu'
 const NAV_ITEMS = [
   { label: '商品一覧', href: '/products' },
   { label: 'ブランドストーリー', href: '/about' },
-  { label: '無料サンプル', href: '/sample' },
+  { label: '14日間体験', href: '/sample' },
 ]
 
 export default function Header() {

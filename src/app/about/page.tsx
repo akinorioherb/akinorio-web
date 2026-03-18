@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
+import { LINE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'ブランドストーリー',
   description:
-    'AKINORIOが追求する「引き算のスキンケア」。ミトコンドリアとケイ素の科学で、あなた本来の輝きを呼び覚ます。',
+    '20歳の構想。何十社に断られた開発秘話。AKINORIOが追求する「引き算の美学」と、ノーファンデの素肌へ導く哲学。',
 }
 
 export default function AboutPage() {
@@ -27,52 +28,101 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Philosophy */}
+      {/* Founder Story */}
       <section className="py-20 md:py-28">
         <Container size="sm">
+          <div className="text-center mb-14">
+            <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
+              Founder
+            </p>
+            <h2 className="text-h2 font-heading-ja font-light text-neutral-800">
+              20歳の構想、何十社の壁
+            </h2>
+            <div className="gold-divider w-16 mx-auto mt-6" />
+          </div>
+          <div className="space-y-8 text-neutral-600 leading-[2]">
+            <p>
+              創業者みなこがこの構想を抱いたのは、20歳の時でした。
+            </p>
+            <p>
+              「ファンデーションも化粧水もいらない。ダブル洗顔も不要。
+              朝は水洗顔すら不要。最終的にこれ1本で済む素肌に導く」
+              ——その信念を、何十社もの工場に伝え歩きました。
+            </p>
+            <p>
+              返ってきたのは、断りの言葉ばかり。
+              「そんなものは作れない」「需要がない」「前例がない」。
+            </p>
+            <p>
+              それでもみなこは諦めなかった。
+              そして、ようやく出会えた工場がこう言いました。
+              「30年の歴史で、こんな形状を作ったのは初めてです」。
+              原料メーカーは「これだけの配合量は、美容液と呼んでください」と。
+            </p>
+            <p>
+              世界でオンリーワン。アキノリオは、そうして生まれました。
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Philosophy */}
+      <section className="py-20 md:py-28 bg-bg-warm">
+        <Container size="sm">
+          <div className="text-center mb-14">
+            <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
+              Philosophy
+            </p>
+            <h2 className="text-h2 font-heading-ja font-light text-neutral-800">
+              何をつけるかより、何をやめるか
+            </h2>
+            <div className="gold-divider w-16 mx-auto mt-6" />
+          </div>
           <div className="space-y-8 text-neutral-600 leading-[2]">
             <p>
               化粧品の世界では、常に「足し算」が行われてきました。
               新しい成分を加え、新しい効果を謳い、新しいステップを追加する。
             </p>
             <p>
-              しかし、私たちは問いました。
-              「本当に必要なものは何か？」
+              化粧品が「アプリの追加」だとすれば、
+              アキノリオは「OSの再インストール」。
+              余計なものを全て取り除き、肌という名のシステムを初期化する。
+            </p>
+            <p>
+              もう、これ以上あなたの貴重なお金と時間を、
+              一時の気休めのために使わないでください。
             </p>
             <p>
               答えは、細胞の中にありました。
+              ミトコンドリアとケイ素の力で、肌が自ら美しくなる力を取り戻す。
+              それが私たちの答えです。
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Mitochondria section */}
-      <section className="py-20 md:py-28 bg-bg-warm">
+      {/* Spreading Philosophy */}
+      <section className="py-20 md:py-28">
         <Container size="md">
           <div className="text-center mb-14">
             <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
-              Science
+              Our Way
             </p>
             <h2 className="text-h2 font-heading-ja font-light text-neutral-800">
-              ミトコンドリアという答え
+              売らないで広がる
             </h2>
             <div className="gold-divider w-16 mx-auto mt-6" />
           </div>
 
           <div className="max-w-2xl mx-auto space-y-6 text-neutral-600 leading-[2]">
             <p>
-              ミトコンドリアは、私たちの細胞一つひとつに存在するエネルギー工場です。
-              ATP（アデノシン三リン酸）を生成し、細胞の活動を支えています。
+              アキノリオの代理店理念は「売らないで広がる」こと。
+              自然な口コミだけで連鎖する。売り込みは完全に禁止。
             </p>
             <p>
-              しかし加齢とともに、ミトコンドリアの機能は低下します。
-              エネルギーが不足した細胞は、ターンオーバーが乱れ、
-              コラーゲンの生成が衰え、シミ・くすみ・たるみが現れます。
-            </p>
-            <p>
-              アキノリオは、このミトコンドリアの活性化に着目。
-              ケイ素（シリカ）との組み合わせで、
-              細胞が自ら美しくなる力を引き出します。
+              オーナー自身が本当に惚れ込んだ場合のみ、取り扱いができます。
+              感動を伝え、その感動が次の人に届く。
+              それだけで広がっていく。
             </p>
           </div>
 
@@ -81,7 +131,7 @@ export default function AboutPage() {
             {[
               {
                 title: 'ミトコンドリア活性',
-                desc: '細胞のエネルギー工場を活性化。内側から肌を目覚めさせます。',
+                desc: '細胞のエネルギー工場を活性化。肌のOSを初期化し、内側から目覚めさせます。',
               },
               {
                 title: 'ケイ素（シリカ）の力',
@@ -93,7 +143,7 @@ export default function AboutPage() {
               },
               {
                 title: '敏感肌にも安心',
-                desc: 'パラベンフリー・アルコールフリー。低刺激処方。',
+                desc: 'パラベンフリー・アルコールフリー。患者の薬剤アレルギーの肌が再生した実績。',
               },
             ].map((point) => (
               <div key={point.title} className="bg-white p-6 rounded-sm border border-neutral-100">
@@ -110,19 +160,30 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28 bg-bg-warm">
         <Container size="sm">
           <div className="text-center">
             <h2 className="text-h3 font-heading-ja font-light text-neutral-800 mb-6">
-              まずは14日間、
+              引き算の旅は、
               <br />
-              引き算のスキンケアを
-              <br />
-              体験してください
+              ここから始まります
             </h2>
-            <Button href="/sample" variant="gold" size="lg">
-              無料サンプルを申し込む
-            </Button>
+            <p className="font-ui text-sm text-neutral-500 mb-8">
+              あなたの肌と、出会い直す14日間。
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={LINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-gold-500 text-white px-8 py-4 rounded-sm font-heading-ja text-base font-normal tracking-wider hover:bg-gold-600 transition-all duration-300"
+              >
+                14日間の引き算プログラムを始める
+              </a>
+              <Button href="/products" variant="secondary">
+                商品一覧を見る
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

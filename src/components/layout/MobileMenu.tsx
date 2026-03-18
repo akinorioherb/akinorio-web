@@ -11,7 +11,7 @@ interface MobileMenuProps {
 const MENU_ITEMS = [
   { label: '商品一覧', href: '/products' },
   { label: 'ブランドストーリー', href: '/about' },
-  { label: '無料サンプル請求', href: '/sample' },
+  { label: '14日間体験', href: '/sample' },
   { label: 'カート', href: '/cart' },
 ]
 
@@ -68,7 +68,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* LINE CTA */}
           <div className="mt-8 p-5 bg-[#06C755]/10 rounded-sm">
             <p className="font-ui text-sm text-neutral-600 mb-3">
-              LINE友だち追加で14日間無料サンプル
+              引き算の旅は、ここから始まります
             </p>
             <a
               href={LINE_URL}

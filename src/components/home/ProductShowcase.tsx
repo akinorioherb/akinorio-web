@@ -17,7 +17,7 @@ export default function ProductShowcase() {
             Products
           </p>
           <h2 className="text-h2 font-heading-ja font-light text-neutral-800">
-            商品ラインナップ
+            引き算のためのアイテム
           </h2>
           <div className="gold-divider w-16 mx-auto mt-6" />
         </div>

@@ -17,7 +17,7 @@ export default function Footer() {
                 AKINORIO
               </Link>
               <p className="mt-4 font-ui text-sm text-primary-200 leading-relaxed">
-                細胞レベルに着目した<br />
+                何をつけるかより、何をやめるか。<br />
                 引き算のスキンケア
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/sample" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors">
-                    14日間無料サンプル
+                    14日間体験
                   </Link>
                 </li>
               </ul>
@@ -80,6 +80,9 @@ export default function Footer() {
               <h3 className="font-ui text-xs tracking-widest text-gold-400 uppercase mb-4">
                 Connect
               </h3>
+              <p className="font-ui text-xs text-primary-300 mb-3">
+                引き算の旅は、ここから始まります
+              </p>
               <a
                 href={LINE_URL}
                 target="_blank"

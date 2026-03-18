@@ -41,10 +41,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <div className="flex gap-2 mb-4">
           {product.subscriptionDiscountPct > 0 && (
             <Badge variant="gold">
-              定期購入{product.subscriptionDiscountPct}%OFF
+              定期コース
             </Badge>
           )}
-          {product.price === 0 && <Badge variant="free">無料</Badge>}
+          {product.price === 0 && <Badge variant="free">14日間体験</Badge>}
         </div>
 
         {/* Title */}
@@ -60,7 +60,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         {/* Price */}
         <div className="mb-8">
           <p className="font-price text-2xl text-primary-700">
-            {product.price === 0 ? '無料' : formatPrice(product.price)}
+            {product.price === 0 ? '' : formatPrice(product.price)}
             <span className="font-ui text-sm text-neutral-400 ml-2">
               {product.price > 0 && '（税込）'}
             </span>
@@ -104,14 +104,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               className="w-full"
               onClick={handleAddToCart}
             >
-              {isAdded ? 'カートに追加しました' : 'カートに入れる'}
+              {isAdded ? 'カートに追加しました' : 'この一本を選ぶ'}
             </Button>
           </div>
         )}
 
         {product.price === 0 && (
           <Button href="/sample" variant="gold" size="lg" className="w-full mb-8">
-            無料サンプルを申し込む
+            14日間の引き算プログラムを始める
           </Button>
         )}
 

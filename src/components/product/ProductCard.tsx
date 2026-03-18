@@ -24,11 +24,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex gap-2">
           {product.price === 0 && (
-            <Badge variant="free">無料</Badge>
+            <Badge variant="free">14日間体験</Badge>
           )}
           {product.subscriptionDiscountPct > 0 && (
             <Badge variant="gold">
-              定期{product.subscriptionDiscountPct}%OFF
+              定期コース
             </Badge>
           )}
         </div>
@@ -44,11 +44,16 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.volume && ` / ${product.volume}`}
         </p>
         <p className="font-price text-lg text-primary-700">
-          {product.price === 0 ? '無料' : formatPrice(product.price)}
+          {product.price === 0 ? '' : formatPrice(product.price)}
           <span className="font-ui text-xs text-neutral-400 ml-1">
             {product.price > 0 && '（税込）'}
           </span>
         </p>
+        {product.subscriptionPrice > 0 && product.subscriptionPrice < product.price && (
+          <p className="font-ui text-xs text-gold-700 mt-1">
+            定期購入なら {formatPrice(product.subscriptionPrice)}
+          </p>
+        )}
         {product.usageDuration && (
           <p className="font-ui text-xs text-neutral-400 mt-1">
             使用目安: {product.usageDuration}

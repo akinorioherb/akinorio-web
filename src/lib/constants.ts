@@ -2,7 +2,7 @@ import type { Product, Testimonial } from '@/types'
 
 export const SITE_NAME = 'AKINORIO'
 export const SITE_URL = 'https://akinorio.com'
-export const SITE_DESCRIPTION = '細胞レベルに着目した引き算のスキンケア。ミトコンドリア×ケイ素の科学で、あなた本来の輝きを。'
+export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリア×ケイ素の力で、肌のOSを初期化する引き算のスキンケア。'
 export const LINE_URL = 'https://lin.ee/qF2bQ2v'
 export const FREE_SHIPPING_THRESHOLD = 10000
 export const SHIPPING_FEE = 600
@@ -13,7 +13,7 @@ export const PRODUCTS: Product[] = [
     slug: 'serum',
     name: 'ミトコンドリアのちから',
     subtitle: '細胞美容液',
-    description: 'ミトコンドリアとケイ素の力で、細胞レベルからお肌を目覚めさせる美容液。引き算のスキンケアの主役です。洗顔後、化粧水の前にお使いください。わずか1滴で、お肌の奥深くまで届く実感をお楽しみいただけます。',
+    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。ファンデーションも化粧水もいらない。ダブル洗顔も不要。最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。ミトコンドリアとケイ素の力で、細胞が自ら美しくなる力を呼び覚まします。',
     category: 'single',
     price: 13200,
     subscriptionPrice: 11880,
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     slug: 'cleansing',
     name: 'ミトコンドリアのちから',
     subtitle: 'クレンジング',
-    description: 'メイクも毛穴汚れも、するんと落とす。ミトコンドリア活性成分配合のクレンジングジェル。洗い上がりはしっとり、つっぱりません。',
+    description: 'ダブル洗顔という「余計な儀式」を終わらせるクレンジング。メイクも毛穴汚れも、するんと落とす。ミトコンドリア活性成分を配合し、落とすたびに肌が整っていく。洗い上がりはしっとり、つっぱりません。引き算の第一歩は、ここから。',
     category: 'single',
     price: 5280,
     subscriptionPrice: 4752,
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     slug: 'soap',
     name: 'ミトコンドリアのちから',
     subtitle: 'ソープ',
-    description: '豊かな泡立ちで、やさしく洗い上げる固形ソープ。ミトコンドリア活性成分とケイ素を配合し、洗うたびに肌を整えます。',
+    description: '工場が「30年の歴史で、こんな形状を作ったのは初めて」と言った石鹸。豊かな泡立ちで、やさしく洗い上げる。ミトコンドリア活性成分とケイ素を配合し、洗うたびに肌本来の力を呼び覚ます。朝は水洗顔すら不要になる、その日のために。',
     category: 'single',
     price: 3960,
     subscriptionPrice: 3564,
@@ -84,9 +84,9 @@ export const PRODUCTS: Product[] = [
   {
     id: '4',
     slug: 'sample',
-    name: '14日間サンプルセット',
-    subtitle: 'お試しセット',
-    description: 'アキノリオの引き算スキンケアを14日間じっくりお試しいただけるサンプルセットです。美容液・クレンジング・ソープの3点セット。',
+    name: '14日間 引き算プログラム',
+    subtitle: '体験セット',
+    description: 'あなたの肌と、出会い直す14日間。余計なケアをやめたとき、肌は何を語り始めるのか。美容液・クレンジング・ソープの3点で、引き算のスキンケアを体感してください。',
     category: 'set',
     price: 0,
     subscriptionPrice: 0,
@@ -96,9 +96,9 @@ export const PRODUCTS: Product[] = [
     ingredients: '',
     features: [
       '美容液・クレンジング・ソープの3点セット',
-      '14日間じっくり試せる',
-      '送料無料',
-      'LINE登録で使い方サポート付き',
+      '14日間の引き算プログラム',
+      '送料は当方が負担いたします',
+      'LINEで引き算スキンケアのヒントをお届け',
     ],
     skinConcerns: ['乾燥', '毛穴', 'シミ・くすみ', 'ハリ・たるみ', '敏感肌'],
     images: [],
@@ -113,7 +113,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'M.T',
     age: 52,
     skinConcern: 'ハリ・たるみ',
-    content: '使い始めて1ヶ月で、朝起きた時の肌のハリが全然違うことに気づきました。引き算のスキンケアという考え方に最初は半信半疑でしたが、今では手放せません。',
+    content: '引き算を始めて1ヶ月。朝、鏡を見て涙が出ました。何十年も「足す」ことばかりしていた自分が恥ずかしくなるほど、肌が生き返っていた。もっと早く出会いたかった。この感動を、同じ悩みを持つ友人にも伝えました。',
     rating: 5,
     productName: 'ミトコンドリアのちから 美容液',
   },
@@ -122,7 +122,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'K.S',
     age: 45,
     skinConcern: '毛穴',
-    content: '長年悩んでいた毛穴の開きが、3ヶ月使い続けたら目立たなくなってきました。友人からも「何か変えた？」と聞かれるようになりました。',
+    content: '長年の毛穴の悩みが、引き算を始めて3ヶ月で嘘のように落ち着きました。化粧水を重ねて、美容液を重ねて、クリームを重ねて。あの「足し算の日々」は一体何だったのか。救われた気持ちです。友人にも教えたくて、もう3人に紹介しました。',
     rating: 5,
     productName: 'ミトコンドリアのちから 美容液',
   },
@@ -131,7 +131,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Y.N',
     age: 38,
     skinConcern: '敏感肌',
-    content: 'アトピー体質で化粧品選びにはとても慎重ですが、アキノリオは全く刺激がなく安心して使えています。肌が本来の力を取り戻していく感覚があります。',
+    content: 'アトピー体質で、何を塗っても赤くなる肌でした。皮膚科で処方された薬すら合わないこともあった。でもアキノリオだけは違った。全く刺激がなく、肌が本来の力を取り戻していくのを感じました。本当に救われました。',
     rating: 5,
     productName: 'ミトコンドリアのちから 美容液',
   },
@@ -140,7 +140,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'R.M',
     age: 61,
     skinConcern: 'シミ・くすみ',
-    content: 'くすみが気になっていましたが、使い続けるうちにワントーン明るくなった気がします。年齢を言うと驚かれることが増えました。',
+    content: '60歳を過ぎて「もう何をしても」と諦めていました。でも引き算を始めてから、肌が自ら明るさを取り戻していく。ファンデーションなしで外出できる日が来るなんて。娘に「お母さん、肌きれいになった」と言われた時、泣きそうになりました。',
     rating: 5,
     productName: 'ミトコンドリアのちから 美容液',
   },

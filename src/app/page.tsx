@@ -4,36 +4,39 @@ import ProductShowcase from '@/components/home/ProductShowcase'
 import BrandStory from '@/components/home/BrandStory'
 import Testimonials from '@/components/home/Testimonials'
 import Container from '@/components/ui/Container'
-import Button from '@/components/ui/Button'
 import { LINE_URL, SITE_NAME, SITE_URL, SITE_DESCRIPTION } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | 細胞レベルに着目した引き算のスキンケア`,
+  title: `${SITE_NAME} | 引き算という、美しさの答え。`,
   description: SITE_DESCRIPTION,
 }
 
-function SampleCTA() {
+function ProgramCTA() {
   return (
     <section className="py-20 md:py-28 bg-marble relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary-900/80 via-primary-700/70 to-primary-800/90" />
       <Container className="relative z-10">
         <div className="text-center max-w-xl mx-auto">
           <p className="font-heading-en text-xs tracking-[0.3em] text-gold-400 uppercase mb-3">
-            Free Sample
+            14 Days Program
           </p>
           <h2 className="text-h2 font-heading-ja font-light text-white mb-6">
-            14日間無料サンプルで
-            <br />
-            実感してください
+            14日間の引き算プログラム
           </h2>
-          <p className="text-white/70 leading-relaxed mb-10 font-ui text-sm">
-            まずは14日間、アキノリオの引き算スキンケアを
-            お試しください。送料も無料です。
+          <p className="text-white/70 leading-[2] mb-10 font-ui text-sm">
+            あなたの肌と、出会い直す14日間。
+            <br />
+            余計なケアをやめたとき、肌は何を語り始めるのか。
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="/sample" variant="gold" size="lg">
-              無料サンプルを申し込む
-            </Button>
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-gold-500 text-white px-8 py-4 rounded-sm font-heading-ja text-base font-normal tracking-wider hover:bg-gold-600 transition-all duration-300 shadow-[var(--shadow-gold)]"
+            >
+              14日間の引き算プログラムを始める
+            </a>
           </div>
         </div>
       </Container>
@@ -47,12 +50,12 @@ function LineCTA() {
       <Container size="sm">
         <div className="text-center">
           <h2 className="text-h3 font-heading-ja font-light text-neutral-800 mb-4">
-            LINE友だち追加で
+            引き算の旅は、
             <br className="md:hidden" />
-            お得な情報をお届け
+            ここから始まります
           </h2>
           <p className="font-ui text-sm text-neutral-500 mb-8">
-            新商品情報やお手入れのコツ、会員限定のお得な情報をお届けします。
+            引き算スキンケアの考え方や、お手入れのヒントをお届けします。
           </p>
           <a
             href={LINE_URL}
@@ -78,7 +81,7 @@ export default function HomePage() {
       <ProductShowcase />
       <BrandStory />
       <Testimonials />
-      <SampleCTA />
+      <ProgramCTA />
       <LineCTA />
 
       {/* JSON-LD Organization */}

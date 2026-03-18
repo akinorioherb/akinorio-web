@@ -67,17 +67,17 @@ export default function SamplePage() {
               </svg>
             </div>
             <h1 className="text-h2 font-heading-ja font-light text-neutral-800 mb-4">
-              サンプルのお申し込み
+              引き算の旅が、
               <br />
-              ありがとうございます
+              始まります。
             </h1>
             <div className="max-w-md mx-auto space-y-4 text-neutral-600 leading-[1.9] font-ui text-sm">
-              <p>3営業日以内に発送いたします。</p>
+              <p>3営業日以内にお届けいたします。</p>
               <p>
                 届きましたら、LINEで一言メッセージいただけると嬉しいです。
               </p>
               <p>
-                到着までの間に、アキノリオの「引き算のスキンケア」について
+                お届けまでの間に、「引き算のスキンケア」という考え方について
                 少しだけお伝えしていきますね。
               </p>
             </div>
@@ -106,15 +106,15 @@ export default function SamplePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
-            Free Sample
+            14 Days Program
           </p>
           <h1 className="text-h1 font-heading-ja font-light text-neutral-800 mb-4">
-            14日間無料サンプル請求
+            14日間の引き算プログラム
           </h1>
           <p className="font-ui text-sm text-neutral-500">
-            美容液・クレンジング・ソープの3点セットを無料でお届けします。
+            あなたの肌と、出会い直す14日間。
             <br />
-            送料も無料です。
+            美容液・クレンジング・ソープの3点セットをお届けします。
           </p>
         </div>
 
@@ -330,10 +330,10 @@ export default function SamplePage() {
           {/* LINE CTA */}
           <div className="bg-[#06C755]/10 p-5 rounded-sm">
             <p className="font-ui text-sm text-neutral-700 mb-2">
-              LINE友だち追加もお忘れなく
+              引き算の旅を、より深く
             </p>
             <p className="font-ui text-xs text-neutral-500 mb-3">
-              サンプルの使い方やお手入れのコツをLINEでお届けします。
+              引き算スキンケアの考え方やお手入れのヒントをLINEでお届けします。
             </p>
             <a
               href={LINE_URL}
@@ -354,7 +354,7 @@ export default function SamplePage() {
               className="w-full"
               disabled={isSubmitting}
             >
-              {isSubmitting ? '送信中...' : '無料サンプルを申し込む'}
+              {isSubmitting ? '送信中...' : '14日間の引き算プログラムを申し込む'}
             </Button>
             <p className="font-ui text-xs text-neutral-400 text-center mt-3">
               ※ お一人様1回限りとさせていただきます

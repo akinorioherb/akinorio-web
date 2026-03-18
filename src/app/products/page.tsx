@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Container from '@/components/ui/Container'
 import ProductCard from '@/components/product/ProductCard'
-import { PRODUCTS } from '@/lib/constants'
+import Button from '@/components/ui/Button'
+import { PRODUCTS, LINE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: '商品一覧',
@@ -34,19 +35,27 @@ export default function ProductsPage() {
           ))}
         </div>
 
-        {/* Sample CTA */}
+        {/* 14-day Program CTA */}
         {sampleProduct && (
           <div className="mt-16 bg-bg-warm p-8 md:p-12 rounded-sm text-center">
             <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
-              Free Sample
+              14 Days Program
             </p>
             <h2 className="text-h3 font-heading-ja font-light text-neutral-800 mb-4">
-              まずは14日間、無料でお試し
+              14日間の引き算プログラム
             </h2>
             <p className="font-ui text-sm text-neutral-500 mb-8 max-w-md mx-auto">
-              美容液・クレンジング・ソープの3点セットを14日間無料でお試しいただけます。送料も無料です。
+              あなたの肌と、出会い直す14日間。
+              美容液・クレンジング・ソープの3点セットをお届けします。
             </p>
-            <ProductCard product={sampleProduct} />
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-gold-500 text-white px-8 py-4 rounded-sm font-heading-ja text-base font-normal tracking-wider hover:bg-gold-600 transition-all duration-300"
+            >
+              引き算プログラムを始める
+            </a>
           </div>
         )}
       </Container>

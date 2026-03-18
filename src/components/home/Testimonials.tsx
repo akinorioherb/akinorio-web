@@ -11,8 +11,11 @@ export default function Testimonials() {
             Voices
           </p>
           <h2 className="text-h2 font-heading-ja font-light text-neutral-800">
-            お客様の声
+            引き算を選んだ方の声
           </h2>
+          <p className="font-ui text-sm text-neutral-400 mt-4">
+            救われた。もっと早く出会いたかった。あの人にも教えたい。
+          </p>
           <div className="gold-divider w-16 mx-auto mt-6" />
         </div>
 

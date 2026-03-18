@@ -8,27 +8,33 @@ export default function BrandStory() {
         <div className="text-center">
           {/* Section header */}
           <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
-            Our Philosophy
+            Philosophy
           </p>
           <h2 className="text-h2 font-heading-ja font-light text-neutral-800 mb-8">
-            なぜ、ミトコンドリアなのか
+            何をつけるかより、何をやめるか。
           </h2>
           <div className="gold-divider w-16 mx-auto mb-12" />
 
           {/* Content */}
           <div className="max-w-2xl mx-auto space-y-6 text-neutral-600 leading-[2]">
             <p>
-              私たちの肌には、自ら美しくなる力が備わっています。
+              もしあなたが「これさえ塗れば翌朝シワが全部消える」ような
+              魔法を求めているなら、どうぞこのページを閉じてください。
             </p>
             <p>
-              その鍵を握るのが、細胞のエネルギー工場「ミトコンドリア」。
-              加齢とともに衰えるミトコンドリアの活性を取り戻すことで、
-              肌は本来の輝きを取り戻します。
+              私たちが提案するのは、魔法ではなく「引き算」です。
             </p>
             <p>
-              アキノリオは「足す」のではなく「引く」スキンケア。
-              余計な成分を排し、ミトコンドリアとケイ素の力だけで
-              細胞レベルからお肌を目覚めさせます。
+              創業者みなこは、20歳の時からこの構想を温めていました。
+              何十社もの工場に断られ、それでも諦めなかった。
+              「ファンデーションも化粧水もいらない。最終的にこれ1本で済む素肌に導く」
+              ——その信念だけを武器に。
+            </p>
+            <p>
+              現代の化粧品が「アプリの追加」だとすれば、
+              アキノリオは「OSの再インストール」。
+              余計な成分を引き算し、ミトコンドリアとケイ素の力だけで
+              肌本来の力を呼び覚ます。それがアキノリオの哲学です。
             </p>
           </div>
 
@@ -38,17 +44,17 @@ export default function BrandStory() {
               {
                 title: '引き算の哲学',
                 description:
-                  '余計な成分を加えない。肌本来の力を信じる、シンプルなアプローチ。',
+                  '足すのではなく、やめること。化粧水も、ファンデーションも、ダブル洗顔も。肌本来の力を信じ、余計を手放す覚悟。',
               },
               {
-                title: 'ミトコンドリア活性',
+                title: 'ミトコンドリアの力',
                 description:
-                  '細胞のエネルギー工場に直接アプローチ。内側から輝く肌へ。',
+                  '細胞のエネルギー工場に着目。肌の「OS」を初期化し、内側から目覚める肌へのアプローチ。',
               },
               {
-                title: 'ケイ素の力',
+                title: 'ノーファンデの素肌へ',
                 description:
-                  '美のミネラル「ケイ素」が、コラーゲンの生成をサポートします。',
+                  '最終的にこれ1本で済む素肌に導く。それがアキノリオの約束であり、ゴールです。',
               },
             ].map((feature) => (
               <div key={feature.title} className="text-center">
