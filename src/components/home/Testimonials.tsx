@@ -1,12 +1,17 @@
+'use client'
+
 import Container from '@/components/ui/Container'
 import { TESTIMONIALS } from '@/lib/constants'
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 
 export default function Testimonials() {
+  const { ref, isVisible } = useScrollAnimation(0.1)
+
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-24 md:py-32" ref={ref}>
       <Container>
         {/* Section header */}
-        <div className="text-center mb-14">
+        <div className={`text-center mb-14 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
           <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
             Voices
           </p>
@@ -21,11 +26,17 @@ export default function Testimonials() {
 
         {/* Testimonial cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {TESTIMONIALS.map((testimonial) => (
+          {TESTIMONIALS.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-bg-cream p-8 rounded-sm border border-neutral-100"
+              className={`bg-bg-cream p-8 rounded-sm border border-neutral-100 relative scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+              style={{ transitionDelay: isVisible ? `${0.2 + index * 0.15}s` : '0s' }}
             >
+              {/* Gold quote accent */}
+              <div className="absolute top-4 right-6 font-heading-en text-5xl text-gold-200 leading-none select-none pointer-events-none">
+                &ldquo;
+              </div>
+
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -42,7 +53,7 @@ export default function Testimonials() {
               </div>
 
               {/* Content */}
-              <p className="text-neutral-600 leading-[1.9] mb-6 text-sm">
+              <p className="text-neutral-600 leading-[1.9] mb-6 text-sm relative z-10">
                 {testimonial.content}
               </p>
 

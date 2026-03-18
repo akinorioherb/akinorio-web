@@ -17,6 +17,7 @@ export interface Product {
   ingredients: string
   features: string[]
   skinConcerns: SkinConcern[]
+  image: string
   images: string[]
   sortOrder: number
   isActive: boolean

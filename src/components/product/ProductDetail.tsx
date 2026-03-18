@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import type { Product } from '@/types'
 import { formatPrice, formatPriceWithTax } from '@/lib/utils'
 import { useCart } from '@/lib/cart'
@@ -25,13 +26,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
       {/* Image */}
-      <div className="aspect-square bg-gradient-to-br from-bg-cream to-neutral-50 rounded-sm flex items-center justify-center">
-        <div className="w-2/3 h-2/3 rounded-full bg-gradient-to-br from-gold-100 to-gold-50 flex items-center justify-center">
-          <span className="font-heading-ja text-lg text-gold-700 text-center px-8">
-            {product.name}
-            <br />
-            {product.subtitle}
-          </span>
+      <div className="relative aspect-square bg-gradient-to-br from-bg-cream to-neutral-50 rounded-sm overflow-hidden">
+        <div className="animate-float w-full h-full">
+          <Image
+            src={product.image}
+            alt={`${product.name} ${product.subtitle}`}
+            fill
+            className="object-contain p-8"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
         </div>
       </div>
 

@@ -238,3 +238,88 @@ h1, h2, h3, h4, h5, h6 {
 .delay-1 { animation-delay: 0.3s; }
 .delay-2 { animation-delay: 0.6s; }
 .delay-3 { animation-delay: 0.9s; }
+
+/* === Product float animation === */
+@keyframes floatProduct {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* === Scale in === */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Slide in from left === */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === Slide in from right === */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === Line expand (gold accent) === */
+@keyframes lineExpand {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+/* === Scroll reveal base classes === */
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-hidden-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-visible-scale {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* === Product card hover === */
+.product-card-hover {
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.product-card-hover:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* === Product image container === */
+.product-image {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* === Float animation utility === */
+.animate-float {
+  animation: floatProduct 4s ease-in-out infinite;
+}
+
+/* === Stagger delay utilities === */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }

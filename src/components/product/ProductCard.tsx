@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Product } from '@/types'
 import { formatPrice } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
@@ -11,18 +12,22 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group block bg-white rounded-sm border border-neutral-100 overflow-hidden hover:shadow-[var(--shadow-elevated)] transition-shadow duration-300"
+      className="group block bg-white rounded-sm border border-neutral-100 overflow-hidden product-card-hover"
     >
-      {/* Image placeholder */}
-      <div className="relative aspect-square bg-gradient-to-br from-bg-cream to-neutral-50 flex items-center justify-center overflow-hidden">
-        <div className="w-2/3 h-2/3 rounded-full bg-gradient-to-br from-gold-100 to-gold-50 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-          <span className="font-heading-ja text-sm text-gold-700 text-center px-4">
-            {product.subtitle}
-          </span>
+      {/* Image */}
+      <div className="relative aspect-[4/5] bg-gradient-to-br from-bg-cream to-neutral-50 flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-full product-image">
+          <Image
+            src={product.image}
+            alt={`${product.name} ${product.subtitle}`}
+            fill
+            className="object-contain p-6"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex gap-2">
+        <div className="absolute top-3 left-3 flex gap-2 z-10">
           {product.price === 0 && (
             <Badge variant="free">14日間体験</Badge>
           )}
