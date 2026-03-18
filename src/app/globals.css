@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Primary (Deep Red / Bordeaux) === */
-  --color-primary-900: #1a0508;
-  --color-primary-800: #2d0b10;
-  --color-primary-700: #3d0e13;
-  --color-primary-600: #4a1520;
-  --color-primary-500: #5c1e26;
-  --color-primary-400: #7a2d38;
-  --color-primary-300: #9e4a58;
-  --color-primary-200: #c4848f;
-  --color-primary-100: #e8c5cb;
-  --color-primary-50: #f9eef0;
+  /* === Primary (Cartier Red) === */
+  --color-primary-900: #2a0008;
+  --color-primary-800: #4d0010;
+  --color-primary-700: #7a001a;
+  --color-primary-600: #a00024;
+  --color-primary-500: #c40234;
+  --color-primary-400: #d4294e;
+  --color-primary-300: #e06080;
+  --color-primary-200: #f0a0b0;
+  --color-primary-100: #fad0d8;
+  --color-primary-50: #fef0f2;
 
   /* === Gold (Accent) === */
   --color-gold-900: #4a3810;
@@ -40,8 +40,8 @@
   /* === Semantic Backgrounds === */
   --color-bg-warm: #faf8f5;
   --color-bg-cream: #f5f1eb;
-  --color-bg-dark: #3d0e13;
-  --color-bg-marble: #3b231c;
+  --color-bg-dark: #2a0008;
+  --color-bg-marble: #1e0a0e;
 
   /* === Status === */
   --color-success: #166534;
