@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Primary (Deep Red / Bordeaux) === */
+  --color-primary-900: #1a0508;
+  --color-primary-800: #2d0b10;
+  --color-primary-700: #3d0e13;
+  --color-primary-600: #4a1520;
+  --color-primary-500: #5c1e26;
+  --color-primary-400: #7a2d38;
+  --color-primary-300: #9e4a58;
+  --color-primary-200: #c4848f;
+  --color-primary-100: #e8c5cb;
+  --color-primary-50: #f9eef0;
+
+  /* === Gold (Accent) === */
+  --color-gold-900: #4a3810;
+  --color-gold-800: #7a5f1a;
+  --color-gold-700: #a68225;
+  --color-gold-600: #bfa045;
+  --color-gold-500: #d4af37;
+  --color-gold-400: #cfaa70;
+  --color-gold-300: #e8d5b0;
+  --color-gold-200: #f3e5ab;
+  --color-gold-100: #f8f0d4;
+  --color-gold-50: #fdf9ec;
+
+  /* === Neutral === */
+  --color-neutral-900: #1a1a1a;
+  --color-neutral-800: #2c2c2c;
+  --color-neutral-700: #404040;
+  --color-neutral-600: #555555;
+  --color-neutral-500: #717171;
+  --color-neutral-400: #888888;
+  --color-neutral-300: #b0b0b0;
+  --color-neutral-200: #d4d4d4;
+  --color-neutral-100: #ebebeb;
+  --color-neutral-50: #f5f5f5;
+
+  /* === Semantic Backgrounds === */
+  --color-bg-warm: #faf8f5;
+  --color-bg-cream: #f5f1eb;
+  --color-bg-dark: #3d0e13;
+  --color-bg-marble: #3b231c;
+
+  /* === Status === */
+  --color-success: #166534;
+  --color-success-light: #dcfce7;
+  --color-warning: #854d0e;
+  --color-warning-light: #fef9c3;
+  --color-error: #991b1b;
+  --color-error-light: #fee2e2;
+
+  /* === Font families === */
+  --font-heading-en: 'Cinzel', 'Times New Roman', serif;
+  --font-heading-ja: 'Noto Serif JP', 'Yu Mincho', serif;
+  --font-body: 'Noto Serif JP', 'Yu Mincho', serif;
+  --font-ui: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  --font-price: 'Cinzel', 'Georgia', serif;
+
+  /* === Font sizes (fluid) === */
+  --text-display: clamp(2rem, 1.4rem + 2.54vw, 3.5rem);
+  --text-h1: clamp(1.75rem, 1.25rem + 2.11vw, 2.75rem);
+  --text-h2: clamp(1.5rem, 1.1rem + 1.69vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 0.95rem + 1.27vw, 1.75rem);
+  --text-h4: clamp(1.125rem, 0.94rem + 0.75vw, 1.375rem);
+
+  /* === Shadows === */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* === Base styles === */
+body {
+  font-family: var(--font-body);
+  color: var(--color-neutral-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "palt";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* === Custom utility classes === */
+.font-heading-en {
+  font-family: var(--font-heading-en);
+  letter-spacing: 0.1em;
+}
+
+.font-heading-ja {
+  font-family: var(--font-heading-ja);
+  letter-spacing: 0.04em;
+}
+
+.font-price {
+  font-family: var(--font-price);
+  letter-spacing: 0.02em;
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+.text-display {
+  font-size: var(--text-display);
+  line-height: 1.3;
+}
+
+.text-h1 {
+  font-size: var(--text-h1);
+  line-height: 1.5;
+}
+
+.text-h2 {
+  font-size: var(--text-h2);
+  line-height: 1.5;
+}
+
+.text-h3 {
+  font-size: var(--text-h3);
+  line-height: 1.5;
+}
+
+.text-h4 {
+  font-size: var(--text-h4);
+  line-height: 1.4;
+}
+
+/* Gold gradient text effect */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold line divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-400), transparent);
+}
+
+/* Marble background pattern */
+.bg-marble {
+  background: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-bg-marble) 50%, var(--color-primary-800) 100%);
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
