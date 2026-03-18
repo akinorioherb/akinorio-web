@@ -269,6 +269,31 @@ h1, h2, h3, h4, h5, h6 {
   to { width: 60px; }
 }
 
+/* === Hero orb breathing === */
+@keyframes heroOrbBreathe {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -45%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -45%) scale(1.1); }
+}
+
+/* === Hero shimmer sweep on product === */
+@keyframes heroShimmer {
+  0% { left: -100%; }
+  50% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* === Hero CTA pulse glow === */
+@keyframes heroPulseGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.15); }
+  50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1); }
+}
+
+/* === Product card shimmer slide === */
+@keyframes shimmerSlide {
+  from { left: -100%; }
+  to { left: 200%; }
+}
+
 /* === Scroll reveal base classes === */
 .scroll-hidden {
   opacity: 0;

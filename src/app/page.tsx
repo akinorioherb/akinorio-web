@@ -11,19 +11,105 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
 }
 
+function GoldDivider() {
+  return (
+    <div className="flex items-center justify-center py-2">
+      <div className="w-px h-12 bg-gradient-to-b from-transparent via-gold-300/40 to-transparent" />
+    </div>
+  )
+}
+
 function ProgramCTA() {
   return (
-    <section className="py-20 md:py-28 bg-marble relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-900/80 via-primary-700/70 to-primary-800/90" />
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Dark marble background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1e0a0e] via-[#2a0008] to-[#1a0006]" />
+
+      {/* SVG ambient animation (LP-level) */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-50"
+        viewBox="0 0 1440 600"
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="ctaGlow1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#d4af37" stopOpacity="0.1">
+              <animate attributeName="stop-opacity" values="0.04;0.12;0.04" dur="7s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" stopColor="#d4af37" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="ctaGlow2" cx="70%" cy="40%" r="35%">
+            <stop offset="0%" stopColor="#c40234" stopOpacity="0.06">
+              <animate attributeName="stop-opacity" values="0.02;0.08;0.02" dur="9s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" stopColor="#c40234" stopOpacity="0" />
+          </radialGradient>
+          <filter id="ctaBlur"><feGaussianBlur stdDeviation="3" /></filter>
+          <linearGradient id="ctaShimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#d4af37" stopOpacity="0" />
+            <stop offset="50%" stopColor="#d4af37" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#d4af37" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {/* Breathing glows */}
+        <circle cx="720" cy="300" r="250" fill="url(#ctaGlow1)">
+          <animate attributeName="r" values="200;300;200" dur="8s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="1000" cy="240" r="180" fill="url(#ctaGlow2)">
+          <animate attributeName="r" values="150;220;150" dur="10s" repeatCount="indefinite" />
+        </circle>
+
+        {/* Wave ring */}
+        <g transform="translate(720, 300)">
+          <circle cx="0" cy="0" r="60" fill="none" stroke="#d4af37" strokeWidth="0.3" opacity="0">
+            <animate attributeName="r" values="60;350" dur="8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0.08;0" dur="8s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        {/* Gold particles */}
+        <g filter="url(#ctaBlur)">
+          <circle cx="200" cy="150" r="1.2" fill="#d4af37" opacity="0">
+            <animate attributeName="opacity" values="0;0.4;0" dur="4s" begin="0.5s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="150;90" dur="4s" begin="0.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="600" cy="450" r="1.5" fill="#d4af37" opacity="0">
+            <animate attributeName="opacity" values="0;0.3;0" dur="5s" begin="1s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="450;370" dur="5s" begin="1s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="1100" cy="200" r="1" fill="#d4af37" opacity="0">
+            <animate attributeName="opacity" values="0;0.35;0" dur="4.5s" begin="2s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="200;140" dur="4.5s" begin="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="400" cy="350" r="1.3" fill="#d4af37" opacity="0">
+            <animate attributeName="opacity" values="0;0.3;0" dur="5.5s" begin="0.8s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="350;280" dur="5.5s" begin="0.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="1300" cy="400" r="1.8" fill="#d4af37" opacity="0">
+            <animate attributeName="opacity" values="0;0.25;0" dur="6s" begin="1.5s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="400;320" dur="6s" begin="1.5s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        {/* Shimmer band */}
+        <rect x="-400" y="0" width="250" height="600" fill="url(#ctaShimmer)" opacity="0.5">
+          <animate attributeName="x" values="-400;1800" dur="8s" begin="1s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.5;0" dur="8s" begin="1s" repeatCount="indefinite" />
+        </rect>
+      </svg>
+
       <Container className="relative z-10">
         <div className="text-center max-w-xl mx-auto">
-          <p className="font-heading-en text-xs tracking-[0.3em] text-gold-400 uppercase mb-3">
+          <p className="font-heading-en text-xs tracking-[0.4em] text-[#d4af37]/70 uppercase mb-4">
             14 Days Program
           </p>
-          <h2 className="text-h2 font-heading-ja font-light text-white mb-6">
+          <h2 className="text-h2 md:text-h1 font-heading-ja font-light text-white/90 mb-4">
             14日間の引き算プログラム
           </h2>
-          <p className="text-white/70 leading-[2] mb-10 font-ui text-sm">
+          <div className="w-px h-8 bg-gradient-to-b from-transparent via-[#d4af37]/40 to-transparent mx-auto mb-8" />
+          <p className="text-white/50 leading-[2.2] mb-12 font-ui text-sm">
             あなたの肌と、出会い直す14日間。
             <br />
             余計なケアをやめたとき、肌は何を語り始めるのか。
@@ -33,11 +119,14 @@ function ProgramCTA() {
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-gold-500 text-white px-8 py-4 rounded-sm font-heading-ja text-base font-normal tracking-wider hover:bg-gold-600 transition-all duration-300 shadow-[var(--shadow-gold)]"
+              className="inline-flex items-center justify-center gap-2 bg-[#d4af37] text-white px-10 py-4 rounded-sm font-heading-ja text-sm md:text-base font-normal tracking-wider hover:bg-[#bfa045] transition-all duration-300 animate-[heroPulseGlow_3s_ease-in-out_infinite]"
             >
               14日間の引き算プログラムを始める
             </a>
           </div>
+          <p className="mt-5 font-ui text-[11px] text-white/30 tracking-wider">
+            LINEで30秒。あなたの肌と、出会い直す旅へ。
+          </p>
         </div>
       </Container>
     </section>
@@ -46,7 +135,7 @@ function ProgramCTA() {
 
 function LineCTA() {
   return (
-    <section className="py-16 md:py-20 bg-bg-warm">
+    <section className="py-20 md:py-28 bg-[#faf8f5]">
       <Container size="sm">
         <div className="text-center">
           <h2 className="text-h3 font-heading-ja font-light text-neutral-800 mb-4">
@@ -54,7 +143,8 @@ function LineCTA() {
             <br className="md:hidden" />
             ここから始まります
           </h2>
-          <p className="font-ui text-sm text-neutral-500 mb-8">
+          <div className="w-px h-6 bg-gradient-to-b from-transparent via-gold-300/40 to-transparent mx-auto mb-6" />
+          <p className="font-ui text-sm text-neutral-500 mb-10">
             引き算スキンケアの考え方や、お手入れのヒントをお届けします。
           </p>
           <a
@@ -79,7 +169,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ProductShowcase />
+      <GoldDivider />
       <BrandStory />
+      <GoldDivider />
       <Testimonials />
       <ProgramCTA />
       <LineCTA />
