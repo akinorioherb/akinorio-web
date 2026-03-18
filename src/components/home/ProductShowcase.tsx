@@ -1,139 +1,146 @@
-'use client'
-
-import Image from 'next/image'
-import Link from 'next/link'
-import Container from '@/components/ui/Container'
-import { PRODUCTS } from '@/lib/constants'
-import { formatPrice } from '@/lib/utils'
-import Button from '@/components/ui/Button'
-import { useScrollAnimation } from '@/lib/useScrollAnimation'
-
-function ProductFeature({
-  product,
-  index,
-  reverse,
-}: {
-  product: (typeof PRODUCTS)[number]
-  index: number
-  reverse: boolean
-}) {
-  const { ref, isVisible } = useScrollAnimation(0.15)
-
+'use client';
+import Image from 'next/image';
+import { useEffect, useMemo, useRef, useState } from 'react';
+type Product = {
+  id: number;
+  name: string;
+  subtitle: string;
+  price: string;
+  image: string;
+  accent: string;
+};
+const products: Product[] = [
+  {
+    id: 1,
+    name: 'Serum',
+    subtitle: '濃密な手応えを、静かに届ける美容液',
+    price: '¥13,200',
+    image: '/images/products/serum.png',
+    accent: '#d4af37',
+  },
+  {
+    id: 2,
+    name: 'Cleansing',
+    subtitle: '落としながら、うるおいの余韻を残す',
+    price: '¥5,280',
+    image: '/images/products/cleansing.png',
+    accent: '#c40234',
+  },
+  {
+    id: 3,
+    name: 'Soap',
+    subtitle: '余分を洗い流し、肌をまっすぐに整える',
+    price: '¥3,960',
+    image: '/images/products/soap.png',
+    accent: '#b8942f',
+  },
+];
+function TiltCard({ product, active }: { product: Product; active: boolean }) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0, glowX: 50, glowY: 50 });
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const node = cardRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    const rotateY = (px - 0.5) * 16;
+    const rotateX = (0.5 - py) * 16;
+    setTilt({ x: rotateX, y: rotateY, glowX: px * 100, glowY: py * 100 });
+  };
+  const reset = () => setTilt({ x: 0, y: 0, glowX: 50, glowY: 50 });
   return (
-    <div
-      ref={ref}
-      className={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 lg:gap-24`}
-    >
-      {/* Product image - large, immersive */}
+    <div className="[perspective:1400px]">
       <div
-        className={`flex-1 w-full max-w-lg scroll-hidden-scale ${isVisible ? 'scroll-visible-scale' : ''}`}
-        style={{ transitionDelay: isVisible ? '0.2s' : '0s', transitionDuration: '1.2s' }}
+        ref={cardRef}
+        onMouseMove={onMove}
+        onMouseLeave={reset}
+        className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_80px_rgba(0,0,0,.25)] backdrop-blur-xl transition-all duration-700 md:p-8 ${
+          active ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+        }`}
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1,1,1)`,
+          transformStyle: 'preserve-3d',
+          transitionProperty: 'transform, opacity',
+        }}
       >
-        <Link href={`/products/${product.slug}`} className="block group">
-          <div className="relative aspect-[4/5] bg-gradient-to-br from-[#f5f1eb] to-[#ebe5db] rounded-sm overflow-hidden flex items-center justify-center">
-            <div className="relative w-full h-full product-image p-8 md:p-12">
-              <Image
-                src={product.image}
-                alt={`${product.name} ${product.subtitle}`}
-                fill
-                className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 768px) 90vw, 45vw"
-              />
-            </div>
-            {/* Hover shimmer */}
-            <div className="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] group-hover:animate-[shimmerSlide_1s_ease-out_forwards]" />
-            </div>
-          </div>
-        </Link>
-      </div>
-
-      {/* Product info */}
-      <div
-        className={`flex-1 text-center md:text-left scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
-        style={{ transitionDelay: isVisible ? '0.5s' : '0s', transitionDuration: '1s' }}
-      >
-        <p className="font-heading-en text-[10px] tracking-[0.4em] text-gold-500 uppercase mb-4">
-          Product {String(index + 1).padStart(2, '0')}
-        </p>
-        <h3 className="text-h3 md:text-h2 font-heading-ja font-light text-neutral-800 mb-2">
-          {product.name}
-        </h3>
-        <p className="font-ui text-sm text-gold-600 mb-6 tracking-wider">
-          {product.subtitle}
-          {product.volume && ` / ${product.volume}`}
-        </p>
-        <div className="w-10 h-px bg-gradient-to-r from-gold-400 to-transparent mb-6 mx-auto md:mx-0" />
-        <p className="font-body text-sm text-neutral-500 leading-[2.2] mb-8 max-w-md mx-auto md:mx-0">
-          {product.description.slice(0, 120)}...
-        </p>
-        <div className="flex items-baseline gap-3 justify-center md:justify-start mb-8">
-          <span className="font-price text-2xl text-primary-700">
-            {formatPrice(product.price)}
-          </span>
-          <span className="font-ui text-xs text-neutral-400">（税込）</span>
-        </div>
-        <Link
-          href={`/products/${product.slug}`}
-          className="inline-flex items-center gap-2 font-heading-en text-xs tracking-[0.2em] text-gold-600 hover:text-gold-700 transition-colors duration-300 group/link"
-        >
-          VIEW DETAIL
-          <span className="inline-block w-6 h-px bg-gold-400 transition-all duration-300 group-hover/link:w-10" />
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-export default function ProductShowcase() {
-  const displayProducts = PRODUCTS.filter(
-    (p) => p.isActive && p.price > 0
-  ).slice(0, 3)
-
-  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation(0.1)
-
-  return (
-    <section className="py-28 md:py-40 bg-[#faf8f5]">
-      <Container>
-        {/* Section header */}
         <div
-          ref={headerRef}
-          className={`text-center mb-20 md:mb-28 scroll-hidden ${headerVisible ? 'scroll-visible' : ''}`}
-        >
-          <p className="font-heading-en text-xs tracking-[0.4em] text-gold-500 uppercase mb-4">
-            Products
-          </p>
-          <h2 className="text-h2 md:text-h1 font-heading-ja font-light text-neutral-800">
-            引き算のためのアイテム
-          </h2>
-          <div
-            className="h-px mx-auto mt-8 bg-gradient-to-r from-transparent via-gold-400 to-transparent"
-            style={{
-              width: headerVisible ? '80px' : '0px',
-              transition: 'width 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s',
-            }}
+          className="pointer-events-none absolute inset-0 opacity-80"
+          style={{
+            background: `radial-gradient(circle at ${tilt.glowX}% ${tilt.glowY}%, ${product.accent}33, transparent 34%)`,
+          }}
+        />
+        <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+        <div className="relative z-10" style={{ transform: 'translateZ(40px)' }}>
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-white/45" style={{ fontFamily: 'Cinzel, serif' }}>
+                Signature
+              </p>
+              <h3 className="mt-2 text-3xl text-white md:text-4xl" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
+                {product.name}
+              </h3>
+            </div>
+            <span className="rounded-full border px-4 py-1 text-xs tracking-[0.25em]" style={{ borderColor: `${product.accent}66`, color: product.accent }}>
+              {product.price}
+            </span>
+          </div>
+          <p className="max-w-sm text-sm leading-7 text-white/72">{product.subtitle}</p>
+        </div>
+        <div className="relative mt-8 flex min-h-[320px] items-center justify-center" style={{ transformStyle: 'preserve-3d' }}>
+          <div className="absolute h-48 w-48 rounded-full blur-3xl" style={{ background: `${product.accent}2e`, transform: 'translateZ(20px)' }} />
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={560}
+            height={560}
+            className="relative z-10 h-auto max-h-[360px] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,.35)] transition duration-500 group-hover:scale-[1.04]"
+            style={{ transform: 'translateZ(72px)' }}
           />
         </div>
-
-        {/* Products - full width, alternating layout */}
-        <div className="space-y-24 md:space-y-36">
-          {displayProducts.map((product, index) => (
-            <ProductFeature
-              key={product.id}
-              product={product}
-              index={index}
-              reverse={index % 2 === 1}
-            />
+      </div>
+    </div>
+  );
+}
+export default function ProductShowcase() {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  const staggered = useMemo(() => products, []);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.18 }
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <section id="products" ref={ref} className="relative overflow-hidden bg-[#0f0b0d] px-6 py-24 text-white md:px-10">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-14 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.35em] text-[#d4af37]" style={{ fontFamily: 'Cinzel, serif' }}>
+              Product Showcase
+            </p>
+            <h2 className="mt-3 text-4xl md:text-6xl" style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}>
+              触れたくなる、静かな存在感。
+            </h2>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-white/65">
+            引き算のスキンケアを構成する、3つのアイテム。
+            あなたの肌に、本当に必要なものだけを届けます。
+          </p>
+        </div>
+        <div className="grid gap-8 lg:grid-cols-3">
+          {staggered.map((product, index) => (
+            <div key={product.id} style={{ transitionDelay: `${index * 140}ms` }}>
+              <TiltCard product={product} active={visible} />
+            </div>
           ))}
         </div>
-
-        {/* View all */}
-        <div className="text-center mt-20 md:mt-28">
-          <Button href="/products" variant="secondary">
-            すべての商品を見る
-          </Button>
-        </div>
-      </Container>
+      </div>
     </section>
-  )
+  );
 }
