@@ -1,188 +1,164 @@
 'use client';
 import Image from 'next/image';
-import { useEffect, useMemo, useRef, useState } from 'react';
-export default function HeroSection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [scrollY, setScrollY] = useState(0);
-  const [visible, setVisible] = useState(false);
-  const floatingDots = useMemo(
-    () =>
-      Array.from({ length: 18 }, (_, i) => ({
-        id: i,
-        size: 6 + ((i * 7) % 18),
-        left: `${(i * 13) % 100}%`,
-        top: `${(i * 17) % 100}%`,
-        delay: `${(i % 6) * 0.6}s`,
-        duration: `${6 + (i % 5)}s`,
-      })),
-    []
-  );
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.25 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-  const translateBack = scrollY * 0.12;
-  const translateMid = scrollY * 0.2;
-  const translateFront = scrollY * 0.32;
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+
+const SplitText = ({ text, delayOffset = 0 }: { text: string, delayOffset?: number }) => {
   return (
-    <section
-      ref={sectionRef}
-      className="relative isolate min-h-screen overflow-hidden bg-[#14070b] text-white"
-    >
-      {/* Background layers */}
-      <div
-        className="absolute inset-0"
-        style={{
-          transform: `translateY(${translateBack}px) scale(1.08)`,
-          background:
-            'radial-gradient(circle at 20% 20%, rgba(212,175,55,.22), transparent 32%), radial-gradient(circle at 80% 25%, rgba(196,2,52,.30), transparent 30%), radial-gradient(circle at 50% 75%, rgba(255,255,255,.08), transparent 28%), linear-gradient(180deg, #1b0b10 0%, #0e0b0d 48%, #14070b 100%)',
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-70"
-        style={{
-          transform: `translateY(${translateMid}px)`,
-          background:
-            'linear-gradient(120deg, transparent 0%, rgba(255,255,255,.05) 20%, transparent 40%), linear-gradient(300deg, transparent 0%, rgba(212,175,55,.08) 25%, transparent 50%)',
-        }}
-      />
-      {floatingDots.map((dot) => (
-        <span
-          key={dot.id}
-          className="absolute rounded-full bg-[#d4af37]/25 blur-[1px]"
-          style={{
-            width: `${dot.size}px`,
-            height: `${dot.size}px`,
-            left: dot.left,
-            top: dot.top,
-            animation: `heroFloat ${dot.duration} ease-in-out infinite`,
-            animationDelay: dot.delay,
-            transform: `translateY(${translateFront * 0.08}px)`,
+    <span className="inline-block">
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          variants={{
+            hidden: { opacity: 0, filter: 'blur(12px)', y: 20 },
+            visible: { 
+              opacity: 1, 
+              filter: 'blur(0px)', 
+              y: 0, 
+              transition: { 
+                duration: 1.2, 
+                ease: [0.22, 1, 0.36, 1],
+                delay: delayOffset + i * 0.08
+              } 
+            }
           }}
-        />
+          className="inline-block"
+        >
+          {char}
+        </motion.span>
       ))}
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_65%,rgba(0,0,0,.45)_100%)]" />
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 py-20 md:px-10">
+    </span>
+  );
+};
+
+export default function HeroSection() {
+  const containerRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  
+  // Parallax effects tied to true scroll position
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  return (
+    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#0a0507] text-white">
+      {/* 1. Immersive Video Background with Parallax */}
+      <motion.div 
+        style={{ y: videoY, scale: videoScale }} 
+        className="absolute inset-0 z-0 h-[110%] w-[110%] -left-[5%] -top-[5%]"
+      >
+        <video 
+          src="/videos/hero.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="h-full w-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,5,7,0.7)_100%)] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#14070b]" />
+      </motion.div>
+
+      {/* 2. Overwhelming Typography & Floating Product */}
+      <motion.div 
+        style={{ y: textY, opacity: textOpacity }}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 md:px-10"
+      >
         <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <div className="order-2 lg:order-1">
-            <p
-              className={`mb-4 font-sans text-xs uppercase tracking-[0.4em] text-[#d4af37] transition-all duration-700 ${
-                visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-              }`}
-              style={{ transitionDelay: '100ms' }}
+          <div className="order-2 lg:order-1 flex flex-col justify-center">
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, letterSpacing: '0.1em' },
+                visible: { opacity: 1, letterSpacing: '0.4em', transition: { duration: 1.5, delay: 0.5, ease: "easeOut" } }
+              }}
+              className="mb-6 font-sans text-[10px] md:text-xs uppercase text-[#d4af37]"
             >
               AKINORIO / Luxury Minimal Skincare
-            </p>
-            <h1 className="max-w-3xl">
-              <span
-                className={`block font-serif text-5xl leading-none tracking-[0.08em] text-white transition-all duration-700 md:text-7xl ${
-                  visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                }`}
-                style={{
-                  transitionDelay: '260ms',
-                  fontFamily: 'Cinzel, "Noto Serif JP", serif',
-                }}
-              >
-                LESS,
+            </motion.p>
+            
+            <h1 className="max-w-3xl flex flex-col gap-4">
+              <span className="block font-serif text-5xl md:text-7xl leading-none tracking-[0.08em] font-light" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
+                <SplitText text="LESS," delayOffset={0.8} />
               </span>
-              <span
-                className={`mt-2 block font-serif text-4xl leading-tight text-white transition-all duration-700 md:text-6xl ${
-                  visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                }`}
-                style={{
-                  transitionDelay: '420ms',
-                  fontFamily: '"Noto Serif JP", serif',
-                }}
-              >
-                纏うほど、研ぎ澄まされる。
+              <span className="block font-serif text-3xl md:text-5xl tracking-wide leading-tight" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <SplitText text="纏うほど、研ぎ澄まされる。" delayOffset={1.4} />
               </span>
             </h1>
-            <p
-              className={`mt-8 max-w-xl text-sm leading-8 text-white/78 md:text-base ${
-                visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              } transition-all duration-700`}
-              style={{ transitionDelay: '580ms' }}
+
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 1.2, delay: 2.8, ease: "easeOut" } }
+              }}
+              className="mt-8 max-w-xl text-sm leading-8 text-white/80 md:text-base tracking-[0.08em]"
+              style={{ fontFamily: '"Noto Serif JP", serif' }}
             >
-              余計なものを重ねない。必要なものだけを、静かに深く届ける。
-              <br />
+              余計なものを重ねない。必要なものだけを、静かに深く届ける。<br />
               引き算という、美しさの答え。
-            </p>
-            <div
-              className={`mt-10 flex flex-wrap gap-4 transition-all duration-700 ${
-                visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-              style={{ transitionDelay: '740ms' }}
+            </motion.p>
+
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 1.2, delay: 3.2, ease: "easeOut" } }
+              }}
+              className="mt-12 flex flex-wrap gap-5"
             >
-              <a
-                href="https://lin.ee/qF2bQ2v"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-[#d4af37] bg-[#d4af37] px-7 py-3 font-sans text-sm font-medium text-black transition hover:scale-[1.03] hover:bg-[#e0bd4e]"
-              >
-                14日間の引き算プログラムを始める
+              <a href="https://lin.ee/qF2bQ2v" className="group relative overflow-hidden inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#d4af37] to-[#f3e5ab] px-8 py-4 font-sans text-sm font-medium text-black tracking-widest transition-all hover:scale-[1.03] shadow-[0_10px_40px_rgba(212,175,55,0.25)]">
+                <span className="relative z-10 font-bold">14日間の引き算プログラムを始める</span>
+                <div className="absolute inset-0 -translate-x-full bg-white/40 transition-transform duration-700 ease-out group-hover:translate-x-0" />
               </a>
-              <a
-                href="#story"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-3 font-sans text-sm font-medium text-white backdrop-blur transition hover:border-white/35 hover:bg-white/10"
-              >
-                ブランド哲学
-              </a>
-            </div>
+            </motion.div>
           </div>
-          <div className="order-1 flex justify-center lg:order-2">
-            <div
-              className="relative w-[88vw] max-w-[720px]"
-              style={{ transform: `translateY(${translateFront * -0.12}px)` }}
+
+          {/* 3. Floating Product Image */}
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
+              visible: { opacity: 1, filter: 'blur(0px)', scale: 1, transition: { duration: 2.5, ease: [0.22, 1, 0.36, 1], delay: 1.5 } }
+            }}
+            className="order-1 flex justify-center lg:order-2"
+          >
+            <motion.div 
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
+              className="relative w-[85vw] max-w-[650px] mix-blend-lighten"
             >
-              <div className="absolute inset-0 rounded-full bg-[#c40234]/20 blur-3xl" />
-              <div className="absolute left-1/2 top-1/2 h-[68%] w-[68%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#d4af37]/20 blur-3xl" />
-              <div
-                className={`relative transition-all duration-1000 ${
-                  visible
-                    ? 'translate-y-0 scale-100 opacity-100'
-                    : 'translate-y-10 scale-95 opacity-0'
-                }`}
-                style={{ transitionDelay: '420ms' }}
-              >
+              <div className="absolute inset-0 rounded-full bg-[#d4af37]/15 blur-[100px]" />
+              <div className="relative">
                 <Image
                   src="/images/products/allseries.png"
                   alt="AKINORIO all series"
                   width={1200}
                   height={1200}
                   priority
-                  className="h-auto w-full object-contain drop-shadow-[0_30px_80px_rgba(0,0,0,.45)]"
+                  className="h-auto w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,.6)]"
                 />
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
-      <style jsx>{`
-        @keyframes heroFloat {
-          0%, 100% {
-            transform: translateY(0px) scale(1);
-            opacity: 0.35;
-          }
-          50% {
-            transform: translateY(-18px) scale(1.12);
-            opacity: 0.9;
-          }
-        }
-      `}</style>
+      </motion.div>
+
+      {/* 4. Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 4.5, duration: 1.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20"
+      >
+        <span className="text-[9px] tracking-[0.4em] text-white/50 uppercase font-sans">Scroll</span>
+        <div className="h-[60px] w-[1px] bg-white/10 relative overflow-hidden">
+          <motion.div 
+            animate={{ y: ['-100%', '100%'] }}
+            transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+            className="absolute inset-0 bg-gradient-to-b from-transparent via-[#d4af37] to-transparent"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
