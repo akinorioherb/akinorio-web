@@ -1,92 +1,122 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-const headline = '引き算の美学';
-const subcopy = '何をつけるかより、何をやめるか。';
-function splitText(text: string) {
-  return text.split('');
-}
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import Image from 'next/image';
+
+const headline = '引き算という、美しさの答え。';
+
 export default function BrandStory() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const headlineChars = useMemo(() => splitText(headline), []);
-  const subcopyChars = useMemo(() => splitText(subcopy), []);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.3 }
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, []);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const yImg = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
   return (
-    <section id="story" ref={ref} className="relative overflow-hidden bg-[#f7f3ee] px-6 py-28 text-[#21181b] md:px-10">
-      <div className="absolute inset-0 opacity-60">
-        <div className="absolute left-[-10%] top-[-8%] h-72 w-72 rounded-full bg-[#d4af37]/10 blur-3xl" />
-        <div className="absolute bottom-[-8%] right-[-10%] h-80 w-80 rounded-full bg-[#c40234]/10 blur-3xl" />
-      </div>
-      <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-[#c40234]" style={{ fontFamily: 'Cinzel, serif' }}>
+    <section id="story" ref={containerRef} className="relative overflow-hidden bg-[#f7f3ee] px-6 py-32 text-[#21181b] md:px-10">
+      <motion.div style={{ y: yBg }} className="absolute inset-0 opacity-60 pointer-events-none">
+        <div className="absolute left-[-10%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#d4af37]/10 blur-[100px]" />
+        <div className="absolute bottom-[10%] right-[-10%] h-[600px] w-[600px] rounded-full bg-[#c40234]/5 blur-[100px]" />
+      </motion.div>
+
+      <div className="relative mx-auto max-w-4xl">
+        <div className="text-center mb-24">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#c40234] mb-6" style={{ fontFamily: 'Cinzel, serif' }}>
             Brand Story
           </p>
-          <h2 className="mt-6 text-4xl leading-tight md:text-6xl" style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}>
-            {headlineChars.map((char, i) => (
-              <span
-                key={`${char}-${i}`}
-                className="inline-block"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(32px)',
-                  filter: visible ? 'blur(0px)' : 'blur(8px)',
-                  transition: 'opacity 700ms ease, transform 700ms ease, filter 700ms ease',
-                  transitionDelay: `${i * 90}ms`,
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.08 } },
+              hidden: {},
+            }}
+            className="text-3xl leading-tight md:text-5xl"
+            style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}
+          >
+            {headline.split('').map((char, i) => (
+              <motion.span
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, filter: 'blur(12px)', y: 30 },
+                  visible: {
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    y: 0,
+                    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+                  },
                 }}
+                className="inline-block"
               >
                 {char}
-              </span>
+              </motion.span>
             ))}
-          </h2>
-          <p className="mt-6 text-xl leading-9 text-[#3a2d31] md:text-2xl" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-            {subcopyChars.map((char, i) => (
-              <span
-                key={`${char}-${i}`}
-                className="inline-block"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: 'opacity 600ms ease, transform 600ms ease',
-                  transitionDelay: `${700 + i * 45}ms`,
-                }}
-              >
-                {char}
-              </span>
-            ))}
-          </p>
+          </motion.h2>
         </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {[
-            { title: 'LESS FORMULA', body: '重ねる発想ではなく、肌の負担になりうる要素を削ぎ落とす。処方そのものに静けさを持たせる設計思想。' },
-            { title: 'LESS NOISE', body: '過剰な演出、過剰な情報、過剰な約束をしない。余白があるからこそ、品質そのものが際立つ。' },
-            { title: 'LESS STEPS', body: '複雑さを増やさず、日々のケアを洗練させる。続けやすいこともラグジュアリーの一部だと考える。' },
-            { title: 'MORE CLARITY', body: '引き算の先に残るのは、肌と感覚の透明感。静かに整っていく体験を、長く愛される価値へ。' },
-          ].map((item, i) => (
-            <div
-              key={item.title}
-              className="rounded-[1.75rem] border border-[#21181b]/10 bg-white/70 p-7 shadow-[0_18px_60px_rgba(0,0,0,.06)] backdrop-blur-sm transition-all duration-700"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(28px)',
-                transitionDelay: `${1000 + i * 130}ms`,
-              }}
-            >
-              <p className="text-xs uppercase tracking-[0.32em] text-[#c40234]" style={{ fontFamily: 'Cinzel, serif' }}>
-                {item.title}
+
+        <div className="grid gap-16 md:grid-cols-2 md:items-center">
+          <motion.div
+            style={{ y: yImg }}
+            className="relative h-[60vh] w-full max-h-[600px] rounded-2xl overflow-hidden shadow-2xl"
+          >
+            <Image
+              src="/images/minakoceo.png"
+              alt="CEO Minako"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 border border-[#d4af37]/30 rounded-2xl pointer-events-none" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-6 text-[#3a2d31]"
+            style={{ fontFamily: '"Noto Serif JP", serif' }}
+          >
+            <h3 className="text-2xl leading-relaxed text-[#c40234]">
+              創業者MINAKOからの<br />ご提案と私たちのお約束
+            </h3>
+            
+            <div className="space-y-5 text-sm md:text-base leading-loose">
+              <p>
+                初めまして。アキノリオ代表の Minako です。<br /><br />
+                私たちアキノリオは、<span className="text-[#c40234] font-bold">「無理に商品を売り込むことは絶対にしない」</span>と誓っています。これは私たちの存在意義であり、決して曲げることのない約束です。
               </p>
-              <p className="mt-4 text-sm leading-7 text-[#4a3f43]">{item.body}</p>
+              
+              <p>
+                世の中には無数のスキンケアが溢れ、次から次へと新しい成分が提案されます。肌の不調の多くが、実はそうした「与えすぎ」によって起こっています。
+              </p>
+              
+              <p>
+                良かれと思って美容液を重ね、高いクリームを塗り込むこと… そのこれまでの努力の方向性が、本来の肌が求めることとは<strong className="text-[#d4af37] font-bold">『真逆』だった</strong>としたらどうでしょうか。
+              </p>
+              
+              <p>
+                しかし、その過剰なケアを一度に手放す恐怖も、私はよく分かっています。だからこそ、無理をせず、まずは自分の肌の感覚を信じることから始めていただきたいのです。
+              </p>
+
+              <div className="mt-8 p-6 rounded-xl bg-black/5 border-l-4 border-[#d4af37]">
+                <p className="text-sm leading-relaxed">
+                  また、LINEでのご相談は、<strong className="text-[#d4af37]">社員やAIでもなく</strong><br />
+                  <strong className="text-[#d4af37] text-lg">私、創業者のMINAKOが直接対応させていただきます。</strong><br /><br />
+                  一人ひとりのお客様の声を直接聞き続け、改良を重ねてきたからこそ、<strong className="text-[#d4af37]">絶対に売り込まない、今の納得のいくアキノリオ</strong>が生まれ、今も進化し続けています。どんな些細なご不安も、どうぞお気軽にご相談ください。
+                </p>
+              </div>
+
+              <div className="mt-10 text-right flex flex-col items-end gap-1">
+                <span className="text-xs tracking-widest text-[#8a7f83]">AKINORIO 代表</span>
+                <span className="text-2xl" style={{ fontFamily: 'Cinzel, serif' }}>MINAKO</span>
+              </div>
             </div>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>

@@ -4,32 +4,23 @@ type Testimonial = {
   id: number;
   name: string;
   role: string;
+  title: string;
   body: string;
 };
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Mika / 42',
-    role: 'Customer',
-    body: '派手ではないのに、使うたびに肌の調子が整っていく感覚があります。洗面台に置いた時の佇まいまで美しいです。',
+    name: 'M.K',
+    role: '50代 / 愛用歴 4ヶ月',
+    title: '「やめる」ことへの恐怖が、14日で確信に変わりました',
+    body: '美容液の重ね塗りや高額なクリームをやめるのは最初とても勇気がいりました。でも、この14日間プログラムで肌の変化を感じていくうちに、「あ、今まで甘やかしすぎていたんだな」と気づくことができました。朝、自分の肌に触れるのが今一番の楽しみです。',
   },
   {
     id: 2,
-    name: 'Aya / 37',
-    role: 'Customer',
-    body: 'いろいろ足すより、これで十分だと思える安心感がありました。スキンケア時間が静かで上質なものに変わりました。',
-  },
-  {
-    id: 3,
-    name: 'Nozomi / 45',
-    role: 'Customer',
-    body: '香りも主張しすぎず、肌に触れた瞬間の感覚がとても上品。余分を削いだブランド哲学がそのまま伝わります。',
-  },
-  {
-    id: 4,
-    name: 'Emi / 39',
-    role: 'Customer',
-    body: '続けるほど印象が変わるタイプ。劇的というより、毎日少しずつ好きになるプロダクトだと感じました。',
+    name: 'Y.S',
+    role: '40代 / 愛用歴 14ヶ月',
+    title: '年間平均36万円のスキンケア代が嘘みたい',
+    body: '今まで色々な広告に踊らされて、色々なものを買っては後悔していました。アキノリオは「売り込まない」という姿勢に惹かれてサンプルを申し込みましたが、本当にその通りでした。シンプルな引き算ケアだけで、ここまで肌の調子が整ってくれるなんて正直驚きです。',
   },
 ];
 export default function Testimonials() {
@@ -96,12 +87,15 @@ export default function Testimonials() {
                     <p className="text-xs uppercase tracking-[0.32em] text-[#d4af37]" style={{ fontFamily: 'Cinzel, serif' }}>
                       Real Voice
                     </p>
-                    <h3 className="mt-2 text-xl text-white">{item.name}</h3>
-                    <p className="mt-1 text-sm text-white/55">{item.role}</p>
+                    <h3 className="mt-2 text-xl text-white font-bold">{item.title}</h3>
+                    <div className="mt-2 flex items-center gap-3">
+                      <span className="text-sm font-semibold text-white/90">{item.name}</span>
+                      <span className="text-xs text-white/55">{item.role}</span>
+                    </div>
                   </div>
                   <span className="text-5xl leading-none text-[#c40234]/80">&ldquo;</span>
                 </div>
-                <p className="mt-7 text-base leading-8 text-white/78 md:text-lg">{item.body}</p>
+                <p className="mt-6 text-sm leading-8 text-white/78 md:text-base">{item.body}</p>
               </article>
             );
           })}
