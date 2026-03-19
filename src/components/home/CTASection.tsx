@@ -1,138 +1,112 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-function useCountUp(end: number, duration = 1400, start = 0, trigger = false) {
-  const [value, setValue] = useState(start);
+import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+
+function AnimatedCounter({ end, duration = 2, prefix = "", suffix = "" }: { end: number, duration?: number, prefix?: string, suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+
   useEffect(() => {
-    if (!trigger) return;
-    let frame = 0;
-    const totalFrames = Math.max(1, Math.round(duration / 16));
-    const diff = end - start;
-    const id = window.setInterval(() => {
-      frame += 1;
-      const progress = frame / totalFrames;
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(start + diff * eased));
-      if (frame >= totalFrames) {
-        setValue(end);
-        window.clearInterval(id);
-      }
-    }, 16);
-    return () => window.clearInterval(id);
-  }, [duration, end, start, trigger]);
-  return value;
+    if (inView) {
+      let startTime: number;
+      const step = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        setCount(Math.floor(easeOutQuart * end));
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+  }, [inView, end, duration]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
 }
+
 export default function CTASection() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 32 }, (_, i) => ({
-        id: i,
-        left: `${(i * 9.7) % 100}%`,
-        top: `${(i * 15.3) % 100}%`,
-        size: 4 + ((i * 3) % 10),
-        duration: 8 + (i % 7),
-        delay: (i % 9) * 0.45,
-      })),
-    []
-  );
-  const count1 = useCountUp(14, 1200, 0, visible);
-  const count2 = useCountUp(3, 1000, 0, visible);
-  const count3 = useCountUp(100, 1400, 0, visible);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.25 }
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, []);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-[#17090d] px-6 py-24 text-white md:px-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(196,2,52,.30),transparent_26%),radial-gradient(circle_at_80%_30%,rgba(212,175,55,.22),transparent_28%),linear-gradient(180deg,#16090d_0%,#0f0a0c_100%)]" />
-      {particles.map((p) => (
-        <span
-          key={p.id}
-          className="pointer-events-none absolute rounded-full bg-[#d4af37]/40 blur-[1px]"
-          style={{
-            left: p.left, top: p.top,
-            width: `${p.size}px`, height: `${p.size}px`,
-            animation: `ctaParticle ${p.duration}s linear infinite`,
-            animationDelay: `${p.delay}s`,
-          }}
-        />
-      ))}
-      <div className="relative mx-auto max-w-6xl rounded-[2.25rem] border border-white/10 bg-white/[0.05] p-8 shadow-[0_30px_120px_rgba(0,0,0,.28)] backdrop-blur-xl md:p-12">
-        <div className="absolute inset-0 rounded-[2.25rem] ring-1 ring-[#d4af37]/20" />
-        <div className="pointer-events-none absolute inset-0 rounded-[2.25rem]">
-          <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c40234]/20 blur-3xl animate-pulse" />
-          <div className="absolute left-[62%] top-[42%] h-44 w-44 rounded-full bg-[#d4af37]/20 blur-3xl animate-pulse" />
-        </div>
-        <div className="relative z-10">
-          <p
-            className={`text-center text-xs uppercase tracking-[0.38em] text-[#d4af37] transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
-            style={{ fontFamily: 'Cinzel, serif' }}
-          >
+    <section ref={containerRef} className="relative w-full overflow-hidden bg-[#050203] text-white py-32 md:py-48">
+      {/* Deep Red/Gold Core Glow */}
+      <motion.div style={{ y: yBg }} className="absolute inset-0 z-0 opacity-40 pointer-events-none mix-blend-screen flex items-center justify-center">
+        <div className="absolute h-[600px] w-[600px] rounded-full bg-[#c40234]/10 blur-[150px]" />
+        <div className="absolute h-[400px] w-[400px] rounded-full bg-[#d4af37]/15 blur-[120px]" />
+      </motion.div>
+
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 md:px-12 flex flex-col items-center">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="text-center"
+        >
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.6em] text-[#d4af37] mb-8 font-sans">
             14 Days Program
           </p>
-          <h2
-            className={`mx-auto mt-5 max-w-4xl text-center text-4xl leading-tight md:text-6xl transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '140ms', fontFamily: '"Noto Serif JP", Cinzel, serif' }}
-          >
-            まずは、14日間。
-            <br />
-            肌と感覚の余白を取り戻す体験へ。
+          <h2 className="text-4xl md:text-7xl font-light tracking-wide text-white leading-tight" style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}>
+            まずは、14日間。<br/>
+            肌と感覚の余白を<br className="md:hidden" />取り戻す体験へ。
           </h2>
-          <p
-            className={`mx-auto mt-6 max-w-2xl text-center text-sm leading-8 text-white/72 md:text-base transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '280ms' }}
-          >
-            引き算のスキンケアを、あなたの肌で体験してください。
+          <p className="mt-10 text-sm md:text-base leading-loose tracking-widest text-white/60 font-light">
+            引き算のスキンケアを、あなたの肌で体験してください。<br/>
             覚悟のある方だけに、この先を。
           </p>
-          <div
-            className={`mt-10 grid gap-4 md:grid-cols-3 transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '420ms' }}
-          >
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Days</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count1}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Steps</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count2}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Clarity</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count3}%</p>
-            </div>
+        </motion.div>
+
+        {/* Counter Stats */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mt-24 mb-24 w-full max-w-4xl"
+        >
+          <div className="flex flex-col items-center justify-center py-10 border-t border-b border-white/10 md:border-transparent md:border-t-0 md:border-b-0">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-sans mb-4">Days</p>
+            <p className="text-6xl md:text-7xl text-[#d4af37] font-light" style={{ fontFamily: 'Cinzel, serif' }}>
+              <AnimatedCounter end={14} />
+            </p>
           </div>
-          <div
-            className={`mt-10 flex justify-center transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '560ms' }}
-          >
-            <a
-              href="https://lin.ee/qF2bQ2v"
-              target="_blank"
-              rel="noreferrer"
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-sans text-sm font-medium text-black shadow-[0_0_0_0_rgba(212,175,55,.45)] transition hover:scale-[1.03] hover:shadow-[0_0_36px_6px_rgba(212,175,55,.22)]"
-            >
-              <span className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,.4)_50%,transparent_100%)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-              <span className="relative z-10">14日間の引き算プログラムを始める</span>
-            </a>
+          <div className="flex flex-col items-center justify-center py-10 border-b border-white/10 md:border-transparent md:border-b-0 md:border-l md:border-r">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-sans mb-4">Steps</p>
+            <p className="text-6xl md:text-7xl text-[#d4af37] font-light" style={{ fontFamily: 'Cinzel, serif' }}>
+              <AnimatedCounter end={3} />
+            </p>
           </div>
-        </div>
+          <div className="flex flex-col items-center justify-center py-10">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 font-sans mb-4">Clarity</p>
+            <p className="text-6xl md:text-7xl text-[#d4af37] font-light" style={{ fontFamily: 'Cinzel, serif' }}>
+              <AnimatedCounter end={100} suffix="%" />
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.8 }}
+        >
+          <a
+            href="https://lin.ee/qF2bQ2v"
+            target="_blank"
+            rel="noreferrer"
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-transparent via-[#d4af37]/10 to-transparent border border-[#d4af37]/50 px-10 py-5 transition-all hover:scale-[1.02] hover:border-[#d4af37] hover:bg-[#d4af37]/20 shadow-[0_0_40px_rgba(212,175,55,0.1)] hover:shadow-[0_0_60px_rgba(212,175,55,0.3)]"
+          >
+            <span className="relative z-10 text-sm font-light text-white tracking-[0.2em]">14日間の引き算プログラムを始める</span>
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-[150%]" />
+          </a>
+        </motion.div>
+
       </div>
-      <style jsx>{`
-        @keyframes ctaParticle {
-          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0; }
-          20% { opacity: 0.7; }
-          50% { transform: translate3d(18px, -28px, 0) scale(1.15); opacity: 1; }
-          100% { transform: translate3d(-10px, -56px, 0) scale(0.8); opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }
