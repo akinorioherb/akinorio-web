@@ -80,8 +80,8 @@ export default function HeroSection() {
             </motion.p>
             
             <h1 className="max-w-3xl flex flex-col gap-4">
-              <span className="block font-serif text-5xl md:text-7xl leading-none tracking-[0.08em] font-light" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
-                <SplitText text="LESS," delayOffset={0.8} />
+              <span className="block font-serif text-3xl md:text-5xl leading-none tracking-[0.08em] font-light md:mb-2" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <SplitText text="美しさは、引き算から。" delayOffset={0.8} />
               </span>
               <span className="block font-serif text-3xl md:text-5xl tracking-wide leading-tight" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                 <SplitText text="纏うほど、研ぎ澄まされる。" delayOffset={1.4} />
