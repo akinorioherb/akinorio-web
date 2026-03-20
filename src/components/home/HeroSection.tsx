@@ -51,13 +51,46 @@ export default function HeroSection() {
         <video 
           src="/videos/hero.mp4" 
           autoPlay 
-          loop 
           muted 
           playsInline 
           className="h-full w-full object-cover opacity-60"
+          onEnded={(e) => {
+            // Keep the video paused at the last frame
+            e.currentTarget.pause();
+          }}
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,5,7,0.7)_100%)] mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#14070b]" />
+        
+        {/* Soft Golden Particles (Fireflies) */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ 
+                x: `${Math.random() * 100}vw`, 
+                y: `${Math.random() * 100 + 100}vh`,
+                opacity: 0,
+                scale: Math.random() * 0.5 + 0.5
+              }}
+              animate={{
+                y: `-${Math.random() * 50 + 20}vh`,
+                opacity: [0, Math.random() * 0.5 + 0.2, 0],
+                x: `${Math.random() * 80 + 10}vw`
+              }}
+              transition={{
+                duration: Math.random() * 10 + 15,
+                repeat: Infinity,
+                delay: Math.random() * 10,
+                ease: "linear"
+              }}
+              className="absolute h-1.5 w-1.5 rounded-full bg-[#d4af37] blur-[2px]"
+              style={{
+                boxShadow: '0 0 15px 4px rgba(212,175,55,0.4)',
+              }}
+            />
+          ))}
+        </div>
       </motion.div>
 
       {/* 2. Overwhelming Typography & Floating Product */}
