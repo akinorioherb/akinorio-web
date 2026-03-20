@@ -2,91 +2,104 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-type Testimonial = {
-  id: number;
-  name: string;
-  role: string;
-  title: string;
-  body: string;
-};
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
     id: 1,
-    name: 'M.K',
-    role: '50代 / 愛用歴 4ヶ月',
-    title: '「やめる」ことへの恐怖が、14日で確信に変わりました',
-    body: '美容液の重ね塗りや高額なクリームをやめるのは最初とても勇気がいりました。でも、この14日間プログラムで肌の変化を感じていくうちに、「あ、今まで甘やかしすぎていたんだな」と気づくことができました。朝、自分の肌に触れるのが今一番の楽しみです。',
+    name: "M.K様",
+    age: "57歳",
+    duration: "4ヶ月",
+    title: "ファンデーションを手放せた驚き",
+    content: "これまで何十種類もの高級美容液やクリームを試してきました。それでも乾燥とくすみが改善せず、ファンデーションが手放せませんでした。アキノリオに出会い、「与えない」ケアに最初は不安でしたが、数ヶ月で見違えるように。今では日焼け止めだけで外出できるようになり、毎朝鏡を見るのが楽しみです。"
   },
   {
     id: 2,
-    name: 'Y.S',
-    role: '40代 / 愛用歴 14ヶ月',
-    title: '年間平均36万円のスキンケア代が嘘みたい',
-    body: '今まで色々な広告に踊らされて、色々なものを買っては後悔していました。アキノリオは「売り込まない」という姿勢に惹かれてサンプルを申し込みましたが、本当にその通りでした。シンプルな引き算ケアだけで、ここまで肌の調子が整ってくれるなんて正直驚きです。',
+    name: "Y.S様",
+    age: "62歳",
+    duration: "14ヶ月",
+    title: "諦めていたハリが戻ってきた",
+    content: "「年齢のせいだから仕方ない」と諦めていた肌のたるみ。けれど、アキノリオのシンプルなステップに変えてから、肌の奥から押し返すようなハリを感じるようになりました。余計なものを削ぎ落とすことで、肌自身が本来持っている力を取り戻したのだと実感しています。"
   },
+  {
+    id: 3,
+    name: "A.T様",
+    age: "49歳",
+    duration: "8ヶ月",
+    title: "スキンケアの概念が変わった",
+    content: "化粧水、乳液、美容液、クリーム… 何種類も塗り重ねていた時間が嘘のようです。今は洗顔後、美容液をなじませるだけ。それなのに、過去最高に肌の調子が良いのです。成分を与えるのではなく、肌の細胞に働きかけるというアプローチがこれほど理にかなっているとは思いませんでした。"
+  }
 ];
 
 export default function Testimonials() {
   const containerRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start']
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
   return (
-    <section ref={containerRef} className="relative w-full overflow-hidden bg-[#0a0507] text-white py-32 md:py-48">
-      {/* Background glow coming from the previous section */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-screen">
-        <div className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-[#d4af37]/5 blur-[150px]" />
-      </motion.div>
-
-      <div className="relative z-10 mx-auto max-w-[1000px] px-6 md:px-12 flex flex-col items-center">
+    <section id="reviews" ref={containerRef} className="relative w-full overflow-hidden bg-gradient-to-b from-[#1A0005] to-[#2A040B] text-white py-32 md:py-48 z-10">
+      
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 flex flex-col md:flex-row gap-16 md:gap-24 items-start">
         
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1.5 }}
-          className="text-center mb-24 md:mb-40"
-        >
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#d4af37] mb-8 font-sans">
-            Real Voice
-          </p>
-          <h2 className="text-3xl md:text-5xl font-light tracking-wider text-white" style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}>
-            引き算を選んだ方の声。
+        {/* Vertical Title Indicator */}
+        <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32">
+          <h2 
+            className="text-4xl md:text-5xl lg:text-5xl font-black tracking-[0.2em] text-[#E31633] uppercase select-none opacity-80" 
+            style={{ writingMode: 'vertical-rl', fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+          >
+            VOICE
           </h2>
         </motion.div>
 
-        <div className="flex flex-col gap-32 md:gap-48 w-full">
-          {testimonials.map((item, index) => {
-            const isEven = index % 2 === 0;
-            return (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true, margin: "-15%" }}
-                transition={{ duration: 1.5, delay: 0.2 }}
-                className={`flex flex-col relative ${isEven ? 'items-start text-left' : 'items-end text-right'}`}
+        {/* Content Area */}
+        <div className="flex-1 w-full flex flex-col items-start text-left">
+          
+          <div className="mb-24 w-full">
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#E31633] mb-4 font-sans font-bold">
+              Testimonials
+            </p>
+            <h3 className="text-3xl md:text-5xl font-bold tracking-wider leading-[1.6]" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
+              引き算を選んだ方の声
+            </h3>
+          </div>
+
+          <div className="w-full flex flex-col space-y-12 md:space-y-24">
+            {testimonials.map((testimonial, idx) => (
+              <motion.div 
+                key={testimonial.id}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 1.2, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full flex flex-col md:flex-row items-start md:gap-16 border-t border-white/10 pt-12 md:pt-24 hover:bg-white/[0.02] transition-colors duration-500"
               >
-                <div className="text-8xl md:text-[10rem] leading-none text-[#d4af37]/20 font-serif absolute top-[-40px] md:top-[-80px] select-none" style={{ [isEven ? 'left' : 'right']: '-20px' }}>
-                  &ldquo;
+                {/* Meta info column */}
+                <div className="w-full md:w-1/4 flex flex-col space-y-2 mb-8 md:mb-0">
+                  <span className="text-2xl md:text-3xl text-white font-bold tracking-widest" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                    {testimonial.name}
+                  </span>
+                  <div className="flex items-center gap-4 text-xs md:text-sm text-white/50 tracking-wider font-light mt-4">
+                    <span>{testimonial.age}</span>
+                    <span className="w-1 h-1 bg-[#E31633] rounded-full" />
+                    <span>ご愛用歴 {testimonial.duration}</span>
+                  </div>
                 </div>
-                
-                <h3 className="text-2xl md:text-3xl font-light tracking-wide text-white/90 mb-8 max-w-2xl leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                  {item.title}
-                </h3>
-                
-                <p className="text-sm md:text-base leading-[2.4] text-white/60 font-light tracking-widest max-w-2xl mb-10 text-justify">
-                  {item.body}
-                </p>
-                
-                <div className="flex flex-col gap-2">
-                  <span className="text-lg md:text-xl text-white/90 tracking-widest" style={{ fontFamily: 'Cinzel, serif' }}>{item.name}</span>
-                  <span className="text-[10px] tracking-[0.2em] text-[#d4af37] uppercase">{item.role}</span>
+
+                {/* Review content column (Strict Left Align) */}
+                <div className="w-full md:w-3/4 flex flex-col space-y-6">
+                  <h4 className="text-xl md:text-2xl text-white font-bold tracking-wide leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                    "{testimonial.title}"
+                  </h4>
+                  <p className="text-sm md:text-base leading-[2.4] text-white/70 font-light tracking-wide text-justify md:text-left">
+                    {testimonial.content}
+                  </p>
                 </div>
               </motion.div>
-            );
-          })}
+            ))}
+          </div>
+
         </div>
 
       </div>

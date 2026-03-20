@@ -38,7 +38,7 @@ export default function BrandStory() {
   };
 
   return (
-    <section id="story" ref={containerRef} className="relative w-full overflow-hidden bg-gradient-to-br from-[#94081F] to-[#7C0114] text-white py-32 md:py-48 z-10">
+    <section id="story" ref={containerRef} className="relative w-full overflow-hidden bg-gradient-to-b from-[#3D010A] to-[#1A0005] text-white py-32 md:py-48 z-10">
       
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 flex flex-col md:flex-row gap-16 md:gap-24 items-start">
         
@@ -82,17 +82,17 @@ export default function BrandStory() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="relative w-full max-w-[320px] md:max-w-[440px] aspect-[3/4] overflow-hidden flex-shrink-0 bg-white"
+              className="relative w-full max-w-[320px] md:max-w-[440px] aspect-[3/4] overflow-hidden flex-shrink-0 bg-[#3D010A]"
             >
-              {/* Warm, inviting background glow behind the image container (not obscuring her) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf7] to-[#ffffff] z-0" />
+              {/* Soft, calming beige/champagne glow behind the image container to remove piercing white contrast */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#c9bcae] to-[#e6dfd3] opacity-90 z-0" />
               
               <motion.div style={{ y: yImg, height: '110%', width: '100%', top: '-5%' }} className="absolute z-10 w-full">
                 <Image
                   src="/images/minakoceo.png"
                   alt="CEO Minako"
                   fill
-                  className="object-cover object-top opacity-100 mix-blend-multiply"
+                  className="object-cover object-top opacity-100"
                   sizes="(max-width: 1024px) 100vw, 440px"
                   priority
                 />
@@ -124,8 +124,11 @@ export default function BrandStory() {
                   絶対に売り込まない。<br/>それが私たちの誓い。
                 </h4>
                 <p className="text-sm md:text-base leading-[2.2] text-white/90 font-medium tracking-wide">
-                  私たちアキノリオは、「無理に商品を売り込むことは絶対にしない」と誓っています。一人ひとりのお客様の声を直接聞き続け、改良を重ねてきたからこそ、今の納得のいくプロダクトが誕生しました。<br/><br/>
-                  過剰なケアを一度に手放す恐怖も、私はよく分かっています。だからこそ、無理をせず、まずはご自身の肌の感覚を信じることから始めていただきたいのです。どんな些細なご不安も、私、創業者のMINAKOが直接対応させていただきます。
+                  私たちアキノリオは、「無理に商品を売り込むことは絶対にしない」と誓っています。<br/><br/>
+                  私はこれまで、ブランドの「引き算体験」を希望されたすべてのお客様と、一人ひとり直接言葉を交わしてまいりました。「引き算」を掲げている私たちが、あえて複数の製品ラインナップをご用意しているのには理由があります。それは、皆様の切実なお声に耳を傾け、「本当に必要なものだけを創る」と決断したからです。<br/><br/>
+                  どれほど悩み、どれほど与え続けてきたのか。徹底してお客様に寄り添い、一人ひとりの「痛み」と向き合い続ける中で、このアキノリオ・シリーズは産声を上げました。<br/><br/>
+                  お客様の本当の声を直接お聞きすることは、私にとって何よりの生きがいです。<br/>
+                  過剰なケアを一度に手放す恐怖も、私は痛いほどよく分かっています。だからこそ、無理をせず、まずはご自身の肌の感覚を信じることから始めていただきたいのです。どんな些細なご不安も、私、創業者のMINAKOが直接対応させていただきます。
                 </p>
               </motion.div>
 

@@ -1,146 +1,119 @@
 'use client';
-import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
-type Product = {
-  id: number;
-  numberStr: string;
-  name: string;
-  subtitle: string;
-  description: string;
-  price: string;
-  image: string;
-  accent: string;
-};
-
-const products: Product[] = [
+const products = [
   {
-    id: 1,
-    numberStr: '01',
+    id: '01',
     name: 'ミトコンドリアのちから',
     subtitle: '濃密な手応えを、静かに届ける美容液',
     description: '肌が必要とする成分だけを、極限までピュアな状態で抽出。テクスチャーは水のように軽やかでありながら、肌の奥深く（角質層まで）で確かなハリと弾力を目覚めさせます。',
-    price: '¥13,200',
-    image: '/images/products/serum.png',
-    accent: '#d4af37',
+    price: '¥22,000',
+    image: '/images/serum_studio.png',
   },
   {
-    id: 2,
-    numberStr: '02',
-    name: 'Cleansing',
+    id: '02',
+    name: 'CLEANSING',
     subtitle: '落としながら、うるおいの余韻を残す',
     description: '1日の終わりの肌を、優しく解放するクレンジング。メイクや汚れだけを的確に包み込み、引き算のあとにふっくらとした透明感と柔らかさを残します。',
-    price: '¥5,280',
-    image: '/images/products/cleansing.png',
-    accent: '#c40234',
+    price: '¥18,000',
+    image: '/images/cleansing_studio.png',
   },
   {
-    id: 3,
-    numberStr: '03',
-    name: 'Soap',
+    id: '03',
+    name: 'SOAP',
     subtitle: '余分を洗い流し、肌をまっすぐに整える',
     description: 'きめ細かく弾力のある泡が、古い角質や毛穴の奥のノイズを吸着。洗い上がりの無垢な肌は、次に届けるセラムを最高のかたちで迎え入れます。',
-    price: '¥3,960',
-    image: '/images/products/soap.png',
-    accent: '#b8942f',
-  },
+    price: '¥8,800',
+    image: '/images/soap_studio.png',
+  }
 ];
 
 export default function ProductShowcase() {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+
+  // 3 panels = 300vw total width. To show the last panel, we move -200vw, which is -66.666%
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.666%"]);
+
   return (
-    <section id="products" className="relative w-full bg-[#0a0507] py-32 md:py-48 overflow-hidden z-10">
-      
-      {/* Title Section */}
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12 mb-24 md:mb-32">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="text-center"
-        >
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#d4af37] mb-8 font-sans">
-            Product Showcase
-          </p>
-          <h2 className="text-3xl md:text-5xl font-light tracking-wider text-white" style={{ fontFamily: '"Noto Serif JP", Cinzel, serif' }}>
-            触れたくなる、静かな存在感。
+    <section ref={targetRef} id="products" className="relative h-[300vh] bg-[#7C0114] z-10 text-white">
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-gradient-to-br from-[#94081F] to-[#7C0114]">
+        
+        {/* Background ambient light */}
+        <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-30 z-0">
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#E31633] rounded-full blur-[200px]" />
+        </div>
+
+        {/* Global Section Title (Left aligned, vertical-rl per guidelines) */}
+        <div className="absolute top-[10%] md:top-24 left-6 md:left-12 z-20">
+          <h2 
+            className="text-3xl md:text-5xl lg:text-6xl font-black tracking-[0.3em] text-[#E31633] uppercase select-none opacity-80" 
+            style={{ writingMode: 'vertical-rl', fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+          >
+            PRODUCTS
           </h2>
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
-            className="mt-12 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent origin-center"
-          />
-        </motion.div>
-      </div>
+        </div>
 
-      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
-        {/* 1 col on mobile, 3 cols on md+ */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 lg:gap-16">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 1.5, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col items-center text-center"
-            >
-              {/* Background Number */}
+        {/* Horizontal Scroll Track */}
+        <motion.div style={{ x }} className="flex h-full w-[300vw] z-10">
+          {products.map((product) => (
+            <div key={product.id} className="relative h-full w-screen flex flex-col md:flex-row items-center justify-center px-8 md:px-32 py-24 gap-8 md:gap-24">
+              
+              {/* Massive Number behind product */}
               <div 
-                className="absolute top-10 left-1/2 -translate-x-1/2 text-[15rem] md:text-[8rem] lg:text-[12rem] xl:text-[15rem] leading-none font-bold opacity-[0.03] select-none pointer-events-none transition-opacity duration-700 group-hover:opacity-[0.06]"
-                style={{ fontFamily: 'Cinzel, serif', color: product.accent }}
+                className="absolute top-1/2 md:top-[40%] left-1/2 md:left-[30%] -translate-x-1/2 -translate-y-1/2 text-[15rem] md:text-[30rem] lg:text-[45rem] font-black text-white/5 select-none pointer-events-none"
+                style={{ fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
               >
-                {product.numberStr}
+                {product.id}
               </div>
 
-              {/* Product Image */}
-              <div className="relative w-full aspect-[4/5] mb-12 flex items-center justify-center">
-                {/* Subtle Ambient Glow */}
-                <div 
-                  className="absolute inset-0 z-0 rounded-full blur-[80px] opacity-10 transition-opacity duration-700 group-hover:opacity-30 scale-75"
-                  style={{ backgroundColor: product.accent }}
+              {/* Product Image Section */}
+              <div className="relative z-10 w-full max-w-[280px] md:max-w-[400px] lg:max-w-[550px] aspect-[4/5] flex-shrink-0">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={100}
                 />
-                
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 6 + index, ease: "easeInOut", repeat: Infinity }}
-                  className="relative z-10 w-[70%] h-[90%] md:w-[80%] md:h-[80%] lg:w-[70%] lg:h-[90%]"
-                >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,.5)] transition-transform duration-700 group-hover:scale-105"
-                  />
-                </motion.div>
               </div>
 
-              {/* Text Info */}
-              <div className="relative z-20 flex flex-col items-center px-4 w-full">
-                <span className="text-[10px] uppercase tracking-[0.4em] mb-4" style={{ color: product.accent, fontFamily: 'Cinzel, serif' }}>
+              {/* Product Text Section (STRICT Left Alignment) */}
+              <div className="relative z-10 flex flex-col items-start w-full max-w-lg text-left mt-8 md:mt-0">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.5em] mb-4 font-bold" style={{ color: '#E31633', fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
                   Signature Line
                 </span>
-                <h3 className="text-3xl md:text-xl lg:text-2xl xl:text-3xl font-light tracking-wider text-white mb-4 text-center w-full break-keep" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-wider text-white mb-4 md:mb-6 whitespace-nowrap" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {product.name}
                 </h3>
-                <p className="text-xs md:text-[10px] lg:text-sm text-white/80 font-light mb-8 h-12 flex items-center justify-center text-center" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <p className="text-sm md:text-lg text-white/90 font-medium mb-6 md:mb-10 tracking-widest leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {product.subtitle}
                 </p>
-                <p className="text-xs lg:text-sm leading-loose tracking-wide text-white/50 font-light mb-10 h-auto md:h-64 lg:h-40 relative text-justify md:text-left text-justify-last-center">
+                <p className="text-xs md:text-base leading-[2.2] tracking-wide text-white/70 font-light mb-8 md:mb-12 text-justify">
                   {product.description}
                 </p>
-                <div className="flex items-center gap-4 mt-auto pt-8 border-t border-white/10 w-full justify-center">
-                  <span className="text-[9px] tracking-[0.2em] text-white/30">PRICE</span>
-                  <span className="text-lg lg:text-xl tracking-widest text-white/90" style={{ fontFamily: 'Cinzel, serif' }}>{product.price}</span>
+                <div className="flex items-center gap-6 mt-auto">
+                  <span className="text-[10px] tracking-[0.3em] text-[#E31633] font-bold">PRICE</span>
+                  <span className="text-xl md:text-3xl tracking-widest text-white font-medium" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>{product.price}</span>
                 </div>
               </div>
-
-            </motion.div>
+              
+            </div>
           ))}
+        </motion.div>
+
+        {/* Horizontal Progress Bar */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[200px] h-[1px] bg-[#FFFFFF]/20 z-20 hidden md:block">
+          <motion.div 
+            className="h-full bg-[#FFFFFF] origin-left"
+            style={{ scaleX: scrollYProgress }}
+          />
         </div>
+
       </div>
     </section>
   );
