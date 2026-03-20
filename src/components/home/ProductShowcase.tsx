@@ -47,110 +47,12 @@ const products: Product[] = [
   },
 ];
 
-function ProductGalleryItem({ product, index }: { product: Product; index: number }) {
-  const itemRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: itemRef,
-    offset: ["start end", "end start"]
-  });
-
-  const isEven = index % 2 === 0;
-  
-  // Parallax values
-  const yImage = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-
-  return (
-    <div ref={itemRef} className="relative min-h-[90vh] flex items-center py-24 md:py-32 overflow-hidden">
-      {/* Absolute Giant Background Number */}
-      <motion.div 
-        style={{ 
-          y: useTransform(scrollYProgress, [0, 1], ["50%", "-50%"]),
-          fontFamily: 'Cinzel, serif', 
-          color: product.accent 
-        }}
-        className={`absolute top-0 z-0 text-[35vw] md:text-[25rem] font-bold leading-none opacity-[0.03] select-none ${isEven ? 'right-[-5%]' : 'left-[-5%]'}`}
-      >
-        {product.numberStr}
-      </motion.div>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6 md:px-12 grid gap-16 lg:grid-cols-2 items-center">
-        
-        {/* Product Image Side */}
-        <motion.div 
-          style={{ y: yImage }}
-          className={`flex justify-center relative ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
-        >
-          {/* Subtle Ambient Glow */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
-            <div 
-              className="h-[40vh] w-[40vh] rounded-full blur-[100px] opacity-20"
-              style={{ backgroundColor: product.accent }}
-            />
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
-            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-[80%] md:w-[65%] lg:w-[85%]"
-          >
-            <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6 + index, ease: "easeInOut", repeat: Infinity }}
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={800}
-                height={800}
-                className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,.6)]"
-              />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Text Side */}
-        <motion.div 
-          style={{ y: yText }}
-          initial={{ opacity: 0, x: isEven ? 40 : -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className={`flex flex-col gap-8 ${isEven ? 'lg:order-2' : 'lg:order-1 lg:items-end lg:text-right'}`}
-        >
-          <div>
-            <span className="text-xs uppercase tracking-[0.4em]" style={{ color: product.accent, fontFamily: 'Cinzel, serif' }}>
-              Signature Line
-            </span>
-            <h3 className="mt-4 text-5xl md:text-7xl font-light tracking-wide text-white" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
-              {product.name}
-            </h3>
-            <p className="mt-4 text-xl md:text-2xl text-white/80 font-light" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              {product.subtitle}
-            </p>
-          </div>
-          
-          <p className={`text-sm md:text-base leading-loose tracking-wide text-white/60 font-light max-w-md ${isEven ? '' : 'lg:text-right'}`}>
-            {product.description}
-          </p>
-
-          <div className={`flex items-center gap-6 mt-4 ${isEven ? '' : 'justify-end'}`}>
-            <span className="text-sm tracking-[0.2em] text-white/40">PRICE</span>
-            <span className="text-xl tracking-widest text-white/90" style={{ fontFamily: 'Cinzel, serif' }}>{product.price}</span>
-          </div>
-        </motion.div>
-
-      </div>
-    </div>
-  );
-}
-
 export default function ProductShowcase() {
   return (
-    <section id="products" className="relative w-full bg-[#0a0507] py-24 md:py-48 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12 mb-32 md:mb-48">
+    <section id="products" className="relative w-full bg-[#0a0507] py-32 md:py-48 overflow-hidden z-10">
+      
+      {/* Title Section */}
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12 mb-24 md:mb-32">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,10 +76,71 @@ export default function ProductShowcase() {
         </motion.div>
       </div>
 
-      <div className="flex flex-col w-full">
-        {products.map((product, index) => (
-          <ProductGalleryItem key={product.id} product={product} index={index} />
-        ))}
+      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-12">
+        {/* 1 col on mobile, 3 cols on md+ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 lg:gap-16">
+          {products.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.5, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative flex flex-col items-center text-center"
+            >
+              {/* Background Number */}
+              <div 
+                className="absolute top-10 left-1/2 -translate-x-1/2 text-[15rem] md:text-[8rem] lg:text-[12rem] xl:text-[15rem] leading-none font-bold opacity-[0.03] select-none pointer-events-none transition-opacity duration-700 group-hover:opacity-[0.06]"
+                style={{ fontFamily: 'Cinzel, serif', color: product.accent }}
+              >
+                {product.numberStr}
+              </div>
+
+              {/* Product Image */}
+              <div className="relative w-full aspect-[4/5] mb-12 flex items-center justify-center">
+                {/* Subtle Ambient Glow */}
+                <div 
+                  className="absolute inset-0 z-0 rounded-full blur-[80px] opacity-10 transition-opacity duration-700 group-hover:opacity-30 scale-75"
+                  style={{ backgroundColor: product.accent }}
+                />
+                
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6 + index, ease: "easeInOut", repeat: Infinity }}
+                  className="relative z-10 w-[70%] h-[90%] md:w-[80%] md:h-[80%] lg:w-[70%] lg:h-[90%]"
+                >
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,.5)] transition-transform duration-700 group-hover:scale-105"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Text Info */}
+              <div className="relative z-20 flex flex-col items-center px-4 w-full">
+                <span className="text-[10px] uppercase tracking-[0.4em] mb-4" style={{ color: product.accent, fontFamily: 'Cinzel, serif' }}>
+                  Signature Line
+                </span>
+                <h3 className="text-4xl lg:text-5xl font-light tracking-widest text-white mb-4" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
+                  {product.name}
+                </h3>
+                <p className="text-sm lg:text-base text-white/80 font-light mb-8 h-12 flex items-center justify-center" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                  {product.subtitle}
+                </p>
+                <p className="text-xs lg:text-sm leading-loose tracking-wide text-white/50 font-light mb-10 h-auto md:h-56 lg:h-32 relative text-justify md:text-center text-justify-last-center">
+                  {product.description}
+                </p>
+                <div className="flex items-center gap-4 mt-auto pt-8 border-t border-white/10 w-full justify-center">
+                  <span className="text-[9px] tracking-[0.2em] text-white/30">PRICE</span>
+                  <span className="text-lg lg:text-xl tracking-widest text-white/90" style={{ fontFamily: 'Cinzel, serif' }}>{product.price}</span>
+                </div>
+              </div>
+
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
