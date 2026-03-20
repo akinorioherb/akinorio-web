@@ -58,7 +58,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <p className="font-ui text-sm text-neutral-500 mb-6">
           {product.subtitle}
           {product.volume && ` / ${product.volume}`}
-          {product.usageDuration && ` / 使用目安: ${product.usageDuration}`}
         </p>
 
         {/* Price */}

@@ -3,42 +3,17 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 
-const products = [
-  {
-    id: '01',
-    name: 'ミトコンドリアのちから',
-    subtitle: '濃密な手応えを、静かに届ける美容液',
-    description: '肌が必要とする成分だけを、極限までピュアな状態で抽出。テクスチャーは水のように軽やかでありながら、肌の奥深く（角質層まで）で確かなハリと弾力を目覚めさせます。',
-    price: '¥22,000',
-    image: '/images/serum_studio.png',
-  },
-  {
-    id: '02',
-    name: 'CLEANSING',
-    subtitle: '落としながら、うるおいの余韻を残す',
-    description: '1日の終わりの肌を、優しく解放するクレンジング。メイクや汚れだけを的確に包み込み、引き算のあとにふっくらとした透明感と柔らかさを残します。',
-    price: '¥18,000',
-    image: '/images/cleansing_studio.png',
-  },
-  {
-    id: '03',
-    name: 'SOAP',
-    subtitle: '余分を洗い流し、肌をまっすぐに整える',
-    description: 'きめ細かく弾力のある泡が、古い角質や毛穴の奥のノイズを吸着。洗い上がりの無垢な肌は、次に届けるセラムを最高のかたちで迎え入れます。',
-    price: '¥8,800',
-    image: '/images/soap_studio.png',
-  }
-];
+import { PRODUCTS } from '@/lib/constants';
 
 export default function ProductShowcase() {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
 
-  // 3 panels = 300vw total width. To show the last panel, we move -200vw, which is -66.666%
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.666%"]);
+  // 10 panels = 1000vw total width. To show the last panel, we move -900vw, which is -90%
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
 
   return (
-    <section ref={targetRef} id="products" className="relative h-[300vh] bg-[#7C0114] z-10 text-white">
+    <section ref={targetRef} id="products" className="relative h-[1000vh] bg-[#7C0114] z-10 text-white">
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-gradient-to-br from-[#94081F] to-[#7C0114]">
         
@@ -55,19 +30,36 @@ export default function ProductShowcase() {
           >
             PRODUCTS
           </h2>
+          <p className="hidden md:block text-xs text-white/70 mt-4 tracking-widest absolute top-1/2 left-20 whitespace-nowrap" style={{ writingMode: 'vertical-rl' }}>
+            ※単品でもご購入いただけます
+          </p>
         </div>
 
         {/* Horizontal Scroll Track */}
-        <motion.div style={{ x }} className="flex h-full w-[300vw] z-10">
-          {products.map((product) => (
+        <motion.div style={{ x }} className="flex h-full w-[1000vw] z-10">
+          {PRODUCTS.map((product, index) => {
+            const displayNum = String(index + 1).padStart(2, '0');
+            return (
             <div key={product.id} className="relative h-full w-screen flex flex-col md:flex-row items-center justify-center px-8 md:px-32 py-24 gap-8 md:gap-24">
               
-              {/* Massive Number behind product */}
+              {/* Massive Number (SVG Format) */}
               <div 
-                className="absolute top-1/2 md:top-[40%] left-1/2 md:left-[30%] -translate-x-1/2 -translate-y-1/2 text-[15rem] md:text-[30rem] lg:text-[45rem] font-black text-white/5 select-none pointer-events-none"
-                style={{ fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+                className="absolute top-1/2 md:top-[40%] left-1/2 md:left-[30%] -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[60vh] text-white/5 select-none pointer-events-none flex items-center justify-center"
               >
-                {product.id}
+                <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
+                  <text 
+                    x="50%" y="54%" 
+                    textAnchor="middle" 
+                    dominantBaseline="middle" 
+                    fill="currentColor" 
+                    fontWeight="900" 
+                    fontSize="300"
+                    fontFamily="Neue Haas Grotesk, Helvetica Neue, sans-serif"
+                    letterSpacing="-0.05em"
+                  >
+                    {displayNum}
+                  </text>
+                </svg>
               </div>
 
               {/* Product Image Section */}
@@ -90,20 +82,43 @@ export default function ProductShowcase() {
                 <h3 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-wider text-white mb-4 md:mb-6 whitespace-nowrap" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {product.name}
                 </h3>
-                <p className="text-sm md:text-lg text-white/90 font-medium mb-6 md:mb-10 tracking-widest leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <p className="text-sm md:text-lg text-white/90 font-medium mb-6 md:mb-8 tracking-widest leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {product.subtitle}
                 </p>
-                <p className="text-xs md:text-base leading-[2.2] tracking-wide text-white/70 font-light mb-8 md:mb-12 text-justify">
+                <div className="flex flex-wrap items-center gap-3 md:gap-4 text-[#e31633] mb-6 md:mb-8">
+                  {product.usageDuration && (
+                    <span className="text-[10px] md:text-xs font-bold tracking-widest border border-[#e31633]/30 px-3 py-1 bg-black/20">
+                      使用目安: {product.usageDuration}
+                    </span>
+                  )}
+                  {product.volume && product.volume !== '—' && (
+                    <span className="text-[10px] md:text-xs font-bold tracking-widest border border-[#e31633]/30 px-3 py-1 bg-black/20">
+                      内容量: {product.volume}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs md:text-base leading-[2.2] tracking-wide text-white/70 font-light mb-8 md:mb-12 text-justify whitespace-pre-line">
                   {product.description}
                 </p>
-                <div className="flex items-center gap-6 mt-auto">
-                  <span className="text-[10px] tracking-[0.3em] text-[#E31633] font-bold">PRICE</span>
-                  <span className="text-xl md:text-3xl tracking-widest text-white font-medium" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>{product.price}</span>
+                <div className="flex flex-col gap-4 mt-auto w-full">
+                  <div className="flex items-center gap-6">
+                    <span className="text-[10px] tracking-[0.3em] text-[#E31633] font-bold">PRICE</span>
+                    <span className="text-xl md:text-3xl tracking-widest text-white font-medium" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>¥{product.price.toLocaleString()}</span>
+                  </div>
+                  <a href="#" className="inline-flex items-center gap-4 group/btn mt-4 self-start">
+                    <span className="text-sm font-bold tracking-[0.2em] transform group-hover/btn:-translate-x-2 transition-transform duration-300">
+                      詳細を見る
+                    </span>
+                    <div className="w-12 h-[1px] bg-[#E31633] relative overflow-hidden">
+                      <div className="absolute inset-0 bg-white transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500" />
+                    </div>
+                  </a>
                 </div>
               </div>
               
             </div>
-          ))}
+            );
+          })}
         </motion.div>
 
         {/* Horizontal Progress Bar */}

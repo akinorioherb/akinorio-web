@@ -59,11 +59,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             定期購入なら {formatPrice(product.subscriptionPrice)}
           </p>
         )}
-        {product.usageDuration && (
-          <p className="font-ui text-xs text-neutral-400 mt-1">
-            使用目安: {product.usageDuration}
-          </p>
-        )}
       </div>
     </Link>
   )

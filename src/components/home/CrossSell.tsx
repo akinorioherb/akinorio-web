@@ -5,18 +5,25 @@ import Image from 'next/image';
 
 const crossSells = [
   {
+    id: "01",
+    title: "ミトコンドリアのちから",
+    image: "/images/products/mitochondria.png",
+    price: "¥22,000",
+    desc: "極限までピュアな状態で抽出された美容液。水のように軽やかに肌の奥深くへ浸透し、かつてないハリと弾力を目覚めさせます。"
+  },
+  {
     id: "02",
-    title: "クレンジング",
-    image: "/images/products/cleansing.png",
+    title: "ハーブのちから",
+    image: "/images/products/herb.png",
     price: "¥18,000",
-    desc: "一日の終わりに肌を解き放つ。汚れやメイクを的確に包み込み、透明感とうるおいの余韻だけを残すクレンジングゲル。"
+    desc: "自然の生命力が宿るハーブの滴。肌の土台を整え、硬くなった角質をやさしく解きほぐすことで、美容成分の浸透を劇的に高めます。"
   },
   {
     id: "03",
-    title: "ソープ",
-    image: "/images/products/soap.png",
-    price: "¥8,800",
-    desc: "次に届けるセラムのために、無垢な土台をつくる。弾力のあるきめ細かな泡で、古い角質や不要なノイズを完璧に洗い流す専用ソープ。"
+    title: "輝肌Kihada",
+    image: "/images/products/kihada.png",
+    price: "¥12,000",
+    desc: "呼び覚ました肌本来のチカラを、極上のヴェールで閉じ込める。与えすぎない「引き算」が完成させる、圧倒的な艶と透明感。"
   }
 ]
 
@@ -48,11 +55,14 @@ export default function CrossSell() {
           
           <div className="mb-24 w-full flex flex-col items-start border-b border-white/10 pb-8">
             <h3 className="text-3xl md:text-5xl font-bold tracking-wider leading-[1.6]" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
-              その他のラインナップ
+              単品ラインナップ
             </h3>
+            <p className="text-sm md:text-base text-white/70 mt-4 tracking-wide" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+              輝魔女セットに含まれる各アイテムは、単品でも追加・継続でご購入いただけます。
+            </p>
           </div>
 
-          <div className="w-full grid md:grid-cols-2 gap-12 md:gap-16">
+          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 gap-8 md:gap-12">
             {crossSells.map((item, idx) => (
               <motion.div 
                 key={item.id}
@@ -62,7 +72,7 @@ export default function CrossSell() {
                 transition={{ duration: 1.2, delay: idx * 0.2, ease: "easeOut" }}
                 className="flex flex-col border border-white/10 bg-[#2A0005] group hover:border-[#E31633]/50 transition-colors duration-500 overflow-hidden"
               >
-                <div className="relative w-full aspect-[4/5] bg-gradient-to-t from-[#1A0005] to-[#3D010A] p-12 overflow-visible flex items-center justify-center">
+                <div className="relative w-full aspect-[4/5] bg-gradient-to-t from-[#1A0005] to-[#3D010A] p-8 overflow-visible flex items-center justify-center">
                   {/* Simulated Studio Spotlight */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#E31633] rounded-full blur-[80px] opacity-[0.15] z-0 transition-opacity duration-700 group-hover:opacity-30" />
                   
@@ -71,7 +81,7 @@ export default function CrossSell() {
                     alt={item.title}
                     fill
                     className="object-contain p-8 md:p-12 transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)] z-10"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   
                   {/* Subtle ambient light overlay on product */}
@@ -82,24 +92,24 @@ export default function CrossSell() {
                   </div>
                 </div>
                 
-                <div className="flex flex-col p-10 md:p-12 border-t border-white/10">
-                  <h4 className="text-2xl md:text-3xl font-bold tracking-widest text-white mb-6" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <div className="flex flex-col flex-1 p-8 md:p-10 border-t border-white/10">
+                  <h4 className="text-xl md:text-2xl font-bold tracking-widest text-[#fdfbf7] mb-6 min-h-[3rem]" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                     {item.title}
                   </h4>
-                  <p className="text-sm md:text-base leading-[2.2] tracking-wide text-white/70 font-light mb-8 text-justify">
+                  <p className="text-sm leading-[2.2] tracking-wide text-white/70 font-light mb-8 text-justify flex-1">
                     {item.desc}
                   </p>
                   
                   <div className="flex items-center justify-between w-full mt-auto">
                     <span className="text-xl md:text-2xl font-bold tracking-wider" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
-                      {item.price}<span className="text-xs text-white/50 ml-2 font-normal">税込</span>
+                      {item.price}<span className="text-[10px] text-white/50 ml-1 font-normal tracking-wide">税込</span>
                     </span>
                     
-                    <a href="#" className="flex items-center gap-4 group/btn">
-                      <span className="text-sm font-bold tracking-[0.2em] transform group-hover/btn:-translate-x-2 transition-transform duration-300">
+                    <a href="#" className="flex items-center gap-3 group/btn">
+                      <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] transform group-hover/btn:-translate-x-2 transition-transform duration-300">
                         詳細を見る
                       </span>
-                      <div className="w-12 h-[1px] bg-[#E31633] relative overflow-hidden">
+                      <div className="w-8 h-[1px] bg-[#E31633] relative overflow-hidden">
                         <div className="absolute inset-0 bg-white transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500" />
                       </div>
                     </a>

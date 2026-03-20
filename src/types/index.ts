@@ -13,7 +13,7 @@ export interface Product {
   subscriptionPrice: number
   subscriptionDiscountPct: number
   volume: string
-  usageDuration: string
+  usageDuration?: string
   ingredients: string
   features: string[]
   skinConcerns: SkinConcern[]

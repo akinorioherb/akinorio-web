@@ -7,29 +7,30 @@ export default function ProductPurchase() {
     <section id="purchase" className="w-full bg-[#1A0005] text-white py-24 md:py-32 border-b border-[#3D010A]">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-24">
         
-        {/* Product Image (Studio Real-Product Simulation) */}
+        {/* Product Images (Single Cohesive Studio Shot) */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="w-full md:w-1/2 relative aspect-[3/4] max-w-[500px] flex items-center justify-center p-8 overflow-visible"
+          className="w-full md:w-1/2 relative aspect-square max-w-[600px] flex items-center justify-center p-0 md:p-8 overflow-visible"
         >
           {/* Simulated Studio Lighting & Shadows */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[#E31633] rounded-full blur-[120px] opacity-20 z-0" />
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-2/3 h-12 bg-black rounded-[100%] blur-[20px] z-0 opacity-80" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[70%] bg-[#E31633] rounded-full blur-[120px] opacity-[0.2] z-0" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-12 bg-black rounded-[100%] blur-[20px] z-0 opacity-90" />
           
-          <Image
-            src="/images/products/serum.png"
-            alt="ミトコンドリアのちから"
-            fill
-            className="object-contain drop-shadow-2xl z-10 scale-90"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-          />
+          <div className="relative w-[90%] aspect-[4/3] z-20 transform hover:scale-105 transition-transform duration-700">
+            <Image
+              src="/images/products/allseries.png"
+              alt="輝魔女セット"
+              fill
+              className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.8)] opacity-95"
+              sizes="(max-width: 768px) 90vw, 50vw"
+              priority
+            />
+          </div>
           
-          {/* Subtle reflection/ambient light overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#3D010A]/10 via-transparent to-white/5 mix-blend-screen z-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#3D010A]/10 via-transparent to-white/5 mix-blend-screen z-40 pointer-events-none" />
         </motion.div>
 
         {/* Product Details & Immediate Cart */}
@@ -40,16 +41,25 @@ export default function ProductPurchase() {
           transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
           className="w-full md:w-1/2 flex flex-col items-start"
         >
-          <div className="flex flex-col mb-8">
+          <div className="flex flex-col mb-8 w-full">
             <span className="text-xs md:text-sm tracking-[0.3em] text-[#E31633] mb-4 font-bold">
-              肌の可能性を引き出す導入美容液
+              肌の可能性を100%呼び覚ます、究極の3ステップ
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-wider text-white mb-6 leading-tight" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              ミトコンドリアの<br className="max-md:hidden"/>ちから
+              輝魔女セット
             </h2>
-            <p className="text-base md:text-lg text-white/80 leading-[2.2] tracking-wide text-justify mb-8" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              糸を引く贅沢なテクスチャーが、肌を包み込みながら驚くほど馴染んでいく。過剰なスキンケアをお休みし、ご自身の肌環境をリセットするための特別な一滴です。
+            <p className="text-base md:text-lg text-white/80 leading-[2.2] tracking-wide text-justify mb-6" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+              過剰なスキンケアをお休みし、ご自身の肌環境をリセットするための特別な3点セット。細胞（ミトコンドリア）から自己再生させるアキノリオの極地体験。<br/>
             </p>
+
+            <div className="bg-[#1A0005] border border-white/20 p-6 mb-2">
+              <p className="text-sm md:text-base text-white/90 leading-[2.0] tracking-wider" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                【セット内容】<br/>
+                ・ミトコンドリアのちから<br/>
+                ・ハーブのちから<br/>
+                ・輝肌Kihada
+              </p>
+            </div>
           </div>
 
           <div className="w-full bg-[#3D010A] p-8 md:p-12 mb-8 border border-[#E31633]/20">
@@ -61,13 +71,13 @@ export default function ProductPurchase() {
             </p>
             
             <div className="flex flex-col space-y-2 mb-8">
-              <span className="text-sm tracking-widest text-white/70">初回特別価格（約54%OFF）</span>
+              <span className="text-sm tracking-widest text-white/70">初回特別価格</span>
               <div className="flex items-end gap-3">
                 <span className="text-4xl md:text-5xl font-bold tracking-wider" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
-                  ¥2,980
+                  ¥〇〇,〇〇〇
                 </span>
-                <span className="text-sm md:text-base text-white/60 mb-2 tracking-widest">
-                  税込・送料無料
+                <span className="text-sm md:text-base text-[#E31633] font-bold mb-2 tracking-widest">
+                  (※価格要確認)
                 </span>
               </div>
             </div>
@@ -97,7 +107,7 @@ export default function ProductPurchase() {
           <div className="w-full flex flex-col space-y-4">
             <a href="#" className="flex items-center justify-between border-b border-white/10 pb-4 group hover:border-[#E31633]/50 transition-colors duration-300">
               <span className="text-sm md:text-base tracking-widest text-[#fdfbf7] font-medium transition-colors" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                定期3ヵ月コース（初回約54%OFF） <span className="ml-2 font-bold" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>¥8,940</span>
+                定期3ヵ月コース
               </span>
               <svg className="w-4 h-4 text-white/50 group-hover:text-[#E31633] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
@@ -105,7 +115,7 @@ export default function ProductPurchase() {
             </a>
             <a href="#" className="flex items-center justify-between border-b border-white/10 pb-4 group hover:border-[#E31633]/50 transition-colors duration-300">
               <span className="text-sm md:text-base tracking-widest text-[#fdfbf7] font-medium transition-colors" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                通常購入 <span className="ml-2 font-bold" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>¥6,600</span>
+                通常購入
               </span>
               <svg className="w-4 h-4 text-white/50 group-hover:text-[#E31633] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" />
