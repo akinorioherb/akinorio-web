@@ -100,44 +100,47 @@ export default function BrandStory() {
             </motion.div>
 
             {/* Left-Aligned, Crisp Text (Body) */}
-            <div className="flex flex-col justify-start max-w-lg space-y-16">
+            <div className="flex flex-col justify-start max-w-lg space-y-16 mt-12 md:mt-0">
+              
               <motion.div 
                 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-10%" }}
                 variants={fadeIn}
-                className="space-y-6"
+                className="space-y-8"
               >
-                <h4 className="text-2xl md:text-3xl text-white font-bold leading-relaxed tracking-wide" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
-                  過剰さが奪う、本来の美しさ。
+                <h4 className="text-2xl md:text-3xl text-[#fdfbf7] font-bold leading-relaxed tracking-wide" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                  病気になっても、<br className="md:hidden" />いくつになっても、<br/>美しさを諦める必要はない。
                 </h4>
-                <p className="text-sm md:text-base leading-[2.2] text-white/90 font-medium tracking-wide">
-                  初めまして。アキノリオ代表の Minako です。<br/><br/>
-                  世の中には無数のスキンケアが溢れ、次から次へと新しい成分が提案されます。しかし、肌の不調の多くが、実はそうした「与えすぎ」によって起こっています。良かれと思って美容液を重ね、高いクリームを塗り込むこと… そのこれまでの努力の方向性が、本来の肌が求めることとは『真逆』だったとしたらどうでしょうか。
-                </p>
+                
+                <div className="space-y-6 text-sm md:text-base leading-[2.4] tracking-wide text-white/90 font-medium text-justify">
+                  <p>
+                    初めまして。アキノリオ代表の MINAKO です。<br/><br/>
+                    私自身、40代前半にバセドー病と橋本病を繰り返した影響で、毛穴の広がりや吹き出物に幾度となく悩まされました。
+                  </p>
+                  <p>
+                    世界中のコスメを買い漁り、長くステロイド生活を続ける日々。しかし、どれを使用しても若干の潤いが感じられれば良い方で、一向に変化の無い自分の肌に悲観する毎日でした。
+                  </p>
+                  <p>
+                    「もう自分と同じように悩む人のために、本当に肌を変えるものを作りたい。」<br/>
+                    その切実な想いから生化学者や化粧品研究者とタッグを組み、独自の年齢肌化粧品の開発に成功しました。
+                  </p>
+                  <p>
+                    今では、「肌の印象が10年前に戻ったようだ」「ファンデーションカラーが2段階明るくなった」など、全国から毎日喜びの声をいただけるようになりました。どの年代の方々も、みるみる美しい素肌へと変わっていくご報告をいただくのが何よりの幸せです。
+                  </p>
+                  <p>
+                    また、仕事をしながら2人の子供を育ててきた私自身の経験から、「ダブル洗顔不要のクレンジング」や、「毎回のスキンケアは15秒以内で終了」という、極限まで時短で結果を出すことにも徹底してこだわりました。
+                  </p>
+                  <p>
+                    世の中には無数のスキンケアが溢れています。しかし、過剰な「与えすぎ」に終止符を打ち、肌本来の力を引き出す「引き算」の美容こそが、あなたが再び輝くための最短の答えだと確信しています。
+                  </p>
+                </div>
               </motion.div>
 
               <motion.div 
                 initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-10%" }}
                 variants={fadeIn}
-                className="space-y-6"
+                className="pt-8 flex flex-col gap-2 border-t border-white/20"
               >
-                <h4 className="text-2xl md:text-3xl text-white font-bold leading-relaxed tracking-wide" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
-                  絶対に売り込まない。<br/>それが私たちの誓い。
-                </h4>
-                <p className="text-sm md:text-base leading-[2.2] text-white/90 font-medium tracking-wide">
-                  私たちアキノリオは、「無理に商品を売り込むことは絶対にしない」と誓っています。<br/><br/>
-                  私はこれまで、ブランドの「引き算体験」を希望されたすべてのお客様と、一人ひとり直接言葉を交わしてまいりました。「引き算」を掲げている私たちが、あえて複数の製品ラインナップをご用意しているのには理由があります。それは、皆様の切実なお声に耳を傾け、「本当に必要なものだけを創る」と決断したからです。<br/><br/>
-                  どれほど悩み、どれほど与え続けてきたのか。徹底してお客様に寄り添い、一人ひとりの「痛み」と向き合い続ける中で、このアキノリオ・シリーズは産声を上げました。<br/><br/>
-                  お客様の本当の声を直接お聞きすることは、私にとって何よりの生きがいです。<br/>
-                  過剰なケアを一度に手放す恐怖も、私は痛いほどよく分かっています。だからこそ、無理をせず、まずはご自身の肌の感覚を信じることから始めていただきたいのです。どんな些細なご不安も、私、創業者のMINAKOが直接対応させていただきます。
-                </p>
-              </motion.div>
-
-              <motion.div 
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-10%" }}
-                variants={fadeIn}
-                className="pt-8 flex flex-col gap-2"
-              >
-                <span className="text-[10px] tracking-[0.2em] text-[#FFFFFF]/70 uppercase font-sans font-bold">AKINORIO 代表</span>
+                <span className="text-[10px] tracking-[0.2em] text-[#FFFFFF]/70 uppercase font-sans font-bold">ブランド創業者</span>
                 <span className="text-3xl text-white font-black" style={{ fontFamily: 'Helvetica Neue, sans-serif' }}>MINAKO</span>
               </motion.div>
             </div>
