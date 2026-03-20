@@ -48,10 +48,10 @@ export default function CTASection() {
         {/* Vertical Title Indicator */}
         <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32 mt-12">
           <h2 
-            className="text-4xl md:text-5xl lg:text-5xl font-black tracking-[0.2em] text-[#E31633] uppercase select-none opacity-80" 
-            style={{ writingMode: 'vertical-rl', fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80" 
+            style={{ writingMode: 'vertical-rl', fontFamily: '"Noto Serif JP", serif' }}
           >
-            EXPERIENCE
+            引き算の体験
           </h2>
         </motion.div>
 
@@ -59,8 +59,8 @@ export default function CTASection() {
         <div className="flex-1 w-full flex flex-col items-start text-left">
           
           <div className="mb-16 md:mb-24 w-full">
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#E31633] mb-6 font-sans font-bold md:hidden">
-              EXPERIENCE
+            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-6 font-bold md:hidden" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+              引き算の体験
             </p>
             <h3 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter leading-[1.3] text-white" style={{ fontFamily: '"Noto Serif JP", serif' }}>
               あなたの<br/>

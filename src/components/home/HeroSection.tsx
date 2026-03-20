@@ -47,22 +47,22 @@ export default function HeroSection() {
           style={{ y: textY, opacity: textOpacity }}
           className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-start justify-center"
         >
-          <div className="max-w-3xl mt-[-5%]">
+          <div className="max-w-4xl mt-[-5%]">
             <motion.h1 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="text-6xl md:text-8xl lg:text-[8rem] font-black tracking-tighter text-white mb-8 uppercase leading-[0.9]"
-              style={{ fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+              className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-widest text-white mb-8 leading-[1.3]"
+              style={{ fontFamily: '"Noto Serif JP", serif' }}
             >
-              Subtract<br/>The<br/>Excess.
+              過剰さが奪う、<br/>本来の美しさ。
             </motion.h1>
             
             <motion.h2 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-              className="text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap"
+              className="text-xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap"
               style={{ fontFamily: '"Noto Serif JP", serif' }}
             >
               手放すほどに、<br className="md:hidden" />研ぎ澄まされる。
@@ -78,7 +78,7 @@ export default function HeroSection() {
           className="absolute bottom-12 left-6 md:left-12 z-20"
         >
           <div className="flex flex-col items-center gap-4">
-            <span className="text-[10px] tracking-[0.4em] font-sans text-white/50 uppercase" style={{ writingMode: 'vertical-rl' }}>SCROLL</span>
+            <span className="text-[10px] tracking-[0.4em] font-sans text-white/50" style={{ writingMode: 'vertical-rl' }}>スクロール</span>
             <motion.div 
               animate={{ height: ['0%', '100%'], opacity: [0, 1, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}

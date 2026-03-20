@@ -46,10 +46,10 @@ export default function Testimonials() {
         {/* Vertical Title Indicator */}
         <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32">
           <h2 
-            className="text-4xl md:text-5xl lg:text-5xl font-black tracking-[0.2em] text-[#E31633] uppercase select-none opacity-80" 
-            style={{ writingMode: 'vertical-rl', fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80" 
+            style={{ writingMode: 'vertical-rl', fontFamily: '"Noto Serif JP", serif' }}
           >
-            VOICE
+            お客様の声
           </h2>
         </motion.div>
 
@@ -57,8 +57,8 @@ export default function Testimonials() {
         <div className="flex-1 w-full flex flex-col items-start text-left">
           
           <div className="mb-24 w-full">
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#E31633] mb-4 font-sans font-bold">
-              Testimonials
+            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-4 font-bold" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+              VOICE
             </p>
             <h3 className="text-3xl md:text-5xl font-bold tracking-wider leading-[1.6]" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
               引き算を選んだ方の声

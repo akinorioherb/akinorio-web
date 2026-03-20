@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import HeroSection from '@/components/home/HeroSection'
-import AkinorioSecret from '@/components/home/AkinorioSecret'
-import ProductShowcase from '@/components/home/ProductShowcase'
+import ProductPurchase from '@/components/home/ProductPurchase'
 import BrandStory from '@/components/home/BrandStory'
+import SkinCareStep from '@/components/home/SkinCareStep'
+import AkinorioSecret from '@/components/home/AkinorioSecret'
 import Testimonials from '@/components/home/Testimonials'
+import CrossSell from '@/components/home/CrossSell'
 import CTASection from '@/components/home/CTASection'
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from '@/lib/constants'
 
@@ -16,10 +18,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <AkinorioSecret />
-      <ProductShowcase />
+      <ProductPurchase />
       <BrandStory />
+      <SkinCareStep />
+      <AkinorioSecret />
       <Testimonials />
+      <CrossSell />
       <CTASection />
 
       {/* JSON-LD Organization */}

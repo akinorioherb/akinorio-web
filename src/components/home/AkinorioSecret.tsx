@@ -40,10 +40,10 @@ export default function AkinorioSecret() {
           
           <div className="lg:col-span-4 flex flex-col items-start">
             <h2 
-              className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-[#E31633] uppercase leading-[0.9]" 
-              style={{ fontFamily: 'Neue Haas Grotesk, Helvetica Neue, sans-serif' }}
+              className="text-4xl md:text-5xl lg:text-7xl font-black tracking-widest text-[#E31633] leading-[1.2]" 
+              style={{ fontFamily: '"Noto Serif JP", serif' }}
             >
-              The<br/>Secret
+              アキノリオの<br/>秘密
             </h2>
             <div className="w-full h-[1px] bg-[#E31633]/30 mt-12 hidden lg:block" />
           </div>
