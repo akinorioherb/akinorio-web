@@ -123,13 +123,13 @@ export default function ProductShowcase() {
                 <span className="text-[10px] uppercase tracking-[0.4em] mb-4" style={{ color: product.accent, fontFamily: 'Cinzel, serif' }}>
                   Signature Line
                 </span>
-                <h3 className="text-4xl lg:text-5xl font-light tracking-widest text-white mb-4" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
+                <h3 className="text-3xl md:text-xl lg:text-2xl xl:text-3xl font-light tracking-wider text-white mb-4 text-center w-full break-keep" style={{ fontFamily: 'Cinzel, "Noto Serif JP", serif' }}>
                   {product.name}
                 </h3>
-                <p className="text-sm lg:text-base text-white/80 font-light mb-8 h-12 flex items-center justify-center" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <p className="text-xs md:text-[10px] lg:text-sm text-white/80 font-light mb-8 h-12 flex items-center justify-center text-center" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {product.subtitle}
                 </p>
-                <p className="text-xs lg:text-sm leading-loose tracking-wide text-white/50 font-light mb-10 h-auto md:h-56 lg:h-32 relative text-justify md:text-center text-justify-last-center">
+                <p className="text-xs lg:text-sm leading-loose tracking-wide text-white/50 font-light mb-10 h-auto md:h-64 lg:h-40 relative text-justify md:text-left text-justify-last-center">
                   {product.description}
                 </p>
                 <div className="flex items-center gap-4 mt-auto pt-8 border-t border-white/10 w-full justify-center">
