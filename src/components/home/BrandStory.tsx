@@ -69,19 +69,19 @@ export default function BrandStory() {
             whileInView={{ opacity: 1, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="relative h-[65vh] w-full lg:h-[80vh] overflow-hidden"
+            className="relative w-full max-w-[320px] md:max-w-[400px] mx-auto aspect-[3/4] overflow-hidden rounded-t-full rounded-b-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex-shrink-0"
           >
-            <motion.div style={{ y: yImg, height: '120%', width: '100%', top: '-10%' }} className="absolute">
+            <motion.div style={{ y: yImg, height: '110%', width: '100%', top: '-5%' }} className="absolute">
               <Image
                 src="/images/minakoceo.png"
                 alt="CEO Minako"
                 fill
                 className="object-cover object-top opacity-70 sepia-[0.2] contrast-125"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 400px"
               />
               {/* Fade out edges for seamless blending into the dark background */}
               <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(10,5,7,1)]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0507] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0507] via-transparent to-[#0a0507]/40" />
             </motion.div>
           </motion.div>
 

@@ -100,24 +100,24 @@ export default function HeroSection() {
         animate="visible"
         className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 md:px-10"
       >
-        <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-          <div className="order-2 lg:order-1 flex flex-col justify-center">
+        <div className="flex w-full flex-col items-center justify-center text-center mt-[-5%]">
+          <div className="flex flex-col items-center justify-center">
             <motion.p 
               variants={{
                 hidden: { opacity: 0, letterSpacing: '0.1em' },
                 visible: { opacity: 1, letterSpacing: '0.4em', transition: { duration: 1.5, delay: 0.5, ease: "easeOut" } }
               }}
-              className="mb-6 font-sans text-[10px] md:text-xs uppercase text-[#d4af37]"
+              className="mb-8 font-sans text-[10px] md:text-xs uppercase text-[#d4af37]"
             >
               AKINORIO / Luxury Minimal Skincare
             </motion.p>
             
-            <h1 className="max-w-3xl flex flex-col gap-4">
-              <span className="block font-serif text-3xl md:text-5xl leading-none tracking-[0.08em] font-light md:mb-2" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+            <h1 className="flex flex-col gap-6 md:gap-8 items-center justify-center">
+              <span className="block font-serif text-3xl md:text-5xl lg:text-6xl leading-normal tracking-[0.08em] font-light" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                 <SplitText text="美しさは、引き算から。" delayOffset={0.8} />
               </span>
-              <span className="block font-serif text-3xl md:text-5xl tracking-wide leading-tight" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                <SplitText text="纏うほど、研ぎ澄まされる。" delayOffset={1.4} />
+              <span className="block font-serif text-3xl md:text-5xl lg:text-6xl tracking-[0.08em] leading-normal font-light" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <SplitText text="手放すほどに、研ぎ澄まされる。" delayOffset={1.4} />
               </span>
             </h1>
 
@@ -126,7 +126,7 @@ export default function HeroSection() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 1.2, delay: 2.8, ease: "easeOut" } }
               }}
-              className="mt-8 max-w-xl text-sm leading-8 text-white/80 md:text-base tracking-[0.08em]"
+              className="mt-12 max-w-2xl text-sm leading-10 text-white/80 md:text-base tracking-[0.1em]"
               style={{ fontFamily: '"Noto Serif JP", serif' }}
             >
               余計なものを重ねない。必要なものだけを、静かに深く届ける。<br />
@@ -138,41 +138,14 @@ export default function HeroSection() {
                 hidden: { opacity: 0, y: 30 },
                 visible: { opacity: 1, y: 0, transition: { duration: 1.2, delay: 3.2, ease: "easeOut" } }
               }}
-              className="mt-12 flex flex-wrap gap-5"
+              className="mt-16 flex justify-center"
             >
-              <a href="https://lin.ee/qF2bQ2v" className="group relative overflow-hidden inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#d4af37] to-[#f3e5ab] px-8 py-4 font-sans text-sm font-medium text-black tracking-widest transition-all hover:scale-[1.03] shadow-[0_10px_40px_rgba(212,175,55,0.25)]">
-                <span className="relative z-10 font-bold">14日間の引き算プログラムを始める</span>
+              <a href="https://lin.ee/qF2bQ2v" className="group relative overflow-hidden inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#d4af37] to-[#f3e5ab] px-10 py-5 font-sans text-sm font-bold text-black tracking-widest transition-all hover:scale-[1.03] shadow-[0_10px_40px_rgba(212,175,55,0.25)]">
+                <span className="relative z-10">14日間の引き算プログラムを始める</span>
                 <div className="absolute inset-0 -translate-x-full bg-white/40 transition-transform duration-700 ease-out group-hover:translate-x-0" />
               </a>
             </motion.div>
           </div>
-
-          {/* 3. Floating Product Image */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
-              visible: { opacity: 1, filter: 'blur(0px)', scale: 1, transition: { duration: 2.5, ease: [0.22, 1, 0.36, 1], delay: 1.5 } }
-            }}
-            className="order-1 flex justify-center lg:order-2"
-          >
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-              className="relative w-[85vw] max-w-[650px] mix-blend-lighten"
-            >
-              <div className="absolute inset-0 rounded-full bg-[#d4af37]/15 blur-[100px]" />
-              <div className="relative">
-                <Image
-                  src="/images/products/allseries.png"
-                  alt="AKINORIO all series"
-                  width={1200}
-                  height={1200}
-                  priority
-                  className="h-auto w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,.6)]"
-                />
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
       </motion.div>
 
