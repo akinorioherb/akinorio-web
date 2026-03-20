@@ -7,22 +7,29 @@ export default function ProductPurchase() {
     <section id="purchase" className="w-full bg-[#1A0005] text-white py-24 md:py-32 border-b border-[#3D010A]">
       <div className="mx-auto max-w-[1200px] px-6 md:px-12 flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-24">
         
-        {/* Product Image */}
+        {/* Product Image (Studio Real-Product Simulation) */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="w-full md:w-1/2 relative aspect-[3/4] max-w-[500px]"
+          className="w-full md:w-1/2 relative aspect-[3/4] max-w-[500px] flex items-center justify-center p-8 overflow-visible"
         >
+          {/* Simulated Studio Lighting & Shadows */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-[#E31633] rounded-full blur-[120px] opacity-20 z-0" />
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-2/3 h-12 bg-black rounded-[100%] blur-[20px] z-0 opacity-80" />
+          
           <Image
-            src="/images/serum_studio.png"
+            src="/images/products/serum.png"
             alt="ミトコンドリアのちから"
             fill
-            className="object-contain"
+            className="object-contain drop-shadow-2xl z-10 scale-90"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
+          
+          {/* Subtle reflection/ambient light overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#3D010A]/10 via-transparent to-white/5 mix-blend-screen z-20 pointer-events-none" />
         </motion.div>
 
         {/* Product Details & Immediate Cart */}

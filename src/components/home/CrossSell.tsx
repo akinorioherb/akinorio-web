@@ -7,14 +7,14 @@ const crossSells = [
   {
     id: "02",
     title: "クレンジング",
-    image: "/images/cleansing_studio.png",
+    image: "/images/products/cleansing.png",
     price: "¥18,000",
     desc: "一日の終わりに肌を解き放つ。汚れやメイクを的確に包み込み、透明感とうるおいの余韻だけを残すクレンジングゲル。"
   },
   {
     id: "03",
     title: "ソープ",
-    image: "/images/soap_studio.png",
+    image: "/images/products/soap.png",
     price: "¥8,800",
     desc: "次に届けるセラムのために、無垢な土台をつくる。弾力のあるきめ細かな泡で、古い角質や不要なノイズを完璧に洗い流す専用ソープ。"
   }
@@ -62,15 +62,22 @@ export default function CrossSell() {
                 transition={{ duration: 1.2, delay: idx * 0.2, ease: "easeOut" }}
                 className="flex flex-col border border-white/10 bg-[#2A0005] group hover:border-[#E31633]/50 transition-colors duration-500 overflow-hidden"
               >
-                <div className="relative w-full aspect-[4/5] bg-gradient-to-t from-[#1A0005] to-[#3D010A] p-12">
+                <div className="relative w-full aspect-[4/5] bg-gradient-to-t from-[#1A0005] to-[#3D010A] p-12 overflow-visible flex items-center justify-center">
+                  {/* Simulated Studio Spotlight */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#E31633] rounded-full blur-[80px] opacity-[0.15] z-0 transition-opacity duration-700 group-hover:opacity-30" />
+                  
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-contain p-8 md:p-12 transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-contain p-8 md:p-12 transform group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)] z-10"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute top-6 left-6 text-2xl font-black text-white/10" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
+                  
+                  {/* Subtle ambient light overlay on product */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#3D010A]/20 via-transparent to-white/5 mix-blend-screen z-20 pointer-events-none" />
+
+                  <div className="absolute top-6 left-6 text-2xl font-black text-white/10 z-30" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
                     {item.id}
                   </div>
                 </div>
