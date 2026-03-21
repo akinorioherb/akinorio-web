@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Container from '@/components/ui/Container'
-import { LINE_URL } from '@/lib/constants'
+import { LINE_URL, PRODUCTS } from '@/lib/constants'
 
 export default function Footer() {
   return (
@@ -28,23 +28,29 @@ export default function Footer() {
                 Products
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <Link href="/products/serum" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
-                    ミトコンドリアのちから 美容液
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/cleansing" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
-                    ミトコンドリアのちから クレンジング
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/soap" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
-                    ミトコンドリアのちから ソープ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/sample" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors">
+                {[
+                  'mitochondria',
+                  'perfume',
+                  'herb',
+                  'cleansing',
+                  'kihada',
+                  'serum',
+                  'balm',
+                  'uv',
+                  'minus20-set'
+                ].map((slug) => {
+                  const product = PRODUCTS.find((p) => p.slug === slug);
+                  if (!product) return null;
+                  return (
+                    <li key={product.id}>
+                      <Link href={`/products/${product.slug}`} className="font-ui text-sm text-primary-200 hover:text-white transition-colors block leading-relaxed" title={product.name}>
+                        {product.name}
+                      </Link>
+                    </li>
+                  );
+                })}
+                <li className="pt-3 mt-3 border-t border-primary-700/50">
+                  <Link href="/sample" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors font-bold block">
                     14日間体験
                   </Link>
                 </li>

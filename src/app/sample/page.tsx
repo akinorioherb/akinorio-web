@@ -114,7 +114,7 @@ export default function SamplePage() {
           <p className="font-ui text-sm text-neutral-500">
             あなたの肌と、出会い直す14日間。
             <br />
-            美容液・クレンジング・ソープの3点セットをお届けします。
+            美容液・クレンジングをお届けします。
           </p>
         </div>
 

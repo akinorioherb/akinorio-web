@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import HeroSection from '@/components/home/HeroSection'
-import ProductPurchase from '@/components/home/ProductPurchase'
 import BrandStory from '@/components/home/BrandStory'
 import SkinCareStep from '@/components/home/SkinCareStep'
 import AkinorioSecret from '@/components/home/AkinorioSecret'
@@ -18,9 +17,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ProductPurchase />
       <BrandStory />
-      <SkinCareStep />
       <AkinorioSecret />
       <Testimonials />
       <CTASection />

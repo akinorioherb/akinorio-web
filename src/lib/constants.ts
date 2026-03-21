@@ -27,20 +27,29 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/herb.png', images: [], sortOrder: 2, isActive: true,
   },
   {
+    id: '6', slug: 'cleansing', name: 'クリアクリスタルクレンジング', subtitle: '摩擦ゼロのメイク落とし',
+    description: 'ダブル洗顔という「余計な儀式」を終わらせるクレンジング。\nメイクも毛穴汚れも、するんと落とす。落とすたびに肌が整っていきます。',
+    category: 'single', price: 6600, subscriptionPrice: 6270, subscriptionDiscountPct: 5, volume: '180ml',
+    ingredients: 'シリカ水、ヤシ油脂肪酸、グリセリン、ミトコンドリア活性成分配合',
+    features: ['ジェルタイプで肌に優しい', 'ダブル洗顔不要', '毛穴汚れもすっきり'],
+    skinConcerns: ['毛穴', '敏感肌'],
+    image: '/images/products/cleansing.png', images: [], sortOrder: 3, isActive: true,
+  },
+  {
     id: '3', slug: 'kihada', name: '輝肌（キハダ）', subtitle: '極上艶ヴェール',
     description: '呼び覚ました肌本来のチカラを、極上のヴェールで閉じ込める。\n与えすぎない「引き算」が完成させる、圧倒的な艶と透明感をご体感ください。',
     category: 'single', price: 11000, subscriptionPrice: 10450, subscriptionDiscountPct: 5, volume: '50g',
     usageDuration: '約3ヶ月',
     ingredients: '', features: [], skinConcerns: ['シミ・くすみ', '乾燥'],
-    image: '/images/products/kihada.png', images: [], sortOrder: 3, isActive: true,
+    image: '/images/products/kihada.png', images: [], sortOrder: 4, isActive: true,
   },
   {
-    id: '4', slug: 'balm', name: 'クリアクリスタルバーム', subtitle: '究極の細胞覚醒バーム',
+    id: '4', slug: 'balm', name: '金の糸クリーム（クリアクリスタルバーム）', subtitle: '究極の細胞覚醒バーム',
     description: '最上級の保湿と細胞活性を両立させた奇跡のバーム。\n夜のスキンケアの最後に塗るだけで、翌朝の肌が見違えるように生まれ変わります。',
     category: 'single', price: 22000, subscriptionPrice: 20900, subscriptionDiscountPct: 5, volume: '100g',
     usageDuration: '約4〜6ヶ月',
     ingredients: '', features: [], skinConcerns: ['ハリ・たるみ', '乾燥'],
-    image: '/images/products/kihada.png', images: [], sortOrder: 4, isActive: true,
+    image: '/images/products/kihada.png', images: [], sortOrder: 5, isActive: true,
   },
   {
     id: '5', slug: 'serum', name: 'クリアクリスタルセラム', subtitle: '高濃度美容液',
@@ -48,16 +57,7 @@ export const PRODUCTS: Product[] = [
     category: 'single', price: 11000, subscriptionPrice: 10450, subscriptionDiscountPct: 5, volume: '200ml',
     usageDuration: '約3ヶ月',
     ingredients: '', features: [], skinConcerns: ['シミ・くすみ', 'ハリ・たるみ'],
-    image: '/images/products/mitochondria.png', images: [], sortOrder: 5, isActive: true,
-  },
-  {
-    id: '6', slug: 'cleansing', name: 'クリアクリスタルクレンジング', subtitle: '摩擦ゼロのメイク落とし',
-    description: 'ダブル洗顔という「余計な儀式」を終わらせるクレンジング。\nメイクも毛穴汚れも、するんと落とす。落とすたびに肌が整っていきます。',
-    category: 'single', price: 6600, subscriptionPrice: 6270, subscriptionDiscountPct: 5, volume: '180ml',
-    ingredients: 'シリカ水、ヤシ油脂肪酸、グリセリン、ミトコンドリア活性成分配合',
-    features: ['ジェルタイプで肌に優しい', 'ダブル洗顔不要', '毛穴汚れもすっきり'],
-    skinConcerns: ['毛穴', '敏感肌'],
-    image: '/images/products/cleansing.png', images: [], sortOrder: 6, isActive: true,
+    image: '/images/products/mitochondria.png', images: [], sortOrder: 6, isActive: true,
   },
   {
     id: '7', slug: 'uv', name: 'クリアクリスタルスキンベースUV', subtitle: '美容液UVベース',
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/mitochondria.png', images: [], sortOrder: 7, isActive: true,
   },
   {
-    id: '8', slug: 'minus20-set', name: 'マイナス20才肌セット', subtitle: '基本の引き算セット',
+    id: '8', slug: 'minus20-set', name: '輝魔女セット', subtitle: '基本の引き算セット',
     description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
     category: 'set', price: 22000, subscriptionPrice: 20900, subscriptionDiscountPct: 5, volume: '1セット',
     ingredients: '', features: [], skinConcerns: ['乾燥', '毛穴', '敏感肌'],
@@ -87,6 +87,16 @@ export const PRODUCTS: Product[] = [
     category: 'set', price: 38500, subscriptionPrice: 38500, subscriptionDiscountPct: 0, volume: '1セット',
     ingredients: '', features: [], skinConcerns: ['シミ・くすみ', 'ハリ・たるみ', '乾燥'],
     image: '/images/products/allseries.png', images: [], sortOrder: 10, isActive: true,
+  },
+  {
+    id: '11', slug: 'perfume', name: 'Perfume（美容液混合シャンプー）', subtitle: 'ノンシリコン・2本セット',
+    description: '美容成分と超高級ケラチンで洗い上げる贅沢。\nトリートメントもボディソープも捨てる、新時代の引き算ケア。\n頭皮のたるみはお顔のたるみ。着目したのは「一つなぎの肌」。\n最終的にこの一本で全身が潤う、極上のスキンケア処方です。\n「しっとりまとまるのに、ペタッとしない」\nシルクの力で、ふんわりと軽やかな美しいツヤ髪へと導きます。',
+    category: 'set', price: 9240, subscriptionPrice: 9240, subscriptionDiscountPct: 0, volume: '250ml×2本',
+    usageDuration: '—',
+    ingredients: '水・ココイルメチルタウリンタウリンNａ・コカミドプロピルベタイン・ココイルアラニンTEA・ラウロイルメチルアラニンNａ・塩化Ｎａ・サッカロミセスセレビシアエエキス・ホスファチジルコリン・チシマザサ水・加水分解ケラチン（羊毛）・加水分解ケラチン（カシミヤヤギ）・（ジヒドロキシメチルシリルプロポキシ）ヒドロキシプロピル加水分解シルク・（加水分解シルク/ＰＧプロピルメチルシランジオール）クロスポリマー・グリチルリチン酸2Ｋ・コカミドＤＥＡ・ポリクオタニウム-10・ポリクオタニウム-61・ジステアリン酸ＰＥＧ-190・ヤシ油脂肪酸ＰＥＧ-7グリセチル・ココイルアルギニンエチルＰＣＡ・クエン酸・アルギニン・ＢＧ・グリセリン・ペンチレングリコール・カプリリルグリコール・フェノキシエタノール・香料',
+    features: ['ワイン酵母・ケラチン・シルク配合', 'トリートメント不要', '必ず2本セットで販売'],
+    skinConcerns: ['抜け毛', 'パサつき', 'ダメージ補修'],
+    image: '/images/products/shampoo.png', images: [], sortOrder: 11, isActive: true,
   }
 ]
 

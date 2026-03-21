@@ -79,87 +79,89 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
 
-  // HIK-style smooth fading and scaling
+  // Keep subtle parallax effect for the background without needing extra section height
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
-  
-  // Parallax the text up at a different speed than the scroll
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '150%']);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[150vh] bg-[#94081F] z-0 truncate overflow-x-hidden">
+    <section ref={containerRef} className="relative w-full h-[100dvh] bg-[#1A0005] z-0 overflow-hidden">
       
-      {/* Sticky Container - Stays pinned while scrolling through the 150vh height */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
-        
-        {/* Massive High-End Generated Image */}
+      {/* Background Image Layer */}
+      <motion.div 
+        style={{ scale, opacity }}
+        className="absolute inset-0 w-full h-full transform-gpu overflow-hidden flex items-center justify-center"
+      >
         <motion.div 
-          style={{ scale, opacity }}
-          className="absolute inset-0 w-full h-full transform-gpu"
+          className="absolute w-[150vmax] h-[150vmax]"
+          animate={{ rotateZ: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          style={{ 
+            transformOrigin: 'center center', 
+            scale: 1.0,
+            rotateX: 72, // 土星の輪のような傾き
+            rotateY: -5,
+            perspective: 1200
+          }}
         >
           <Image
             src="/images/hero_bg.png"
             alt="AKINORIO Signature Crimson"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center mix-blend-lighten"
             priority
             quality={100}
           />
-          {/* Deep crimson gradient from left and bottom for text readability and HIK contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#7C0114]/90 via-[#94081F]/40 to-transparent opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#7C0114] via-transparent to-transparent opacity-90" />
         </motion.div>
 
-        {/* Dancing Gold Particles */}
-        <GoldParticles />
+        {/* Deep crimson gradient from left and bottom for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#7C0114]/90 via-[#94081F]/40 to-transparent opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#7C0114] via-transparent to-transparent opacity-90" />
+      </motion.div>
 
-        {/* HIK style dramatic typography overlay: STRICT Left Alignment per Guidelines */}
-        <motion.div 
-          style={{ y: textY, opacity: textOpacity }}
-          className="relative z-20 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-start justify-center point-events-none"
-        >
-          <div className="max-w-4xl mt-[-5%]">
-            <motion.h1 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-widest text-white mb-8 leading-[1.3]"
-              style={{ fontFamily: '"Noto Serif JP", serif' }}
-            >
-              過剰さが奪う、<br/>本来の美しさ。
-            </motion.h1>
-            
-            <motion.h2 
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-              className="text-xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap"
-              style={{ fontFamily: '"Noto Serif JP", serif' }}
-            >
-              手放すほどに、<br className="md:hidden" />研ぎ澄まされる。
-            </motion.h2>
-          </div>
-        </motion.div>
+      {/* Dancing Gold Particles */}
+      <GoldParticles />
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 1.5 }}
-          className="absolute bottom-12 left-6 md:left-12 z-30"
-        >
-          <div className="flex flex-col items-center gap-4">
-            <span className="text-[10px] tracking-[0.4em] font-sans text-white/50" style={{ writingMode: 'vertical-rl' }}>スクロール</span>
-            <motion.div 
-              animate={{ height: ['0%', '100%'], opacity: [0, 1, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-[1px] h-16 bg-white transform origin-top" 
-            />
-          </div>
-        </motion.div>
-
+      {/* Hero Typography Layer */}
+      <div className="relative z-20 w-full h-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-start justify-center pointer-events-none">
+        
+        <div className="max-w-4xl mt-[-5vh]">
+          <motion.h1 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-widest text-white mb-8 md:mb-12 leading-[1.3] drop-shadow-2xl"
+            style={{ fontFamily: '"Noto Serif JP", serif' }}
+          >
+            引き算の美学。<br/>本来の美しさ。
+          </motion.h1>
+          
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+            className="text-xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap drop-shadow-lg"
+            style={{ fontFamily: '"Noto Serif JP", serif' }}
+          >
+            手放すほどに、<br className="md:hidden" />研ぎ澄まされる。
+          </motion.h2>
+        </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 1.5 }}
+        className="absolute bottom-6 md:bottom-12 left-6 md:left-12 z-30 flex flex-col items-center gap-4"
+      >
+        <span className="text-[10px] tracking-[0.4em] font-sans text-white/50" style={{ writingMode: 'vertical-rl' }}>スクロール</span>
+        <motion.div 
+          animate={{ height: ['0%', '100%'], opacity: [0, 1, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="w-[1px] h-12 md:h-16 bg-white transform origin-top" 
+        />
+      </motion.div>
+
     </section>
   );
 }

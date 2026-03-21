@@ -38,34 +38,39 @@ export default function SkinCareStep() {
 
   return (
     <section id="skincare-step" ref={containerRef} className="relative w-full overflow-hidden bg-[#2A0005] text-white py-32 md:py-48 z-10 border-t border-[#3D010A]">
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
         
-        {/* Vertical Title Indicator */}
-        <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32">
+        {/* Title Area */}
+        <div className="w-full lg:w-1/4 flex flex-col items-start lg:sticky lg:top-32 z-20">
           <h2 
-            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80" 
-            style={{ writingMode: 'vertical-rl', fontFamily: '"Noto Serif JP", serif' }}
+            className="text-4xl md:text-5xl font-black tracking-widest text-[#E31633] lg:writing-vertical-rl pb-8 lg:pb-0" 
+            style={{ fontFamily: '"Noto Serif JP", serif', writingMode: 'horizontal-tb' }}
           >
             輝魔女セットの奇跡
           </h2>
-        </motion.div>
+          <style dangerouslySetInnerHTML={{__html: `
+            @media (min-width: 1024px) {
+              h2.lg\\:writing-vertical-rl { writing-mode: vertical-rl; text-orientation: upright; height: 500px; }
+            }
+          `}} />
+        </div>
 
         {/* Content Area */}
-        <div className="flex-1 w-full flex flex-col items-start text-left">
+        <div className="flex-1 w-full flex flex-col items-start mt-8 lg:mt-0">
           
-          <div className="mb-24 w-full">
-            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-4 font-bold max-md:text-center" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+          <div className="mb-20 w-full text-left">
+            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-4 font-bold" style={{ fontFamily: '"Noto Serif JP", serif' }}>
               輝魔女セット - スキンケアステップ
             </p>
-            <h3 className="text-3xl md:text-5xl font-bold tracking-wider leading-[1.6] mb-8 max-md:text-center" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
+            <h3 className="text-3xl md:text-5xl font-bold tracking-wider leading-[1.6] mb-8" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
               なぜ、この順番なのか。
             </h3>
-            <p className="text-sm md:text-base text-white/80 leading-loose tracking-wide md:max-w-2xl text-justify md:text-left mx-auto md:mx-0">
+            <p className="text-sm md:text-base text-white/80 leading-loose tracking-wide md:max-w-2xl text-justify md:text-left">
               圧倒的な素肌力を引き出すための、究極の3ステップ「輝魔女セット」。それぞれが明確な役割を持ち、完璧な連携で肌環境を整え、細胞からの自己再生を促します。
             </p>
           </div>
 
-          <div className="w-full flex flex-col md:flex-row gap-12 md:gap-8">
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {steps.map((step, idx) => (
               <motion.div 
                 key={step.num}
@@ -73,18 +78,18 @@ export default function SkinCareStep() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1.2, delay: idx * 0.2, ease: "easeOut" }}
-                className="flex-1 flex flex-col border border-white/10 bg-[#1A0005]/50 p-6 md:p-8 hover:border-[#E31633]/30 transition-all duration-500 overflow-hidden relative group"
+                className="flex flex-col border border-white/10 bg-[#1A0005]/50 p-6 hover:border-[#E31633]/30 transition-all duration-500 overflow-hidden relative group h-full"
               >
                 {/* Product Image */}
-                <div className="relative w-[120px] md:w-[150px] aspect-[4/5] mx-auto mb-8 transform group-hover:scale-105 transition-transform duration-700">
-                  <Image src={step.image} alt={step.name} fill className="object-contain drop-shadow-2xl mix-blend-screen" />
+                <div className="relative w-full aspect-[4/5] max-w-[200px] mx-auto mb-8 transform group-hover:scale-105 transition-transform duration-700 bg-white/5 rounded flex items-center justify-center p-4">
+                  <Image src={step.image} alt={step.name} fill className="object-contain drop-shadow-xl" />
                 </div>
 
-                <div className="flex items-end gap-3 mb-6 pb-6 border-b border-[#E31633]/30">
-                  <span className="text-4xl md:text-5xl font-black text-[#E31633]/80" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>{step.num}</span>
-                  <span className="text-lg md:text-xl font-bold tracking-widest text-white mb-1" style={{ fontFamily: '"Noto Serif JP", serif' }}>{step.name}</span>
+                <div className="flex flex-col items-start mb-6 pb-6 border-b border-[#E31633]/30">
+                  <span className="text-4xl md:text-5xl font-black text-[#E31633]/80 mb-2" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>{step.num}</span>
+                  <span className="text-lg md:text-xl font-bold tracking-widest text-[#fdfbf7] whitespace-nowrap" style={{ fontFamily: '"Noto Serif JP", serif' }}>{step.name}</span>
                 </div>
-                <h4 className="text-base md:text-lg font-bold tracking-wide text-white mb-4" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+                <h4 className="text-base md:text-lg font-bold tracking-wide text-white mb-4 leading-relaxed" style={{ fontFamily: '"Noto Serif JP", serif' }}>
                   {step.title}
                 </h4>
                 <p className="text-[13px] leading-[2.2] tracking-wide text-white/70 font-light text-justify mt-auto">

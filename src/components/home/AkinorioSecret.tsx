@@ -24,7 +24,7 @@ export default function AkinorioSecret() {
           width: 100vw; height: 100vh;
           z-index: 0;
           /* ダークなグラデーションと指定のイメージ画像を適用 */
-          background-image: linear-gradient(to top, rgba(26,0,5,0.95) 0%, rgba(26,0,5,0.2) 60%), url('/images/asian_skin_40s_new.png');
+          background-image: linear-gradient(to top, rgba(26,0,5,0.95) 0%, rgba(26,0,5,0.2) 60%), url('/images/modelandproducts.png');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -33,20 +33,6 @@ export default function AkinorioSecret() {
       `}} />
 
       <div className="secret-bg" />
-
-      {/* Genuine Akinorio SVG Products placed floating/sitting in the background right */}
-      {/* We keep these independent of the background and just fixed to the section to ensure they don't break parallax */}
-      <div className="absolute right-[-5%] md:right-12 top-[40%] md:top-1/2 -translate-y-1/2 flex items-end gap-2 md:gap-4 z-[1] scale-[0.6] md:scale-90 origin-right opacity-90 drop-shadow-2xl pointer-events-none">
-        <div className="relative w-[120px] md:w-[160px] aspect-[4/5] transform hover:scale-105 transition-transform duration-500">
-          <Image src="/images/products/12.svg" alt="Akinorio Product 12" fill className="object-contain" />
-        </div>
-        <div className="relative w-[90px] md:w-[120px] aspect-[4/5] translate-y-6 transform hover:scale-105 transition-transform duration-500">
-          <Image src="/images/products/5.svg" alt="Akinorio Product 5" fill className="object-contain" />
-        </div>
-        <div className="relative w-[130px] md:w-[180px] aspect-[4/5] transform hover:scale-105 transition-transform duration-500">
-          <Image src="/images/products/2.svg" alt="Akinorio Product 2" fill className="object-contain" />
-        </div>
-      </div>
 
       {/* Content Layer (Flowing Text) */}
       <div className="relative z-10 w-full min-h-screen py-[120px] px-6 md:px-12 flex flex-col justify-end max-w-[1400px] mx-auto overflow-hidden">
@@ -91,13 +77,13 @@ export default function AkinorioSecret() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="lg:col-span-7 flex flex-col space-y-8 md:space-y-12"
+            className="lg:col-span-7 flex flex-col space-y-8 md:space-y-12 bg-gradient-to-r from-transparent via-black/20 to-black/60 p-6 md:p-12 rounded-xl"
           >
-            <h3 className="text-2xl md:text-4xl font-bold tracking-wider leading-[1.6] text-[#fdfbf7] drop-shadow-2xl" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
+            <h3 className="text-2xl md:text-4xl font-bold tracking-wider leading-[1.6] text-[#fdfbf7] drop-shadow-md" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
               肌の「根本環境」に着目した<br className="hidden md:block"/>全く新しい解答。
             </h3>
             
-            <div className="space-y-6 text-sm md:text-base leading-[2.4] tracking-wide text-white/90 font-medium text-justify max-w-2xl drop-shadow-md" style={{ fontFamily: '"Noto Serif JP", serif' }}>
+            <div className="space-y-6 text-sm md:text-base leading-[2.4] tracking-wide text-white font-medium text-justify max-w-2xl drop-shadow-md" style={{ fontFamily: '"Noto Serif JP", serif' }}>
               <p>
                 角質層の根本環境が乱れていたら、どんな成分も浸透せずに流れてしまいます。<br/>
                 何を使っても変わらない… だからこそ「肌の土台」に着目する必要があるのです。
