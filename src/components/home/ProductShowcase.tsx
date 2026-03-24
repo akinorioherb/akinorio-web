@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { PRODUCTS } from '@/lib/constants';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n';
 
 // ec-site/products/*.png と各商品を紐付け
 const BG_MAP: Record<string, string> = {
@@ -28,6 +30,8 @@ const OBJECT_POSITION_MAP: Record<string, string> = {
 };
 
 export default function ProductShowcase() {
+  const { lang } = useLanguage();
+  const t = translations[lang].products;
   const mitoProduct = PRODUCTS.find(p => p.slug === 'mitochondria');
   const perfumeProduct = PRODUCTS.find(p => p.slug === 'perfume');
   
@@ -100,12 +104,12 @@ export default function ProductShowcase() {
                 <div className="flex flex-wrap items-center gap-3 mb-6 md:mb-8">
                   {product.usageDuration && product.usageDuration !== '—' && (
                     <span className="text-[10px] md:text-xs font-bold tracking-widest border border-white/30 px-3 py-1 bg-transparent drop-shadow-sm">
-                      使用目安: {product.usageDuration}
+                      {t.duration}: {product.usageDuration}
                     </span>
                   )}
                   {product.volume && product.volume !== '—' && (
                     <span className="text-[10px] md:text-xs font-bold tracking-widest border border-white/30 px-3 py-1 bg-transparent drop-shadow-sm">
-                      内容量: {product.volume}
+                      {t.volume}: {product.volume}
                     </span>
                   )}
                 </div>
@@ -131,7 +135,7 @@ export default function ProductShowcase() {
                     href={`/products/${product.slug}`}
                     className="inline-flex items-center justify-center bg-white text-black px-8 py-4 text-xs tracking-[0.2em] font-bold hover:bg-neutral-200 transition-colors w-full sm:w-auto mt-4 sm:mt-0 group"
                   >
-                    詳細を見る
+                    {t.viewDetails}
                     <svg className="w-4 h-4 ml-3 flex-shrink-0 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
@@ -196,7 +200,7 @@ export default function ProductShowcase() {
                       </div>
                     </div>
                     <a href="#purchase" className="inline-flex items-center justify-center px-4 py-2 bg-white text-[#1A0005] hover:bg-[#E31633] hover:text-white transition-all duration-300 font-sans text-xs font-bold tracking-widest shadow-xl">
-                      詳細
+                      {t.view}
                     </a>
                   </div>
                 </div>

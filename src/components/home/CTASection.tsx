@@ -2,6 +2,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n';
 
 // Counter component for dramatic number reveal
 const AnimatedCounter = ({ end, duration = 2 }: { end: number, duration?: number }) => {
@@ -32,8 +34,11 @@ export default function CTASection() {
     target: containerRef,
     offset: ['start end', 'end start']
   });
-
   const headerY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const { lang } = useLanguage();
+  const t = translations[lang].cta;
+  const isEn = lang === 'en';
+  const bodyFont = isEn ? 'var(--font-luxury-en)' : '"Noto Serif JP", serif';
 
   return (
     <section id="cta" ref={containerRef} className="relative w-full overflow-hidden bg-gradient-to-t from-[#120002] to-[#1A0005] text-white py-32 md:py-48 z-10">
@@ -47,25 +52,25 @@ export default function CTASection() {
         
         {/* Vertical Title Indicator */}
         <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32 mt-12">
-          <h2 
-            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80" 
-            style={{ writingMode: 'vertical-rl', fontFamily: '"Noto Serif JP", serif' }}
+          <h2
+            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80"
+            style={{ writingMode: 'vertical-rl', fontFamily: bodyFont, fontWeight: isEn ? 300 : 900, letterSpacing: isEn ? '0.1em' : '0.4em' }}
           >
-            引き算の体験
+            {t.verticalLabel}
           </h2>
         </motion.div>
 
         {/* Content Area */}
         <div className="flex-1 w-full flex flex-col items-start text-left">
-          
+
           <div className="mb-16 md:mb-24 w-full">
-            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-6 font-bold md:hidden" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              引き算の体験
+            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-6 font-bold md:hidden"
+              style={{ fontFamily: bodyFont }}>
+              {t.mobileLabel}
             </p>
-            <h3 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter leading-[1.3] text-white" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              あなたの<br/>
-              肌の歴史を、<br/>
-              <span className="font-bold">引き算</span>から<br className="md:hidden" />やり直す。
+            <h3 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter leading-[1.3] text-white"
+              style={{ fontFamily: bodyFont, whiteSpace: 'pre-line', fontWeight: isEn ? 300 : 300, letterSpacing: isEn ? '0.01em' : undefined }}>
+              {t.headline}
             </h3>
           </div>
 
@@ -82,10 +87,10 @@ export default function CTASection() {
               >
                 <div className="flex flex-col text-left">
                   <span className="text-[11px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#E31633] md:text-white/50 mb-1 font-mono font-bold">
-                    Repeat Rate
+                    {t.repeatRateLabel}
                   </span>
                   <span className="text-[9px] text-white/40 tracking-wider hidden md:block mt-6">
-                    ※当社販売実績データ
+                    {t.repeatNote}
                   </span>
                 </div>
                 
@@ -94,7 +99,7 @@ export default function CTASection() {
                     <AnimatedCounter end={90} />%<span className="text-2xl md:text-3xl font-light ml-1">+</span>
                   </span>
                   <span className="text-[9px] text-white/40 tracking-wider md:hidden mt-2">
-                    ※当社販売実績データ
+                    {t.repeatNote}
                   </span>
                 </div>
               </motion.div>
@@ -111,13 +116,14 @@ export default function CTASection() {
               {/* Subtle hover gleam */}
               <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out" />
 
-              <h4 className="text-xl md:text-3xl text-white font-bold tracking-widest mb-6" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                21日間プログラム
+              <h4 className="text-xl md:text-3xl text-white font-bold tracking-widest mb-6"
+                style={{ fontFamily: bodyFont, fontWeight: isEn ? 300 : 700, letterSpacing: isEn ? '0.04em' : undefined }}>
+                {t.program.title}
               </h4>
-              <p className="text-[13px] md:text-[15px] text-white/90 leading-loose tracking-wider mb-10 text-left">
-                <span className="font-bold text-[#fdfbf7] block mb-2 tracking-[0.1em]">いきなりの引き算スキンケアを躊躇うあなたへ。</span>
-                まずは、足し算のスキンケアをお休みし、ご自身の肌環境をリセットする21日間をお試しください。<br className="hidden md:block"/>
-                本当に必要なものは何か、肌が答えてくれます。
+              <p className="text-[13px] md:text-[15px] text-white/90 leading-loose tracking-wider mb-10 text-left"
+                style={{ fontFamily: bodyFont }}>
+                <span className="font-bold text-[#fdfbf7] block mb-2 tracking-[0.1em]">{t.program.subhead}</span>
+                <span style={{ whiteSpace: 'pre-line' }}>{t.program.body}</span>
               </p>
 
               {/* Gold CTA Button */}
@@ -152,9 +158,9 @@ export default function CTASection() {
 
                   <span
                     className="text-[14px] md:text-[15px] font-bold tracking-[0.18em] relative z-10 text-[#120002]"
-                    style={{ fontFamily: '"Noto Serif JP", sans-serif' }}
+                    style={{ fontFamily: isEn ? 'var(--font-luxury-en)' : '"Noto Serif JP", sans-serif', letterSpacing: isEn ? '0.12em' : '0.18em' }}
                   >
-                    21日間の体験を始める
+                    {t.program.button}
                   </span>
 
                   <motion.svg

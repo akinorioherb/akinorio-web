@@ -5,6 +5,8 @@ import Image from 'next/image'
 import type { Product } from '@/types'
 import { useCart } from '@/lib/cart'
 import { motion } from 'framer-motion'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 interface Props { product: Product }
 
@@ -56,6 +58,8 @@ export default function ProductDetail({ product }: Props) {
   )
   const [isAdded, setIsAdded] = useState(false)
   const { addItem } = useCart()
+  const { lang } = useLanguage()
+  const t = translations[lang].productDetail
 
   const productImage = product.hikImage || product.image
 
@@ -77,7 +81,7 @@ export default function ProductDetail({ product }: Props) {
     return (
       <a href="/sample" className="block w-full py-5 text-center rounded-sm font-ui font-bold tracking-widest text-[#120002]"
         style={{ background: 'linear-gradient(135deg,#b8873a,#d4af61,#f0dc98,#cfaa70,#9e7030)', boxShadow: '0 4px 24px rgba(207,170,112,0.4)' }}>
-        21日間の引き算プログラムを始める
+        {t.startProgram}
       </a>
     )
   }
@@ -85,29 +89,29 @@ export default function ProductDetail({ product }: Props) {
   const plans: Array<{ key: PurchaseType; label: string; badge: string; priceFirst: number; priceSub: string; desc: string; available: boolean }> = [
     {
       key: 'sub3month',
-      label: '定期 3ヶ月コース',
-      badge: '初回 20%OFF',
+      label: t.plans.sub3.label,
+      badge: t.plans.sub3.badge,
       priceFirst: sub3price,
-      priceSub: `3ヶ月目以降も ${sub3price.toLocaleString()}円（20%OFF）`,
-      desc: '3ヶ月ごとにお届け。変更・解約はいつでもOK。',
+      priceSub: `${t.plans.sub3.subpricePrefix}${sub3price.toLocaleString()}${t.plans.sub3.subpriceSuffix}`,
+      desc: t.plans.sub3.desc,
       available: sub3price > 0,
     },
     {
       key: 'sub1month',
-      label: '定期 1ヶ月コース',
-      badge: '初回 10%OFF',
+      label: t.plans.sub1.label,
+      badge: t.plans.sub1.badge,
       priceFirst: sub1price,
-      priceSub: `2回目以降も ${sub1price.toLocaleString()}円（10%OFF）`,
-      desc: '毎月お届け。変更・解約はいつでもOK。',
+      priceSub: `${t.plans.sub1.subpricePrefix}${sub1price.toLocaleString()}${t.plans.sub1.subpriceSuffix}`,
+      desc: t.plans.sub1.desc,
       available: sub1price > 0,
     },
     {
       key: 'normal',
-      label: '通常購入',
-      badge: '',
+      label: t.plans.normal.label,
+      badge: t.plans.normal.badge,
       priceFirst: normalPrice,
-      priceSub: '送料：550円（税込）',
-      desc: '1回のみのご購入。',
+      priceSub: t.plans.normal.subprice,
+      desc: t.plans.normal.desc,
       available: true,
     },
   ]
@@ -162,7 +166,7 @@ export default function ProductDetail({ product }: Props) {
 
           <p className="font-ui text-sm text-white/50 tracking-widest mb-3">{product.subtitle}</p>
           {product.volume && (
-            <p className="font-ui text-sm text-white/40">容量：{product.volume}</p>
+            <p className="font-ui text-sm text-white/40">{t.volume}：{product.volume}</p>
           )}
           <div className="w-12 h-px bg-[#cfaa70]/50 my-6" />
           <p className="font-ui text-sm text-white/60 leading-loose whitespace-pre-line max-w-md mb-10">
@@ -203,7 +207,7 @@ export default function ProductDetail({ product }: Props) {
                     <p className="font-heading-en text-xl font-light text-white">
                       ¥{plan.priceFirst.toLocaleString()}
                     </p>
-                    <p className="font-ui text-[10px] text-white/40 mt-0.5">税込・送料無料</p>
+                    <p className="font-ui text-[10px] text-white/40 mt-0.5">{t.includingTax}</p>
                   </div>
                 </div>
                 <div className="px-5 pb-3 border-t border-[#cfaa70]/10">
@@ -232,7 +236,7 @@ export default function ProductDetail({ product }: Props) {
               transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2 }}
             />
             <span className="relative z-10">
-              {isAdded ? 'カートに追加しました ✓' : `この一本を選ぶ — ¥${selectedPrice.toLocaleString()}`}
+              {isAdded ? t.addedToCart : `${t.addToCart} — ¥${selectedPrice.toLocaleString()}`}
             </span>
             <svg className="relative z-10 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -270,7 +274,7 @@ export default function ProductDetail({ product }: Props) {
           {product.ingredients && (
             <details className="border-t border-[#cfaa70]/15 pt-4 group">
               <summary className="font-ui text-sm text-[#cfaa70]/60 cursor-pointer hover:text-[#cfaa70] transition-colors flex items-center gap-2 list-none">
-                全成分を表示する
+                {t.ingredients}
                 <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                 </svg>

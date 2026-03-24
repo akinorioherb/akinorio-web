@@ -1,6 +1,8 @@
 'use client';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n';
 
 const pseudoRandom = (seed: number) => {
   const x = Math.sin(seed) * 10000;
@@ -129,6 +131,9 @@ export default function HeroSection() {
   const containerRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
+  const { lang } = useLanguage();
+  const t = translations[lang].hero;
+  const isEn = lang === 'en';
 
   return (
     <section ref={containerRef} className="relative w-full h-[100dvh] z-0 overflow-hidden"
@@ -186,22 +191,45 @@ export default function HeroSection() {
       {/* Hero Typography */}
       <div className="relative z-20 w-full h-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col items-start justify-center pointer-events-none">
         <div className="max-w-4xl mt-[-5vh]">
-          <motion.h1
-            initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-widest text-white mb-8 md:mb-12 leading-[1.3] drop-shadow-2xl"
-            style={{ fontFamily: '"Noto Serif JP", serif' }}
-          >
-            引き算の美学。<br/>本来の美しさ。
-          </motion.h1>
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-            className="text-xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap drop-shadow-lg"
-            style={{ fontFamily: '"Noto Serif JP", serif' }}
-          >
-            手放すほどに、<br className="md:hidden" />研ぎ澄まされる。
-          </motion.h2>
+          {isEn ? (
+            <>
+              <motion.h1
+                initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="text-4xl md:text-6xl lg:text-[5rem] font-light tracking-wide text-white mb-8 md:mb-12 leading-[1.25] drop-shadow-2xl"
+                style={{ fontFamily: 'var(--font-luxury-en)', letterSpacing: '0.02em', fontWeight: 300 }}
+              >
+                {t.line1}<br/>{t.line2}
+              </motion.h1>
+              <motion.h2
+                initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+                className="text-xl md:text-3xl lg:text-4xl text-white/85 font-light leading-relaxed drop-shadow-lg"
+                style={{ fontFamily: 'var(--font-luxury-en)', letterSpacing: '0.04em', fontStyle: 'italic' }}
+              >
+                {t.line3}<br className="md:hidden" />{t.line4}
+              </motion.h2>
+            </>
+          ) : (
+            <>
+              <motion.h1
+                initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="text-4xl md:text-6xl lg:text-[5rem] font-bold tracking-widest text-white mb-8 md:mb-12 leading-[1.3] drop-shadow-2xl"
+                style={{ fontFamily: '"Noto Serif JP", serif' }}
+              >
+                {t.line1}<br/>{t.line2}
+              </motion.h1>
+              <motion.h2
+                initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
+                className="text-xl md:text-3xl lg:text-4xl text-white font-medium tracking-widest leading-relaxed whitespace-nowrap drop-shadow-lg"
+                style={{ fontFamily: '"Noto Serif JP", serif' }}
+              >
+                {t.line3}<br className="md:hidden" />{t.line4}
+              </motion.h2>
+            </>
+          )}
         </div>
       </div>
 

@@ -7,6 +7,8 @@ import { formatPrice } from '@/lib/utils'
 import { SHOPIFY_DOMAIN } from '@/lib/shopify'
 import { FREE_SHIPPING_THRESHOLD, SHIPPING_FEE } from '@/lib/constants'
 import { getStoredAffiliateRef } from '@/hooks/useAffiliateTracking'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 const AGENT_CODE_KEY = 'akinorio-agent-code'
 
@@ -29,6 +31,9 @@ export default function CartDrawer() {
   const [agentCode, setAgentCode] = useState('')
   const [agentCodeInput, setAgentCodeInput] = useState('')
   const [showAgentInput, setShowAgentInput] = useState(false)
+  const { lang } = useLanguage()
+  const t = translations[lang].cart
+  const isEn = lang === 'en'
 
   useEffect(() => {
     const stored = getStoredAgentCode()
@@ -102,16 +107,20 @@ export default function CartDrawer() {
           <div>
             <p className="font-heading-en text-[10px] tracking-[0.4em] text-[#cfaa70]/60 uppercase mb-0.5">Cart</p>
             <h2 className="font-heading-ja text-base text-white font-light tracking-widest">
-              カート
+              {t.drawerTitle}
               {items.length > 0 && (
-                <span className="ml-2 text-xs text-[#cfaa70]/70">（{items.reduce((s, i) => s + i.quantity, 0)}点）</span>
+                <span className="ml-2 text-xs text-[#cfaa70]/70">
+                  {isEn
+                    ? `(${items.reduce((s, i) => s + i.quantity, 0)} items)`
+                    : `（${items.reduce((s, i) => s + i.quantity, 0)}点）`}
+                </span>
               )}
             </h2>
           </div>
           <button
             onClick={closeDrawer}
             className="w-9 h-9 flex items-center justify-center text-white/40 hover:text-white transition-colors"
-            aria-label="カートを閉じる"
+            aria-label={isEn ? 'Close cart' : 'カートを閉じる'}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -124,12 +133,12 @@ export default function CartDrawer() {
           <div className="px-6 py-3 border-b border-[#cfaa70]/10">
             {shippingFee === 0 ? (
               <p className="font-ui text-xs text-[#cfaa70] tracking-wider">
-                送料無料 ✓
+                {t.freeShipping}
               </p>
             ) : (
               <>
                 <div className="flex justify-between font-ui text-[10px] text-white/40 mb-1.5 tracking-wider">
-                  <span>送料無料まで</span>
+                  <span>{t.freeShippingRemaining}</span>
                   <span>{formatPrice(remaining)}</span>
                 </div>
                 <div className="w-full h-0.5 bg-white/10 rounded-full overflow-hidden">
@@ -157,12 +166,12 @@ export default function CartDrawer() {
                   <path d="M16 10a4 4 0 01-8 0" />
                 </svg>
               </div>
-              <p className="font-ui text-sm text-white/30 tracking-wider">カートに商品がありません</p>
+              <p className="font-ui text-sm text-white/30 tracking-wider">{t.empty}</p>
               <button
                 onClick={closeDrawer}
                 className="mt-6 font-ui text-xs text-[#cfaa70]/60 hover:text-[#cfaa70] transition-colors tracking-widest border-b border-[#cfaa70]/30 pb-0.5"
               >
-                ← 商品を探す
+                {t.drawerBrowse}
               </button>
             </div>
           ) : (
@@ -203,7 +212,7 @@ export default function CartDrawer() {
                         <button
                           onClick={() => removeItem(item.product.id)}
                           className="font-ui text-[10px] text-white/25 hover:text-[#E31633] transition-colors mt-0.5"
-                        >削除</button>
+                        >{t.remove}</button>
                       </div>
                     </div>
                   </div>
@@ -220,15 +229,15 @@ export default function CartDrawer() {
             {/* 合計 */}
             <div className="space-y-1.5">
               <div className="flex justify-between font-ui text-xs text-white/40 tracking-wider">
-                <span>小計</span>
+                <span>{t.subtotalLabel}</span>
                 <span>{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between font-ui text-xs text-white/40 tracking-wider">
-                <span>送料</span>
-                <span>{shippingFee === 0 ? '無料' : formatPrice(SHIPPING_FEE)}</span>
+                <span>{t.shippingLabel}</span>
+                <span>{shippingFee === 0 ? t.free : formatPrice(SHIPPING_FEE)}</span>
               </div>
               <div className="flex justify-between font-heading-ja text-base text-white pt-2 border-t border-[#cfaa70]/10">
-                <span>合計（税込）</span>
+                <span>{t.total}</span>
                 <span className="font-price text-[#cfaa70]">{formatPrice(total)}</span>
               </div>
             </div>
@@ -239,13 +248,13 @@ export default function CartDrawer() {
                 <div className="flex items-center justify-between px-3 py-2 rounded-sm"
                   style={{ background: 'rgba(207,170,112,0.08)', border: '1px solid rgba(207,170,112,0.25)' }}>
                   <div>
-                    <p className="font-ui text-[10px] text-[#cfaa70]/60 tracking-widest">代理店コード適用中</p>
+                    <p className="font-ui text-[10px] text-[#cfaa70]/60 tracking-widest">{t.agentApplied}</p>
                     <p className="font-heading-en text-sm text-[#cfaa70] tracking-widest">{agentCode}</p>
                   </div>
                   <button
                     onClick={() => { setAgentCode(''); setAgentCodeInput(''); saveAgentCode('') }}
                     className="font-ui text-[10px] text-white/30 hover:text-white/60 transition-colors"
-                  >解除</button>
+                  >{t.agentRelease}</button>
                 </div>
               ) : (
                 <>
@@ -254,7 +263,7 @@ export default function CartDrawer() {
                       onClick={() => setShowAgentInput(true)}
                       className="font-ui text-[10px] text-white/30 hover:text-[#cfaa70]/60 transition-colors tracking-widest"
                     >
-                      + 代理店コードをお持ちの方
+                      {t.agentHint}
                     </button>
                   ) : (
                     <div className="flex gap-2">
@@ -262,7 +271,7 @@ export default function CartDrawer() {
                         type="text"
                         value={agentCodeInput}
                         onChange={e => setAgentCodeInput(e.target.value.toUpperCase())}
-                        placeholder="代理店コード"
+                        placeholder={t.agentPlaceholder}
                         className="flex-1 px-3 py-2 font-ui text-xs text-white tracking-widest bg-transparent outline-none"
                         style={{ border: '1px solid rgba(207,170,112,0.3)' }}
                         onKeyDown={e => e.key === 'Enter' && handleApplyAgentCode()}
@@ -271,7 +280,7 @@ export default function CartDrawer() {
                         onClick={handleApplyAgentCode}
                         className="px-3 py-2 font-ui text-xs text-[#120002] tracking-widest font-bold"
                         style={{ background: 'linear-gradient(135deg,#b8873a,#d4af61,#cfaa70)' }}
-                      >適用</button>
+                      >{t.agentApply}</button>
                     </div>
                   )}
                 </>
@@ -287,13 +296,13 @@ export default function CartDrawer() {
                 boxShadow: '0 4px 24px rgba(207,170,112,0.4)',
               }}
             >
-              <span className="relative z-10">Shopifyで購入手続きへ</span>
+              <span className="relative z-10">{t.drawerCheckout}</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
 
-            {/* Shopifyセキュリティバッジ */}
+            {/* セキュリティバッジ */}
             <p className="font-ui text-[10px] text-white/25 text-center tracking-wider leading-relaxed">
-              🔒 SSL暗号化 · Shopify決済 · クレジットカード対応
+              {t.drawerSecurity}
             </p>
           </div>
         )}

@@ -6,13 +6,19 @@ import { SHOPIFY_DOMAIN } from '@/lib/shopify'
 import { FREE_SHIPPING_THRESHOLD } from '@/lib/constants'
 import { getStoredAffiliateRef } from '@/hooks/useAffiliateTracking'
 import Button from '@/components/ui/Button'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 export default function CartSummary() {
   const { items, subtotal, shippingFee, total } = useCart()
+  const { lang } = useLanguage()
+  const t = translations[lang].cart
+  const isEn = lang === 'en'
+  const remaining = FREE_SHIPPING_THRESHOLD - subtotal
 
   const handleCheckout = () => {
     if (!SHOPIFY_DOMAIN) {
-      alert('Shopifyドメインが設定されていません（.env.local を確認してください）')
+      alert(isEn ? 'Shopify domain is not configured.' : 'Shopifyドメインが設定されていません（.env.local を確認してください）')
       return
     }
     const cartLine = items
@@ -20,47 +26,48 @@ export default function CartSummary() {
       .map(i => `${i.product.shopifyVariantId}:${i.quantity}`)
       .join(',')
     if (!cartLine) {
-      alert('購入できる商品がカートにありません')
+      alert(isEn ? 'No purchasable items in cart.' : '購入できる商品がカートにありません')
       return
     }
-    
+
     let url = `https://${SHOPIFY_DOMAIN}/cart/${cartLine}`
-    
-    // アフィリエイト（代理店）IDをShopifyの属性と割引コードに付与
+
     const affiliateId = getStoredAffiliateRef()
     if (affiliateId) {
       url += `?attributes[代理店コード]=${encodeURIComponent(affiliateId)}&discount=${encodeURIComponent(affiliateId)}`
     }
-    
+
     window.location.href = url
   }
 
   return (
     <div className="bg-bg-cream p-6 rounded-sm">
       <h2 className="font-heading-ja text-base text-neutral-800 mb-6">
-        ご注文内容
+        {t.orderSummary}
       </h2>
 
       <div className="space-y-3 mb-6">
         <div className="flex justify-between font-ui text-sm">
-          <span className="text-neutral-500">商品小計</span>
+          <span className="text-neutral-500">{t.subtotal}</span>
           <span className="text-neutral-800">{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between font-ui text-sm">
-          <span className="text-neutral-500">送料</span>
+          <span className="text-neutral-500">{t.shipping}</span>
           <span className="text-neutral-800">
-            {shippingFee === 0 ? '無料' : formatPrice(shippingFee)}
+            {shippingFee === 0 ? t.free : formatPrice(shippingFee)}
           </span>
         </div>
         {shippingFee > 0 && (
           <p className="font-ui text-xs text-gold-700">
-            あと{formatPrice(FREE_SHIPPING_THRESHOLD - subtotal)}で送料無料
+            {isEn
+              ? `${formatPrice(remaining)} until free shipping`
+              : `あと${formatPrice(remaining)}で送料無料`}
           </p>
         )}
         <div className="border-t border-neutral-200 pt-3">
           <div className="flex justify-between">
             <span className="font-heading-ja text-base text-neutral-800">
-              合計（税込）
+              {t.total}
             </span>
             <span className="font-price text-xl text-primary-700">
               {formatPrice(total)}
@@ -75,7 +82,7 @@ export default function CartSummary() {
         className="w-full"
         onClick={handleCheckout}
       >
-        購入手続きへ（Shopify）
+        {t.checkout}
       </Button>
     </div>
   )
