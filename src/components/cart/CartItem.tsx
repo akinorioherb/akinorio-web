@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import type { CartItem as CartItemType } from '@/types'
 import { formatPrice } from '@/lib/utils'
 import { useCart } from '@/lib/cart'
@@ -11,14 +12,19 @@ interface CartItemProps {
 export default function CartItem({ item }: CartItemProps) {
   const { updateQuantity, removeItem } = useCart()
   const { product, quantity } = item
+  const displayImage = product.hikImage ?? product.image
 
   return (
     <div className="flex gap-4 py-6 border-b border-neutral-100">
-      {/* Image placeholder */}
-      <div className="w-20 h-20 flex-shrink-0 bg-gradient-to-br from-bg-cream to-neutral-50 rounded-sm flex items-center justify-center">
-        <span className="font-ui text-[10px] text-gold-700 text-center">
-          {product.subtitle}
-        </span>
+      {/* 商品画像 */}
+      <div className="w-20 h-20 flex-shrink-0 rounded-sm overflow-hidden bg-[#1a0005] relative">
+        <Image
+          src={displayImage}
+          alt={product.name}
+          fill
+          className="object-cover"
+          sizes="80px"
+        />
       </div>
 
       {/* Info */}

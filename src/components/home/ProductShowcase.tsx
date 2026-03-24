@@ -13,6 +13,7 @@ const BG_MAP: Record<string, string> = {
   'serum': 'serum.png',
   'cleansing': 'cleansing.png',
   'uv': 'uv.png',
+  'starter-set': 'starterset.png',
   'minus20-set': 'kimajyoset.png',
   'kagayaki-majo': 'allseries_fine.png',
   'premium': 'allseries_fine.png',
@@ -36,7 +37,7 @@ export default function ProductShowcase() {
   const balmProduct = PRODUCTS.find(p => p.slug === 'balm');
   const uvProduct = PRODUCTS.find(p => p.slug === 'uv');
   
-  const SET_SLUGS = ['minus20-set'];
+  const SET_SLUGS = ['starter-set', 'minus20-set'];
   const setProducts = SET_SLUGS.map(slug => PRODUCTS.find(p => p.slug === slug)).filter(Boolean) as typeof PRODUCTS;
 
   const renderSingleProduct = (product: typeof PRODUCTS[0], index: number) => {

@@ -9,12 +9,12 @@ import MobileMenu from './MobileMenu'
 const NAV_ITEMS = [
   { label: '商品一覧', href: '/products' },
   { label: 'ブランドストーリー', href: '/about' },
-  { label: '14日間体験', href: '/sample' },
+  { label: '21日間体験', href: '/sample' },
 ]
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { totalItems } = useCart()
+  const { totalItems, openDrawer } = useCart()
 
   return (
     <>
@@ -51,10 +51,10 @@ export default function Header() {
             </nav>
 
             {/* Cart */}
-            <Link
-              href="/cart"
+            <button
+              onClick={openDrawer}
               className="relative p-2 text-neutral-700 hover:text-primary-700 transition-colors"
-              aria-label="カート"
+              aria-label="カートを開く"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -66,7 +66,7 @@ export default function Header() {
                   {totalItems}
                 </span>
               )}
-            </Link>
+            </button>
           </div>
         </Container>
       </header>

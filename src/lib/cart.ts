@@ -14,6 +14,10 @@ export interface CartContextType {
   subtotal: number
   shippingFee: number
   total: number
+  // カートドロワー
+  isDrawerOpen: boolean
+  openDrawer: () => void
+  closeDrawer: () => void
 }
 
 export const CartContext = createContext<CartContextType | null>(null)

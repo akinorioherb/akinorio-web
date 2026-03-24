@@ -3,6 +3,8 @@ import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from '@/lib/constants'
 import CartProvider from '@/components/CartProvider'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import CartDrawer from '@/components/cart/CartDrawer'
+import AffiliateTracker from '@/components/layout/AffiliateTracker'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -12,6 +14,16 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  keywords: [
+    'アキノリオ', 'AKINORIO', '引き算のスキンケア', 'ミトコンドリア美容液',
+    'ケイ素 スキンケア', 'シリカ 化粧品', 'ミトコンドリアのちから',
+    'ミニマルスキンケア', '肌断捨離', '引き算美容', '細胞美容液',
+    '敏感肌 化粧品', 'パラベンフリー', 'ファンデーション不要',
+    'MINAKO', '引き算の美学',
+  ],
+  authors: [{ name: 'MINAKO', url: SITE_URL }],
+  creator: 'AKINORIO',
+  publisher: 'AKINORIO',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
@@ -19,13 +31,36 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} | 細胞レベルに着目した引き算のスキンケア`,
     description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: `${SITE_URL}/images/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'AKINORIO | 引き算のスキンケア — ミトコンドリア×ケイ素',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    title: `${SITE_NAME} | 引き算のスキンケア`,
+    description: SITE_DESCRIPTION,
+    images: [`${SITE_URL}/images/og-image.png`],
+  },
+  alternates: {
+    canonical: SITE_URL,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_ID',
   },
 }
 
@@ -50,9 +85,11 @@ export default function RootLayout({
       </head>
       <body className="bg-white min-h-screen flex flex-col">
         <CartProvider>
+          <AffiliateTracker />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

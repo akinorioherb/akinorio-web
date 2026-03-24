@@ -21,6 +21,14 @@ export interface Product {
   images: string[]
   sortOrder: number
   isActive: boolean
+  hikImage?: string
+  howToUse?: string
+  sub1MonthPrice?: number
+  sub3MonthPrice?: number
+  // Shopify連携
+  shopifyVariantId?: string
+  shopifySub1SellingPlanId?: string
+  shopifySub3SellingPlanId?: string
 }
 
 export interface CartItem {

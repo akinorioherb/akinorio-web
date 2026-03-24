@@ -17,8 +17,7 @@ export default function TokushohoPage() {
         <div className="space-y-0 border-t border-neutral-200">
           {[
             { label: '販売業者', value: '株式会社アキノリオ' },
-            { label: '代表責任者', value: '代表取締役（準備中）' },
-            { label: '所在地', value: '（準備中）' },
+            { label: '所在地', value: '〒104-0061 東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階' },
             { label: '電話番号', value: '（準備中）' },
             { label: 'メールアドレス', value: 'info@akinorio.com' },
             { label: 'URL', value: 'https://akinorio.com' },

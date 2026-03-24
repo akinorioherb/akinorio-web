@@ -112,32 +112,61 @@ export default function CTASection() {
               <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out" />
 
               <h4 className="text-xl md:text-3xl text-white font-bold tracking-widest mb-6" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                14日間プログラム
+                21日間プログラム
               </h4>
               <p className="text-[13px] md:text-[15px] text-white/90 leading-loose tracking-wider mb-10 text-left">
                 <span className="font-bold text-[#fdfbf7] block mb-2 tracking-[0.1em]">いきなりの引き算スキンケアを躊躇うあなたへ。</span>
-                まずは、足し算のスキンケアをお休みし、ご自身の肌環境をリセットする14日間をお試しください。<br className="hidden md:block"/>
+                まずは、足し算のスキンケアをお休みし、ご自身の肌環境をリセットする21日間をお試しください。<br className="hidden md:block"/>
                 本当に必要なものは何か、肌が答えてくれます。
               </p>
 
-              <button className="relative overflow-hidden w-full bg-[#fdfbf7] text-[#120002] py-4 md:py-5 px-6 md:px-8 flex items-center justify-between group transition-all duration-300 rounded-lg shadow-md">
-                <span className="text-[13px] md:text-[15px] font-bold tracking-[0.1em] md:tracking-[0.2em] relative z-10" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
-                  14日間の体験を始める
-                </span>
-                <svg className="w-5 h-5 md:w-6 md:h-6 relative z-10 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-                {/* Button hover effect */}
-                <div className="absolute inset-0 bg-[#E31633] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out z-0" />
-                <span className="absolute inset-0 flex items-center justify-between py-4 md:py-5 px-6 md:px-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 delay-100 pointer-events-none">
-                  <span className="text-[13px] md:text-[15px] font-bold tracking-[0.1em] md:tracking-[0.2em]" style={{ fontFamily: '"Noto Serif JP", sans-serif' }}>
-                    14日間の体験を始める
+              {/* Gold CTA Button */}
+              <div className="relative w-full group">
+                {/* 背後のパルスグロー */}
+                <motion.div
+                  className="absolute inset-0 rounded-lg pointer-events-none"
+                  animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.03, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ boxShadow: '0 0 32px 10px rgba(207,170,112,0.45)' }}
+                />
+
+                <motion.button
+                  whileHover={{ filter: 'brightness(1.12)', boxShadow: '0 6px 36px rgba(212,175,55,0.75)' }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative overflow-hidden w-full py-5 md:py-5 px-6 md:px-8 flex items-center justify-between rounded-lg"
+                  style={{
+                    background: 'linear-gradient(135deg, #b8873a 0%, #d4af61 28%, #f0dc98 50%, #cfaa70 72%, #9e7030 100%)',
+                    boxShadow: '0 4px 28px rgba(207,170,112,0.55), inset 0 1px 0 rgba(255,255,255,0.35)',
+                  }}
+                >
+                  {/* シマー（光の筋が流れる） */}
+                  <motion.div
+                    className="absolute top-0 w-[45%] h-full pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%)',
+                      skewX: '-20deg',
+                    }}
+                    animate={{ left: ['-55%', '165%'] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.8 }}
+                  />
+
+                  <span
+                    className="text-[14px] md:text-[15px] font-bold tracking-[0.18em] relative z-10 text-[#120002]"
+                    style={{ fontFamily: '"Noto Serif JP", sans-serif' }}
+                  >
+                    21日間の体験を始める
                   </span>
-                  <svg className="w-5 h-5 md:w-6 md:h-6 transform translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                  <motion.svg
+                    className="w-5 h-5 md:w-6 md:h-6 relative z-10 text-[#120002]"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-              </button>
+                  </motion.svg>
+                </motion.button>
+              </div>
             </motion.div>
 
           </div>

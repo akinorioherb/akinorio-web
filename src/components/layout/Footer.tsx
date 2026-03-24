@@ -51,7 +51,7 @@ export default function Footer() {
                 })}
                 <li className="pt-3 mt-3 border-t border-primary-700/50">
                   <Link href="/sample" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors font-bold block">
-                    14日間体験
+                    21日間体験
                   </Link>
                 </li>
               </ul>
@@ -66,6 +66,16 @@ export default function Footer() {
                 <li>
                   <Link href="/about" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
                     ブランドストーリー
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/company" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
+                    会社概要
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="font-ui text-sm text-primary-200 hover:text-white transition-colors">
+                    お問い合わせ
                   </Link>
                 </li>
                 <li>

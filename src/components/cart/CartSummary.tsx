@@ -2,11 +2,38 @@
 
 import { useCart } from '@/lib/cart'
 import { formatPrice } from '@/lib/utils'
+import { SHOPIFY_DOMAIN } from '@/lib/shopify'
 import { FREE_SHIPPING_THRESHOLD } from '@/lib/constants'
+import { getStoredAffiliateRef } from '@/hooks/useAffiliateTracking'
 import Button from '@/components/ui/Button'
 
 export default function CartSummary() {
-  const { subtotal, shippingFee, total } = useCart()
+  const { items, subtotal, shippingFee, total } = useCart()
+
+  const handleCheckout = () => {
+    if (!SHOPIFY_DOMAIN) {
+      alert('Shopifyドメインが設定されていません（.env.local を確認してください）')
+      return
+    }
+    const cartLine = items
+      .filter(i => i.product.shopifyVariantId)
+      .map(i => `${i.product.shopifyVariantId}:${i.quantity}`)
+      .join(',')
+    if (!cartLine) {
+      alert('購入できる商品がカートにありません')
+      return
+    }
+    
+    let url = `https://${SHOPIFY_DOMAIN}/cart/${cartLine}`
+    
+    // アフィリエイト（代理店）IDをShopifyの属性と割引コードに付与
+    const affiliateId = getStoredAffiliateRef()
+    if (affiliateId) {
+      url += `?attributes[代理店コード]=${encodeURIComponent(affiliateId)}&discount=${encodeURIComponent(affiliateId)}`
+    }
+    
+    window.location.href = url
+  }
 
   return (
     <div className="bg-bg-cream p-6 rounded-sm">
@@ -46,14 +73,10 @@ export default function CartSummary() {
         variant="gold"
         size="lg"
         className="w-full"
-        onClick={() => alert('Phase 2でStripe決済を接続します')}
+        onClick={handleCheckout}
       >
-        購入手続きへ
+        購入手続きへ（Shopify）
       </Button>
-
-      <p className="font-ui text-xs text-neutral-400 text-center mt-3">
-        ※ Phase 1のため決済機能は準備中です
-      </p>
     </div>
   )
 }

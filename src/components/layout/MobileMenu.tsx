@@ -11,11 +11,13 @@ interface MobileMenuProps {
 const MENU_ITEMS = [
   { label: '商品一覧', href: '/products' },
   { label: 'ブランドストーリー', href: '/about' },
-  { label: '14日間体験', href: '/sample' },
+  { label: '21日間体験', href: '/sample' },
   { label: 'カート', href: '/cart' },
 ]
 
 const FOOTER_LINKS = [
+  { label: '会社概要', href: '/company' },
+  { label: 'お問い合わせ', href: '/contact' },
   { label: '特定商取引法に基づく表記', href: '/tokushoho' },
   { label: 'プライバシーポリシー', href: '/privacy' },
 ]
