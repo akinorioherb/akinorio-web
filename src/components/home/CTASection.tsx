@@ -1,138 +1,184 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-function useCountUp(end: number, duration = 1400, start = 0, trigger = false) {
-  const [value, setValue] = useState(start);
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/i18n';
+
+// Counter component for dramatic number reveal
+const AnimatedCounter = ({ end, duration = 2 }: { end: number, duration?: number }) => {
+  const [count, setCount] = useState(0);
+  const nodeRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
-    if (!trigger) return;
-    let frame = 0;
-    const totalFrames = Math.max(1, Math.round(duration / 16));
-    const diff = end - start;
-    const id = window.setInterval(() => {
-      frame += 1;
-      const progress = frame / totalFrames;
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(start + diff * eased));
-      if (frame >= totalFrames) {
-        setValue(end);
-        window.clearInterval(id);
+    let startTimestamp: number;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      // easeOutQuart curve
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeProgress * end));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
       }
-    }, 16);
-    return () => window.clearInterval(id);
-  }, [duration, end, start, trigger]);
-  return value;
-}
+    };
+    window.requestAnimationFrame(step);
+  }, [end, duration]);
+
+  return <span ref={nodeRef}>{count}</span>;
+};
+
 export default function CTASection() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 32 }, (_, i) => ({
-        id: i,
-        left: `${(i * 9.7) % 100}%`,
-        top: `${(i * 15.3) % 100}%`,
-        size: 4 + ((i * 3) % 10),
-        duration: 8 + (i % 7),
-        delay: (i % 9) * 0.45,
-      })),
-    []
-  );
-  const count1 = useCountUp(14, 1200, 0, visible);
-  const count2 = useCountUp(3, 1000, 0, visible);
-  const count3 = useCountUp(100, 1400, 0, visible);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.25 }
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, []);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start']
+  });
+  const headerY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const { lang } = useLanguage();
+  const t = translations[lang].cta;
+  const isEn = lang === 'en';
+  const bodyFont = isEn ? 'var(--font-luxury-en)' : '"Noto Serif JP", serif';
+
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-[#17090d] px-6 py-24 text-white md:px-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(196,2,52,.30),transparent_26%),radial-gradient(circle_at_80%_30%,rgba(212,175,55,.22),transparent_28%),linear-gradient(180deg,#16090d_0%,#0f0a0c_100%)]" />
-      {particles.map((p) => (
-        <span
-          key={p.id}
-          className="pointer-events-none absolute rounded-full bg-[#d4af37]/40 blur-[1px]"
-          style={{
-            left: p.left, top: p.top,
-            width: `${p.size}px`, height: `${p.size}px`,
-            animation: `ctaParticle ${p.duration}s linear infinite`,
-            animationDelay: `${p.delay}s`,
-          }}
-        />
-      ))}
-      <div className="relative mx-auto max-w-6xl rounded-[2.25rem] border border-white/10 bg-white/[0.05] p-8 shadow-[0_30px_120px_rgba(0,0,0,.28)] backdrop-blur-xl md:p-12">
-        <div className="absolute inset-0 rounded-[2.25rem] ring-1 ring-[#d4af37]/20" />
-        <div className="pointer-events-none absolute inset-0 rounded-[2.25rem]">
-          <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c40234]/20 blur-3xl animate-pulse" />
-          <div className="absolute left-[62%] top-[42%] h-44 w-44 rounded-full bg-[#d4af37]/20 blur-3xl animate-pulse" />
-        </div>
-        <div className="relative z-10">
-          <p
-            className={`text-center text-xs uppercase tracking-[0.38em] text-[#d4af37] transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
-            style={{ fontFamily: 'Cinzel, serif' }}
-          >
-            14 Days Program
-          </p>
-          <h2
-            className={`mx-auto mt-5 max-w-4xl text-center text-4xl leading-tight md:text-6xl transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '140ms', fontFamily: '"Noto Serif JP", Cinzel, serif' }}
-          >
-            まずは、14日間。
-            <br />
-            肌と感覚の余白を取り戻す体験へ。
-          </h2>
-          <p
-            className={`mx-auto mt-6 max-w-2xl text-center text-sm leading-8 text-white/72 md:text-base transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '280ms' }}
-          >
-            引き算のスキンケアを、あなたの肌で体験してください。
-            覚悟のある方だけに、この先を。
-          </p>
-          <div
-            className={`mt-10 grid gap-4 md:grid-cols-3 transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '420ms' }}
-          >
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Days</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count1}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Steps</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count2}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 text-center">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Clarity</p>
-              <p className="mt-3 text-4xl font-semibold text-[#d4af37]">{count3}%</p>
-            </div>
-          </div>
-          <div
-            className={`mt-10 flex justify-center transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-            style={{ transitionDelay: '560ms' }}
-          >
-            <a
-              href="https://lin.ee/qF2bQ2v"
-              target="_blank"
-              rel="noreferrer"
-              className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#d4af37] bg-[#d4af37] px-8 py-4 font-sans text-sm font-medium text-black shadow-[0_0_0_0_rgba(212,175,55,.45)] transition hover:scale-[1.03] hover:shadow-[0_0_36px_6px_rgba(212,175,55,.22)]"
-            >
-              <span className="absolute inset-0 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,.4)_50%,transparent_100%)] opacity-0 transition duration-700 group-hover:translate-x-full group-hover:opacity-100" />
-              <span className="relative z-10">14日間の引き算プログラムを始める</span>
-            </a>
-          </div>
-        </div>
+    <section id="cta" ref={containerRef} className="relative w-full overflow-hidden bg-gradient-to-t from-[#120002] to-[#1A0005] text-white py-32 md:py-48 z-10">
+      
+      {/* Background visual element */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-20 z-0 select-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#E31633] rounded-full blur-[250px]" />
       </div>
-      <style jsx>{`
-        @keyframes ctaParticle {
-          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0; }
-          20% { opacity: 0.7; }
-          50% { transform: translate3d(18px, -28px, 0) scale(1.15); opacity: 1; }
-          100% { transform: translate3d(-10px, -56px, 0) scale(0.8); opacity: 0; }
-        }
-      `}</style>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+        
+        {/* Vertical Title Indicator */}
+        <motion.div style={{ y: headerY }} className="hidden md:flex flex-col items-center sticky top-32 mt-12">
+          <h2
+            className="text-3xl md:text-4xl lg:text-4xl font-black tracking-[0.4em] text-[#E31633] opacity-80"
+            style={{ writingMode: 'vertical-rl', fontFamily: bodyFont, fontWeight: isEn ? 300 : 900, letterSpacing: isEn ? '0.1em' : '0.4em' }}
+          >
+            {t.verticalLabel}
+          </h2>
+        </motion.div>
+
+        {/* Content Area */}
+        <div className="flex-1 w-full flex flex-col items-start text-left">
+
+          <div className="mb-16 md:mb-24 w-full">
+            <p className="text-[10px] md:text-xs tracking-[0.5em] text-[#E31633] mb-6 font-bold md:hidden"
+              style={{ fontFamily: bodyFont }}>
+              {t.mobileLabel}
+            </p>
+            <h3 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tighter leading-[1.3] text-white"
+              style={{ fontFamily: bodyFont, whiteSpace: 'pre-line', fontWeight: isEn ? 300 : 300, letterSpacing: isEn ? '0.01em' : undefined }}>
+              {t.headline}
+            </h3>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-16 md:gap-32 w-full lg:items-center">
+            
+            {/* Left: Metrics & Counter */}
+            <div className="w-full md:w-auto flex flex-col flex-shrink-0">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5 }}
+                className="flex flex-row md:flex-col items-center md:items-start justify-between w-full"
+              >
+                <div className="flex flex-col text-left">
+                  <span className="text-[11px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#E31633] md:text-white/50 mb-1 font-mono font-bold">
+                    {t.repeatRateLabel}
+                  </span>
+                  <span className="text-[9px] text-white/40 tracking-wider hidden md:block mt-6">
+                    {t.repeatNote}
+                  </span>
+                </div>
+                
+                <div className="flex flex-col items-end md:items-start">
+                  <span className="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
+                    <AnimatedCounter end={90} />%<span className="text-2xl md:text-3xl font-light ml-1">+</span>
+                  </span>
+                  <span className="text-[9px] text-white/40 tracking-wider md:hidden mt-2">
+                    {t.repeatNote}
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right: Action Box (Refined for Mobile) */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              className="w-full max-w-lg mx-auto md:mx-0 bg-gradient-to-br from-[#2A0005] to-[#120002] p-8 md:p-12 relative overflow-hidden group border border-[#E31633]/30 hover:border-[#E31633]/60 transition-colors duration-500 rounded-2xl shadow-2xl"
+            >
+              {/* Subtle hover gleam */}
+              <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out" />
+
+              <h4 className="text-xl md:text-3xl text-white font-bold tracking-widest mb-6"
+                style={{ fontFamily: bodyFont, fontWeight: isEn ? 300 : 700, letterSpacing: isEn ? '0.04em' : undefined }}>
+                {t.program.title}
+              </h4>
+              <p className="text-[13px] md:text-[15px] text-white/90 leading-loose tracking-wider mb-10 text-left"
+                style={{ fontFamily: bodyFont }}>
+                <span className="font-bold text-[#fdfbf7] block mb-2 tracking-[0.1em]">{t.program.subhead}</span>
+                <span style={{ whiteSpace: 'pre-line' }}>{t.program.body}</span>
+              </p>
+
+              {/* Gold CTA Button */}
+              <div className="relative w-full group">
+                {/* 背後のパルスグロー */}
+                <motion.div
+                  className="absolute inset-0 rounded-lg pointer-events-none"
+                  animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.03, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ boxShadow: '0 0 32px 10px rgba(207,170,112,0.45)' }}
+                />
+
+                <motion.button
+                  whileHover={{ filter: 'brightness(1.12)', boxShadow: '0 6px 36px rgba(212,175,55,0.75)' }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative overflow-hidden w-full py-5 md:py-5 px-6 md:px-8 flex items-center justify-between rounded-lg"
+                  style={{
+                    background: 'linear-gradient(135deg, #b8873a 0%, #d4af61 28%, #f0dc98 50%, #cfaa70 72%, #9e7030 100%)',
+                    boxShadow: '0 4px 28px rgba(207,170,112,0.55), inset 0 1px 0 rgba(255,255,255,0.35)',
+                  }}
+                >
+                  {/* シマー（光の筋が流れる） */}
+                  <motion.div
+                    className="absolute top-0 w-[45%] h-full pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%)',
+                      skewX: '-20deg',
+                    }}
+                    animate={{ left: ['-55%', '165%'] }}
+                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.8 }}
+                  />
+
+                  <span
+                    className="text-[14px] md:text-[15px] font-bold tracking-[0.18em] relative z-10 text-[#120002]"
+                    style={{ fontFamily: isEn ? 'var(--font-luxury-en)' : '"Noto Serif JP", sans-serif', letterSpacing: isEn ? '0.12em' : '0.18em' }}
+                  >
+                    {t.program.button}
+                  </span>
+
+                  <motion.svg
+                    className="w-5 h-5 md:w-6 md:h-6 relative z-10 text-[#120002]"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </motion.svg>
+                </motion.button>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 }

@@ -16,6 +16,7 @@ export default function CartProvider({
 }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isHydrated, setIsHydrated] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   useEffect(() => {
     setItems(getCartFromStorage())
@@ -40,6 +41,7 @@ export default function CartProvider({
       }
       return [...prev, { product, quantity }]
     })
+    setIsDrawerOpen(true)
   }, [])
 
   const removeItem = useCallback((productId: string) => {
@@ -62,6 +64,9 @@ export default function CartProvider({
     setItems([])
   }, [])
 
+  const openDrawer = useCallback(() => setIsDrawerOpen(true), [])
+  const closeDrawer = useCallback(() => setIsDrawerOpen(false), [])
+
   const { totalItems, subtotal, shippingFee, total } =
     calculateCartTotals(items)
 
@@ -76,6 +81,9 @@ export default function CartProvider({
       subtotal,
       shippingFee,
       total,
+      isDrawerOpen,
+      openDrawer,
+      closeDrawer,
     }}>
       {children}
     </CartContext>

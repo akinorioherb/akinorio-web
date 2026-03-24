@@ -5,25 +5,27 @@ import CartItemComponent from '@/components/cart/CartItem'
 import CartSummary from '@/components/cart/CartSummary'
 import Button from '@/components/ui/Button'
 import { useCart } from '@/lib/cart'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 export default function CartPage() {
   const { items } = useCart()
+  const { lang } = useLanguage()
+  const t = translations[lang].cart
 
   return (
     <section className="py-12 md:py-20">
       <Container>
-        {/* Header */}
         <div className="text-center mb-10">
           <p className="font-heading-en text-xs tracking-[0.3em] text-gold-500 uppercase mb-3">
             Cart
           </p>
           <h1 className="text-h1 font-heading-ja font-light text-neutral-800">
-            カート
+            {t.title}
           </h1>
         </div>
 
         {items.length === 0 ? (
-          /* Empty cart */
           <div className="text-center py-20">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-neutral-50 flex items-center justify-center">
               <svg
@@ -40,14 +42,13 @@ export default function CartPage() {
               </svg>
             </div>
             <p className="font-ui text-neutral-500 mb-6">
-              カートに商品がありません
+              {t.empty}
             </p>
             <Button href="/products" variant="secondary">
-              商品一覧を見る
+              {t.browse}
             </Button>
           </div>
         ) : (
-          /* Cart contents */
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
               {items.map((item) => (
@@ -55,7 +56,7 @@ export default function CartPage() {
               ))}
               <div className="mt-6">
                 <Button href="/products" variant="ghost" size="sm">
-                  &larr; 買い物を続ける
+                  {t.continueShopping}
                 </Button>
               </div>
             </div>

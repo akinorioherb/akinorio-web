@@ -57,6 +57,8 @@
   --font-body: 'Noto Serif JP', 'Yu Mincho', serif;
   --font-ui: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
   --font-price: 'Cinzel', 'Georgia', serif;
+  /* Luxury English editorial font */
+  --font-luxury-en: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
 
   /* === Font sizes (fluid) === */
   --text-display: clamp(2rem, 1.4rem + 2.54vw, 3.5rem);
@@ -104,6 +106,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .font-ui {
   font-family: var(--font-ui);
+}
+
+.font-luxury-en {
+  font-family: var(--font-luxury-en);
+  letter-spacing: 0.04em;
+  font-weight: 300;
 }
 
 .text-display {

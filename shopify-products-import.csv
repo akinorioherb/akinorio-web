@@ -1,0 +1,12 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Grams,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Requires Shipping,Variant Taxable,Status
+mitochondria,ミトコンドリアのちから,"原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。ファンデーションも化粧水もいらない。最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。ミトコンドリアとケイ素の力で、細胞が自ら美しくなる力を呼び覚まします。",AKINORIO,美容液,"ミトコンドリア,ケイ素,引き算スキンケア,細胞美容液",TRUE,タイトル,標準タイトル,MITO-001,50,shopify,100,deny,manual,13200,TRUE,TRUE,active
+herb,ハーブのちから,"自然の生命力が宿るハーブの滴。肌の土台を整え、硬くなった角質をやさしく解きほぐすことで、次に使う美容成分の浸透を劇的に高めます。",AKINORIO,化粧水,"ハーブ,引き算スキンケア,肌育",TRUE,タイトル,標準タイトル,HERB-001,30,shopify,100,deny,manual,8800,TRUE,TRUE,active
+cleansing,クリアクリスタルクレンジング,"ダブル洗顔という「余計な儀式」を終わらせるクレンジング。メイクも毛穴汚れも、するんと落とす。落とすたびに肌が整っていきます。",AKINORIO,クレンジング,"クレンジング,引き算スキンケア,ダブル洗顔不要",TRUE,タイトル,標準タイトル,CLNS-001,180,shopify,100,deny,manual,6600,TRUE,TRUE,active
+kihada,輝肌（キハダ）,"呼び覚ました肌本来のチカラを、極上のヴェールで閉じ込める。与えすぎない「引き算」が完成させる、圧倒的な艶と透明感をご体感ください。",AKINORIO,保湿クリーム,"輝肌,艶,引き算スキンケア",TRUE,タイトル,標準タイトル,KHDA-001,50,shopify,100,deny,manual,11000,TRUE,TRUE,active
+balm,金の糸クリーム（クリアクリスタルバーム）,"最上級の保湿と細胞活性を両立させた奇跡のバーム。夜のスキンケアの最後に塗るだけで、翌朝の肌が見違えるように生まれ変わります。",AKINORIO,バーム,"バーム,エイジングケア,引き算スキンケア",TRUE,タイトル,標準タイトル,BALM-001,100,shopify,100,deny,manual,22000,TRUE,TRUE,active
+serum,クリアクリスタルセラム,"極限までピュアな状態で抽出された高濃度な美容液。水のように軽やかに肌の奥深くへ浸透し、かつてないハリと弾力を目覚めさせます。",AKINORIO,美容液,"セラム,高濃度,引き算スキンケア",TRUE,タイトル,標準タイトル,SERUM-001,200,shopify,100,deny,manual,11000,TRUE,TRUE,active
+uv,クリアクリスタルスキンベースUV,"紫外線から肌を確実に守りながら、日中もスキンケアし続ける新感覚のUVベース。負担を一切感じさせない極上の軽さです。",AKINORIO,UVケア,"UV,日焼け止め,引き算スキンケア",TRUE,タイトル,標準タイトル,UV-001,30,shopify,100,deny,manual,5500,TRUE,TRUE,active
+minus20-set,輝魔女セット（基本の引き算セット）,"肌のOSを初期化するための、基本のステップが揃ったセット。これだけで、あなたのスキンケアは完了します。",AKINORIO,セット,"セット,引き算スキンケア,基本セット",TRUE,タイトル,標準タイトル,SET-KIMAJO-001,0,shopify,100,deny,manual,22000,FALSE,TRUE,active
+kagayaki-majo,輝魔女セット（極上のエイジングケア）,"ミトコンドリアのちから、ハーブのちから、輝肌Kihadaがセットに。本来の美しさを呼び覚ます、ブランド最高峰の組み合わせ。",AKINORIO,セット,"セット,エイジングケア,引き算スキンケア",TRUE,タイトル,標準タイトル,SET-KAGAYAKI-001,0,shopify,100,deny,manual,33000,FALSE,TRUE,active
+premium,輝魔女プレミアム,"アキノリオの全ての真価を余すところなく体験できる、最上級のフルセット。揺るぎない自信と究極の美肌をあなたに。",AKINORIO,セット,"セット,プレミアム,引き算スキンケア",TRUE,タイトル,標準タイトル,SET-PREMIUM-001,0,shopify,100,deny,manual,38500,FALSE,TRUE,active
+perfume,Perfume（美容液混合シャンプー）2本セット,"美容成分と超高級ケラチンで洗い上げる贅沢。トリートメントもボディソープも捨てる、新時代の引き算ケア。「しっとりまとまるのに、ペタッとしない」シルクの力で、ふんわりと軽やかな美しいツヤ髪へと導きます。",AKINORIO,シャンプー,"シャンプー,ケラチン,引き算ケア",TRUE,タイトル,標準タイトル,SHAMP-001,500,shopify,100,deny,manual,9240,TRUE,TRUE,active

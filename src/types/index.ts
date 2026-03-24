@@ -1,6 +1,6 @@
 export type ProductCategory = 'single' | 'set'
 
-export type SkinConcern = '乾燥' | '毛穴' | 'シミ・くすみ' | 'ハリ・たるみ' | '敏感肌' | 'その他'
+export type SkinConcern = '乾燥' | '毛穴' | 'シミ・くすみ' | 'ハリ・たるみ' | '敏感肌' | '抜け毛' | 'パサつき' | 'ダメージ補修' | 'その他'
 
 export interface Product {
   id: string
@@ -13,7 +13,7 @@ export interface Product {
   subscriptionPrice: number
   subscriptionDiscountPct: number
   volume: string
-  usageDuration: string
+  usageDuration?: string
   ingredients: string
   features: string[]
   skinConcerns: SkinConcern[]
@@ -21,6 +21,14 @@ export interface Product {
   images: string[]
   sortOrder: number
   isActive: boolean
+  hikImage?: string
+  howToUse?: string
+  sub1MonthPrice?: number
+  sub3MonthPrice?: number
+  // Shopify連携
+  shopifyVariantId?: string
+  shopifySub1SellingPlanId?: string
+  shopifySub3SellingPlanId?: string
 }
 
 export interface CartItem {

@@ -5,16 +5,20 @@ import Link from 'next/link'
 import { useCart } from '@/lib/cart'
 import Container from '@/components/ui/Container'
 import MobileMenu from './MobileMenu'
-
-const NAV_ITEMS = [
-  { label: '商品一覧', href: '/products' },
-  { label: 'ブランドストーリー', href: '/about' },
-  { label: '14日間体験', href: '/sample' },
-]
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { totalItems } = useCart()
+  const { totalItems, openDrawer } = useCart()
+  const { lang, toggle } = useLanguage()
+  const t = translations[lang].nav
+
+  const NAV_ITEMS = [
+    { label: t.products, href: '/products' },
+    { label: t.story, href: '/about' },
+    { label: t.trial, href: '/sample' },
+  ]
 
   return (
     <>
@@ -25,7 +29,7 @@ export default function Header() {
             <button
               className="md:hidden p-2 text-neutral-700"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="メニューを開く"
+              aria-label={t.openMenu}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M3 6h18M3 12h18M3 18h18" />
@@ -50,23 +54,37 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* Cart */}
-            <Link
-              href="/cart"
-              className="relative p-2 text-neutral-700 hover:text-primary-700 transition-colors"
-              aria-label="カート"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 01-8 0" />
-              </svg>
-              {totalItems > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-gold-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-ui font-medium">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
+            {/* Right controls */}
+            <div className="flex items-center gap-3">
+              {/* Language Toggle */}
+              <button
+                onClick={toggle}
+                className="hidden md:flex items-center gap-1 text-xs tracking-[0.15em] text-neutral-500 hover:text-primary-700 transition-colors select-none"
+                aria-label="Switch language"
+              >
+                <span className={lang === 'ja' ? 'text-primary-700 font-medium' : 'opacity-40'}>JA</span>
+                <span className="opacity-30 mx-0.5">|</span>
+                <span className={lang === 'en' ? 'text-primary-700 font-medium' : 'opacity-40'}>EN</span>
+              </button>
+
+              {/* Cart */}
+              <button
+                onClick={openDrawer}
+                className="relative p-2 text-neutral-700 hover:text-primary-700 transition-colors"
+                aria-label={t.openCart}
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 01-8 0" />
+                </svg>
+                {totalItems > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 bg-gold-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-ui font-medium">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
         </Container>
       </header>
