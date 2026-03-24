@@ -118,7 +118,7 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62647648551283',
   },
   {
-    id: '8', slug: 'minus20-set', name: '輝魔女セット', subtitle: '基本の引き算セット',
+    id: '8', slug: 'kimajyoset', name: '輝魔女セット', subtitle: '基本の引き算セット',
     description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
     category: 'set', price: 22000, subscriptionPrice: 20900, subscriptionDiscountPct: 5, volume: '1セット',
     ingredients: '', features: [], skinConcerns: ['乾燥', '毛穴', '敏感肌'],
