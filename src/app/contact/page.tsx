@@ -10,6 +10,33 @@ export const metadata: Metadata = {
   },
 }
 
+const contactPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `お問い合わせ | ${SITE_NAME}`,
+  url: `${SITE_URL}/contact`,
+  description: 'AKINORIOへのお問い合わせページ。メールまたはLINE公式アカウントよりご連絡ください。',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#organization`,
+    name: 'AKINORIO',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      url: `${SITE_URL}/contact`,
+      availableLanguage: 'Japanese',
+    },
+  },
+}
+
 export default function ContactPage() {
-  return <ContactContent />
+  return (
+    <>
+      <ContactContent />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+      />
+    </>
+  )
 }
