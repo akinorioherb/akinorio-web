@@ -1,13 +1,22 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Product } from '@/types'
 import { formatPrice } from '@/lib/utils'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 interface ProductCardProps {
   product: Product
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { lang } = useLanguage()
+  const t = translations[lang].products
+  const pc = translations[lang].productContent[product.slug]
+  const displayName = pc?.name ?? product.name
+  const displaySubtitle = pc?.subtitle ?? product.subtitle
   // 商品一覧と同じ hikImage を使用。なければ旧 image にフォールバック
   const displayImage = product.hikImage || product.image
 
@@ -24,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="relative aspect-[3/4] overflow-hidden bg-[#0d0003]">
         <Image
           src={displayImage}
-          alt={`${product.name} ${product.subtitle}`}
+          alt={`${displayName} ${displaySubtitle}`}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -40,7 +49,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="font-ui text-[10px] tracking-widest px-2 py-1 rounded-sm"
               style={{ background: 'rgba(212,175,55,0.18)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.3)' }}
             >
-              定期コース
+              {t.subscriptionBadge}
             </span>
           </div>
         )}
@@ -50,7 +59,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="font-ui text-[10px] tracking-widest px-2 py-1 rounded-sm"
               style={{ background: 'rgba(227,22,51,0.2)', color: '#E31633', border: '1px solid rgba(227,22,51,0.3)' }}
             >
-              21日間体験
+              {t.trialBadge}
             </span>
           </div>
         )}
@@ -58,10 +67,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* テキスト情報（画像下部にオーバーレイ） */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
           <p className="font-ui text-[10px] tracking-[0.3em] text-[#cfaa70]/60 uppercase mb-1">
-            {product.subtitle}
+            {displaySubtitle}
           </p>
           <h3 className="font-heading-ja text-base font-light text-white mb-2 leading-snug">
-            {product.name}
+            {displayName}
           </h3>
 
           <div className="flex items-baseline gap-2">
@@ -70,7 +79,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </p>
             {bestPrice > 0 && bestPrice < product.price && (
               <p className="font-ui text-xs text-[#cfaa70]">
-                定期 {formatPrice(bestPrice)}〜
+                {t.from} {formatPrice(bestPrice)}〜
               </p>
             )}
           </div>

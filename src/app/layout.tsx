@@ -97,7 +97,7 @@ const localBusinessSchema = {
     url: `${SITE_URL}/contact`,
     availableLanguage: 'Japanese',
   },
-  sameAs: ['https://lin.ee/9kGSzcS'],
+  sameAs: ['https://lin.ee/Sa4uQuI'],
   founder: {
     '@type': 'Person',
     name: 'MINAKO',

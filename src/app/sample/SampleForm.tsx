@@ -110,6 +110,14 @@ export default function SampleForm() {
         <p className="relative font-ui text-sm text-white/50 leading-loose" style={{ whiteSpace: 'pre-line' }}>
           {t.description}
         </p>
+        <div className="relative mt-6 px-5 py-3 border border-[#cfaa70]/30 rounded-sm max-w-sm text-center">
+          <p className="font-ui text-xs text-[#cfaa70]/80 leading-relaxed">
+            ※ 本プログラムは日本国内への発送のみ対応しております。
+          </p>
+          <p className="font-ui text-[10px] text-[#cfaa70]/50 leading-relaxed mt-1">
+            * This programme is available for delivery within Japan only.
+          </p>
+        </div>
       </div>
 
       <Container size="sm">

@@ -3,7 +3,7 @@ import type { Product, Testimonial } from '@/types'
 export const SITE_NAME = 'AKINORIO'
 export const SITE_URL = 'https://akinorio.com'
 export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリア×ケイ素の力で、肌のOSを初期化する引き算のスキンケア。'
-export const LINE_URL = 'https://lin.ee/qF2bQ2v'
+export const LINE_URL = 'https://lin.ee/Sa4uQuI'
 export const FREE_SHIPPING_THRESHOLD = 10000
 export const SHIPPING_FEE = 600
 

@@ -3,7 +3,7 @@ import type { Product, Testimonial } from '@/types'
 export const SITE_NAME = 'AKINORIO'
 export const SITE_URL = 'https://akinorio.com'
 export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリア×ケイ素の力で、肌のOSを初期化する引き算のスキンケア。'
-export const LINE_URL = 'https://lin.ee/qF2bQ2v'
+export const LINE_URL = 'https://lin.ee/Sa4uQuI'
 export const FREE_SHIPPING_THRESHOLD = 10000
 export const SHIPPING_FEE = 600
 
@@ -81,7 +81,8 @@ export const PRODUCTS: Product[] = [
     description: '極限までピュアな状態で抽出された高濃度な美容液。\n水のように軽やかに肌の奥深くへ浸透し、かつてないハリと弾力を目覚めさせます。',
     category: 'single', price: 11000, subscriptionPrice: 10450, subscriptionDiscountPct: 5, volume: '200ml',
     usageDuration: '約3ヶ月',
-    ingredients: '', features: [], skinConcerns: ['シミ・くすみ', 'ハリ・たるみ'],
+    ingredients: '水、グリセリン、BG、ペンチレングリコール、乳酸Na、クラドシホンノバエカレドニアエ多糖体、加水分解コラーゲン、サッカロミセスセレビシアエキス、ナットウガム、アルギニン、トリ（カプリル酸/カプリン酸）グリセリル、セラミドEOP、セラミドNG、セラミドNP、セラミドAP、フィトステロールズ、水添レシチン、PEG-40水添ヒマシ油、フェノキシエタノール',
+    features: [], skinConcerns: ['シミ・くすみ', 'ハリ・たるみ'],
     image: '/images/products-bg-hik/serum.png', images: [], sortOrder: 6, isActive: true,
     hikImage: '/images/products-bg-hik/serum.png',
     howToUse: '洗顔後、化粧水の前に適量を顔全体になじませてください。',

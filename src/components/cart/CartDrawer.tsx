@@ -33,6 +33,7 @@ export default function CartDrawer() {
   const [showAgentInput, setShowAgentInput] = useState(false)
   const { lang } = useLanguage()
   const t = translations[lang].cart
+  const pc = translations[lang].productContent
   const isEn = lang === 'en'
 
   useEffect(() => {
@@ -177,18 +178,21 @@ export default function CartDrawer() {
           ) : (
             items.map(item => {
               const img = item.product.hikImage || item.product.image
+              const itemContent = pc[item.product.slug]
+              const itemName = itemContent?.name ?? item.product.name
+              const itemSubtitle = itemContent?.subtitle ?? item.product.subtitle
               return (
                 <div key={item.product.id} className="flex gap-4 pb-5 border-b border-[#cfaa70]/10">
                   {/* 商品画像 */}
                   <div className="w-[72px] h-[72px] flex-shrink-0 relative rounded-sm overflow-hidden"
                     style={{ background: 'rgba(207,170,112,0.05)', border: '1px solid rgba(207,170,112,0.12)' }}>
-                    <Image src={img} alt={item.product.name} fill className="object-cover" sizes="72px" />
+                    <Image src={img} alt={itemName} fill className="object-cover" sizes="72px" />
                   </div>
 
                   {/* 情報 */}
                   <div className="flex-1 min-w-0">
-                    <p className="font-heading-ja text-sm text-white font-light leading-snug">{item.product.name}</p>
-                    <p className="font-ui text-[10px] text-white/40 mt-0.5 tracking-wider">{item.product.subtitle}</p>
+                    <p className="font-heading-ja text-sm text-white font-light leading-snug">{itemName}</p>
+                    <p className="font-ui text-[10px] text-white/40 mt-0.5 tracking-wider">{itemSubtitle}</p>
                     <p className="font-price text-sm text-[#cfaa70] mt-1.5">{formatPrice(item.product.price)}</p>
 
                     <div className="flex items-center justify-between mt-2.5">

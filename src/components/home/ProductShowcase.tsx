@@ -32,14 +32,15 @@ const OBJECT_POSITION_MAP: Record<string, string> = {
 export default function ProductShowcase() {
   const { lang } = useLanguage();
   const t = translations[lang].products;
+  const pc = translations[lang].productContent;
   const mitoProduct = PRODUCTS.find(p => p.slug === 'mitochondria');
+  const herbProduct = PRODUCTS.find(p => p.slug === 'herb');
   const perfumeProduct = PRODUCTS.find(p => p.slug === 'perfume');
-  
-  const GALLERY_SLUGS = ['herb', 'cleansing', 'kihada', 'serum'];
+
+  const GALLERY_SLUGS = ['cleansing', 'kihada', 'serum', 'uv'];
   const galleryProducts = GALLERY_SLUGS.map(slug => PRODUCTS.find(p => p.slug === slug)).filter(Boolean) as typeof PRODUCTS;
-  
+
   const balmProduct = PRODUCTS.find(p => p.slug === 'balm');
-  const uvProduct = PRODUCTS.find(p => p.slug === 'uv');
   
   const SET_SLUGS = ['starter-set', 'minus20-set'];
   const setProducts = SET_SLUGS.map(slug => PRODUCTS.find(p => p.slug === slug)).filter(Boolean) as typeof PRODUCTS;
@@ -49,6 +50,10 @@ export default function ProductShowcase() {
     const bgClass = 'bg-gradient-to-r from-transparent via-black/10 to-black/50';
     const isWhiteSubtitle = product.slug === 'minus20-set';
     const subtitleColor = isWhiteSubtitle ? 'text-[#fdfbf7]' : 'text-[#E31633]';
+    const content = pc[product.slug];
+    const displayName = content?.name ?? product.name;
+    const displaySubtitle = content?.subtitle ?? product.subtitle;
+    const displayDescription = content?.description ?? product.description;
     return (
       <section 
         key={product.id} 
@@ -78,14 +83,14 @@ export default function ProductShowcase() {
                className={`w-full md:w-[60%] lg:w-[55%] xl:w-[50%] flex flex-col items-start text-left text-white p-8 md:p-12 lg:p-16 pointer-events-auto ${bgClass}`}
              >
                 <span className={`text-[10px] md:text-xs uppercase tracking-[0.5em] mb-6 font-bold ${subtitleColor} drop-shadow-sm`} style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>
-                  {product.subtitle}
+                  {displaySubtitle}
                 </span>
-                
-                <h3 
+
+                <h3
                   className="text-2xl md:text-[28px] lg:text-3xl font-bold tracking-[0.1em] mb-8 font-serif leading-[1.5] drop-shadow-md"
                   style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}
                 >
-                  {product.name}
+                  {displayName}
                 </h3>
                   
                 <div className="w-full max-w-full overflow-hidden mb-6 hidden">
@@ -115,7 +120,7 @@ export default function ProductShowcase() {
                 </div>
                 
                 <p className="text-sm md:text-base leading-[2.4] tracking-wide text-white mb-8 max-w-full text-justify font-medium whitespace-pre-line drop-shadow-md" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                  {product.description}
+                  {displayDescription}
                 </p>
 
                 <div className="w-full border-t border-white/20 pt-8 mt-auto flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 drop-shadow-md">
@@ -127,7 +132,7 @@ export default function ProductShowcase() {
                         {product.price.toLocaleString()}
                       </span>
                       <span className="text-[10px] text-white/80 ml-3 tracking-widest font-normal drop-shadow-sm" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-                        (税込)
+                        {t.includingTax}
                       </span>
                     </div>
                   </div>
@@ -155,14 +160,19 @@ export default function ProductShowcase() {
         {/* === 1. Title Product: Mitochondria (100vh) === */}
         {mitoProduct && renderSingleProduct(mitoProduct, 0)}
 
-        {/* === 2. Shampoo: Perfume (100vh) === */}
-        {perfumeProduct && renderSingleProduct(perfumeProduct, 1)}
+        {/* === 2. Herb (100vh) === */}
+        {herbProduct && renderSingleProduct(herbProduct, 1)}
 
-        {/* === 3. Gallery 4 Products (100vh total) === */}
+        {/* === 3. Shampoo: Perfume (100vh) === */}
+        {perfumeProduct && renderSingleProduct(perfumeProduct, 2)}
+
+        {/* === 4. Gallery 4 Products (100vh total) === */}
         <section className="relative w-full h-[100dvh] grid grid-cols-2 lg:grid-cols-4 overflow-hidden bg-[#1A0005]">
           {galleryProducts.map((product) => {
             const bgFileName = BG_MAP[product.slug] || 'allseries_fine.png';
             const objectPos = OBJECT_POSITION_MAP[product.slug] || 'center center';
+            const galleryContent = pc[product.slug];
+            const galleryName = galleryContent?.name ?? product.name;
             return (
               <div key={product.id} className="relative w-full h-full border-b lg:border-b-0 border-r border-[#E31633]/20 overflow-hidden group">
                 {/* Background Text Overlay to add depth */}
@@ -171,21 +181,21 @@ export default function ProductShowcase() {
                     {product.slug}
                   </span>
                 </div>
-                
-                <Image 
+
+                <Image
                    src={`/images/products-bg-hik/${bgFileName}`}
-                   alt={product.name}
-                   fill 
-                   className="object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-out z-10" 
+                   alt={galleryName}
+                   fill
+                   className="object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-out z-10"
                    style={{ objectPosition: objectPos }}
                    priority={false}
                    quality={100}
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 flex flex-col justify-end p-5 md:p-8 z-20">
                   <div className="w-full flex justify-between items-start mb-6">
                     <h3 className="text-xl md:text-2xl font-bold tracking-widest text-[#fdfbf7] leading-[1.4] drop-shadow-2xl" style={{ fontFamily: '"Noto Serif JP", serif', wordBreak: 'keep-all' }}>
-                      {product.name}
+                      {galleryName}
                     </h3>
                   </div>
                   
@@ -209,11 +219,8 @@ export default function ProductShowcase() {
           })}
         </section>
 
-        {/* === 4. Balm (100vh) === */}
-        {balmProduct && renderSingleProduct(balmProduct, 2)}
-
-        {/* === 5. UV (100vh) === */}
-        {uvProduct && renderSingleProduct(uvProduct, 3)}
+        {/* === 5. Balm (100vh) === */}
+        {balmProduct && renderSingleProduct(balmProduct, 3)}
 
         {/* === 6. Sets (100vh each) === */}
         {setProducts.map((product, index) => renderSingleProduct(product, index + 4))}

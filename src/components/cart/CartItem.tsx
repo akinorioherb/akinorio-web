@@ -17,13 +17,17 @@ export default function CartItem({ item }: CartItemProps) {
   const displayImage = product.hikImage ?? product.image
   const { lang } = useLanguage()
   const t = translations[lang].cart
+  const pc = translations[lang].productContent
+  const itemContent = pc[product.slug]
+  const displayName = itemContent?.name ?? product.name
+  const displaySubtitle = itemContent?.subtitle ?? product.subtitle
 
   return (
     <div className="flex gap-4 py-6 border-b border-neutral-100">
       <div className="w-20 h-20 flex-shrink-0 rounded-sm overflow-hidden bg-[#1a0005] relative">
         <Image
           src={displayImage}
-          alt={product.name}
+          alt={displayName}
           fill
           className="object-cover"
           sizes="80px"
@@ -32,10 +36,10 @@ export default function CartItem({ item }: CartItemProps) {
 
       <div className="flex-1 min-w-0">
         <h3 className="font-heading-ja text-sm text-neutral-800 truncate">
-          {product.name}
+          {displayName}
         </h3>
         <p className="font-ui text-xs text-neutral-400 mt-0.5">
-          {product.subtitle}
+          {displaySubtitle}
         </p>
         <p className="font-price text-sm text-primary-700 mt-2">
           {formatPrice(product.price)}

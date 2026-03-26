@@ -60,6 +60,12 @@ export default function ProductDetail({ product }: Props) {
   const { addItem } = useCart()
   const { lang } = useLanguage()
   const t = translations[lang].productDetail
+  const pc = translations[lang].productContent[product.slug]
+  const displayName = pc?.name ?? product.name
+  const displaySubtitle = pc?.subtitle ?? product.subtitle
+  const displayDescription = pc?.description ?? product.description
+  const displayHowToUse = pc?.howToUse ?? product.howToUse
+  const displayFeatures = pc?.features ?? product.features
 
   const productImage = product.hikImage || product.image
 
@@ -128,7 +134,7 @@ export default function ProductDetail({ product }: Props) {
           <div className="relative w-full aspect-[4/3] lg:hidden">
             <Image
               src={productImage}
-              alt={product.name}
+              alt={displayName}
               fill
               className="object-cover object-center"
               sizes="100vw"
@@ -139,7 +145,7 @@ export default function ProductDetail({ product }: Props) {
           <div className="hidden lg:block sticky top-0 h-[100dvh] relative">
             <Image
               src={productImage}
-              alt={product.name}
+              alt={displayName}
               fill
               className="object-cover object-center"
               sizes="50vw"
@@ -162,15 +168,15 @@ export default function ProductDetail({ product }: Props) {
           </p>
 
           {/* 商品名 SVG — getBBox で実幅計測、自然な1行レンダリング */}
-          <ProductNameSvg name={product.name} />
+          <ProductNameSvg name={displayName} />
 
-          <p className="font-ui text-sm text-white/50 tracking-widest mb-3">{product.subtitle}</p>
+          <p className="font-ui text-sm text-white/50 tracking-widest mb-3">{displaySubtitle}</p>
           {product.volume && (
             <p className="font-ui text-sm text-white/40">{t.volume}：{product.volume}</p>
           )}
           <div className="w-12 h-px bg-[#cfaa70]/50 my-6" />
           <p className="font-ui text-sm text-white/60 leading-loose whitespace-pre-line max-w-md mb-10">
-            {product.description.split('\n')[0]}
+            {displayDescription.split('\n')[0]}
           </p>
 
           {/* ── 購入プラン ── */}
@@ -250,18 +256,18 @@ export default function ProductDetail({ product }: Props) {
       <div className="border-t border-[#cfaa70]/15" style={{ background: 'rgba(10,0,3,0.6)' }}>
         <div className="max-w-[900px] mx-auto px-6 md:px-12 py-16 space-y-10">
 
-          {product.howToUse && (
+          {displayHowToUse && (
             <div>
               <p className="font-heading-en text-[10px] tracking-[0.4em] text-[#cfaa70]/60 uppercase mb-3">How to Use</p>
-              <p className="font-ui text-sm text-white/60 leading-loose">{product.howToUse}</p>
+              <p className="font-ui text-sm text-white/60 leading-loose">{displayHowToUse}</p>
             </div>
           )}
 
-          {product.features.length > 0 && (
+          {displayFeatures.length > 0 && (
             <div>
               <p className="font-heading-en text-[10px] tracking-[0.4em] text-[#cfaa70]/60 uppercase mb-3">Features</p>
               <ul className="space-y-2">
-                {product.features.map((f, i) => (
+                {displayFeatures.map((f, i) => (
                   <li key={i} className="flex items-start gap-2 font-ui text-sm text-white/60">
                     <span className="text-[#cfaa70] mt-0.5 flex-shrink-0">✦</span>
                     {f}
@@ -284,9 +290,9 @@ export default function ProductDetail({ product }: Props) {
           )}
 
           <div className="border-t border-[#cfaa70]/15 pt-6">
-            <p className="font-ui text-xs font-bold text-white/60 mb-2">ご使用上の注意：</p>
+            <p className="font-ui text-xs font-bold text-white/60 mb-2">{t.usageWarningLabel}</p>
             <p className="font-ui text-xs text-white/35 leading-relaxed">
-              お肌に異常が生じていないかよく注意して使用してください。お肌に合わないときは、使用を中止し皮膚科専門医にご相談ください。目に入った場合は、すぐに水または温水で十分に洗い流してください。
+              {t.usageWarning}
             </p>
           </div>
 

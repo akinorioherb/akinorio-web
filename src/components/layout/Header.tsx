@@ -18,11 +18,18 @@ export default function Header() {
     { label: t.products, href: '/products' },
     { label: t.story, href: '/about' },
     { label: t.trial, href: '/sample' },
+    ...(lang === 'en' ? [{ label: '🌏 ' + t.global, href: '/global' }] : []),
   ]
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-100">
+      {/* Ships Worldwide banner — EN only */}
+      {lang === 'en' && (
+        <div className="fixed top-0 left-0 right-0 z-[60] bg-[#1A0005] text-[#D4AF37] text-center py-1.5 text-[10px] tracking-[0.35em] uppercase font-medium">
+          Ships Worldwide · Alcohol-Free · Paraben-Free · Made in Japan
+        </div>
+      )}
+      <header className={`fixed left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-100 ${lang === 'en' ? 'top-7' : 'top-0'}`}>
         <Container>
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Mobile menu button */}
@@ -95,7 +102,7 @@ export default function Header() {
       />
 
       {/* Spacer */}
-      <div className="h-16 md:h-20" />
+      <div className={lang === 'en' ? 'h-[calc(1.75rem+4rem)] md:h-[calc(1.75rem+5rem)]' : 'h-16 md:h-20'} />
     </>
   )
 }

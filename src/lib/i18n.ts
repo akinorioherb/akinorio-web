@@ -5,6 +5,7 @@ const jaBase = {
     products: '商品一覧',
     story: 'ブランドストーリー',
     trial: '21日間体験',
+    global: '海外配送',
     cart: 'カート',
     openMenu: 'メニューを開く',
     closeMenu: 'メニューを閉じる',
@@ -149,6 +150,7 @@ const enBase = {
     products: 'Products',
     story: 'Our Story',
     trial: '21-Day Trial',
+    global: 'Ships Worldwide',
     cart: 'Cart',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
@@ -156,8 +158,8 @@ const enBase = {
   },
 
   hero: {
-    line1: 'The Art of Subtraction.',
-    line2: 'Your Natural Radiance.',
+    line1: 'Stop Adding.',
+    line2: 'Start Subtracting.',
     line3: 'The more you release,',
     line4: 'the more you reveal.',
   },
@@ -499,6 +501,10 @@ const jaProducts = {
   tax: '税込',
   viewDetails: '詳細を見る',
   view: '詳細',
+  subscriptionBadge: '定期コース',
+  trialBadge: '21日間体験',
+  from: '定期',
+  includingTax: '（税込）',
 }
 
 const enProducts = {
@@ -507,6 +513,183 @@ const enProducts = {
   tax: 'incl. tax',
   viewDetails: 'View Details',
   view: 'View',
+  subscriptionBadge: 'Subscription',
+  trialBadge: '21-Day Trial',
+  from: 'Sub from',
+  includingTax: '(incl. tax)',
+}
+
+// ─── product content (name / subtitle / description per slug) ──
+type ProductContent = { name: string; subtitle: string; description: string; howToUse: string; features?: string[] }
+
+const jaProductContent: Record<string, ProductContent> = {
+  mitochondria: {
+    name: 'ミトコンドリアのちから',
+    subtitle: '細胞美容液',
+    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアとケイ素の力で、細胞が自ら美しくなる力を呼び覚まします。',
+    howToUse: '洗顔後、適量を手に取り顔全体になじませてください。目元・口元など気になる部分には重ねづけが効果的です。',
+    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'パラベンフリー・アルコールフリー'],
+  },
+  herb: {
+    name: 'ハーブのちから',
+    subtitle: '肌育エッセンス',
+    description: '自然の生命力が宿るハーブの滴。\n肌の土台を整え、硬くなった角質をやさしく解きほぐすことで、\n次に使う美容成分の浸透を劇的に高めます。',
+    howToUse: '洗顔後、化粧水のように適量を顔全体にやさしくなじませてください。',
+  },
+  cleansing: {
+    name: 'クリアクリスタルクレンジング',
+    subtitle: '摩擦ゼロのメイク落とし',
+    description: 'ダブル洗顔という「余計な儀式」を終わらせるクレンジング。\nメイクも毛穴汚れも、するんと落とす。落とすたびに肌が整っていきます。',
+    howToUse: '乾いた手でメイクなじませ、少量の水でなじませてからぬるま湯で洗い流してください。',
+    features: ['ジェルタイプで肌に優しい', 'ダブル洗顔不要', '毛穴汚れもすっきり'],
+  },
+  kihada: {
+    name: '輝肌（キハダ）',
+    subtitle: '極上艶ヴェール',
+    description: '呼び覚ました肌本来のチカラを、極上のヴェールで閉じ込める。\n与えすぎない「引き算」が完成させる、圧倒的な艶と透明感をご体感ください。',
+    howToUse: 'スキンケアの最後に適量を手に取り、顔全体にやさしくなじませてください。',
+  },
+  balm: {
+    name: '金の糸クリーム（クリアクリスタルバーム）',
+    subtitle: '究極の細胞覚醒バーム',
+    description: '最上級の保湿と細胞活性を両立させた奇跡のバーム。\n夜のスキンケアの最後に塗るだけで、翌朝の肌が見違えるように生まれ変わります。',
+    howToUse: 'アイクリーム・ネッククリーム・ハンドクリームとして。1日に何度でもお使いいただけます。',
+  },
+  serum: {
+    name: 'クリアクリスタルセラム',
+    subtitle: '高濃度美容液',
+    description: '極限までピュアな状態で抽出された高濃度な美容液。\n水のように軽やかに肌の奥深くへ浸透し、かつてないハリと弾力を目覚めさせます。',
+    howToUse: '洗顔後、化粧水の前に適量を顔全体になじませてください。',
+  },
+  uv: {
+    name: 'クリアクリスタルスキンベースUV',
+    subtitle: '美容液UVベース',
+    description: '紫外線から肌を確実に守りながら、日中もスキンケアし続ける新感覚のUVベース。\n負担を一切感じさせない極上の軽さです。',
+    howToUse: 'スキンケアの最後に適量を顔全体に伸ばし、日焼け止めとして使用してください。',
+  },
+  'starter-set': {
+    name: 'スターターセット',
+    subtitle: 'ミトコンドリアのちから＋ハーブのちから',
+    description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。',
+    howToUse: '洗顔後、ハーブのちからを顔全体になじませてから、ミトコンドリアのちからを重ねてください。',
+    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
+  },
+  kimajyoset: {
+    name: '輝魔女セット',
+    subtitle: '基本の引き算セット',
+    description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
+    howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
+  },
+  'kagayaki-majo': {
+    name: '輝魔女セット',
+    subtitle: '極上のエイジングケア',
+    description: 'ミトコンドリアのちから、ハーブのちから、輝肌Kihadaがセットに。\n本来の美しさを呼び覚ます、ブランド最高峰の組み合わせ。',
+    howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
+  },
+  'minus20-set': {
+    name: '輝魔女セット',
+    subtitle: '基本の引き算セット',
+    description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
+    howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
+  },
+  premium: {
+    name: '輝魔女プレミアム',
+    subtitle: '最上級コンプリート',
+    description: 'アキノリオの全ての真価を余すところなく体験できる、最上級のフルセット。\n揺るぎない自信と究極の美肌をあなたに。',
+    howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
+  },
+  perfume: {
+    name: 'Perfume（美容液混合シャンプー）',
+    subtitle: 'ノンシリコン・2本セット',
+    description: '美容成分と超高級ケラチンで洗い上げる贅沢。\nトリートメントもボディソープも捨てる、新時代の引き算ケア。\n頭皮のたるみはお顔のたるみ。着目したのは「一つなぎの肌」。\n最終的にこの一本で全身が潤う、極上のスキンケア処方です。',
+    howToUse: '適量を手に取り、髪全体になじませて洗い流してください。トリートメント不要です。',
+    features: ['ワイン酵母・ケラチン・シルク配合', 'トリートメント不要', '必ず2本セットで販売'],
+  },
+}
+
+const enProductContent: Record<string, ProductContent> = {
+  mitochondria: {
+    name: 'The Power of Mitochondria',
+    subtitle: 'Cellular Serum',
+    description: 'The ingredient supplier said: "With a concentration this high, please call it a serum."\nNo foundation. No toner. No double cleanse.\nBorn to guide the skin to its purest, truest form through the practice of subtraction.\nMitochondria and silica awaken the skin\'s innate capacity for beauty.',
+    howToUse: 'After cleansing, take an appropriate amount and blend gently over the entire face. Apply an extra layer to areas of concern such as the eyes and mouth.',
+    features: ['Mitochondrial Activation Technology', 'Silica (Silicon Dioxide) Formulation', 'Paraben-free · Alcohol-free'],
+  },
+  herb: {
+    name: 'The Power of Herb',
+    subtitle: 'Skin Cultivation Essence',
+    description: 'Botanical droplets alive with the vitality of nature.\nGently dissolves hardened surface layers and dramatically increases the absorption of the serum that follows — all the way to the stratum corneum.',
+    howToUse: 'After cleansing, apply an appropriate amount gently over the face, as you would a toner.',
+  },
+  cleansing: {
+    name: 'Clear Crystal Cleansing',
+    subtitle: 'Zero-Friction Makeup Remover',
+    description: 'The cleanser that ends the unnecessary ritual of double cleansing.\nRemoves makeup and pore impurities effortlessly — and with each use, the skin grows cleaner still.',
+    howToUse: 'Apply to dry hands, work into makeup, add a small amount of water to emulsify, then rinse with warm water.',
+    features: ['Gentle gel formula', 'No double cleanse required', 'Deep pore cleansing'],
+  },
+  kihada: {
+    name: 'Kihada',
+    subtitle: 'Luminous Veil',
+    description: 'A luminous veil that envelops the beauty your skin has reclaimed.\nGiving less — not more — is what allows an extraordinary clarity and glow to finally surface.',
+    howToUse: 'At the end of your skincare routine, take an appropriate amount and blend gently over the face.',
+  },
+  balm: {
+    name: 'Gold Thread Cream',
+    subtitle: 'Ultimate Cellular Awakening Balm',
+    description: 'A miracle balm that unites supreme moisture with cellular activation.\nApply as the final step of your evening routine — wake to skin that looks visibly transformed.',
+    howToUse: 'Use as an eye cream, neck cream, or hand cream. May be applied as many times as desired throughout the day.',
+  },
+  serum: {
+    name: 'Clear Crystal Serum',
+    subtitle: 'High-Concentration Serum',
+    description: 'A high-concentration serum extracted in its purest possible state.\nMoves weightlessly into the skin\'s depths, awakening a firmness and elasticity you may have thought was gone.',
+    howToUse: 'After cleansing and before toner, apply an appropriate amount over the face.',
+  },
+  uv: {
+    name: 'Clear Crystal Skin Base UV',
+    subtitle: 'Serum-SPF Base',
+    description: 'A new kind of UV base that protects reliably against UV while continuing to care for the skin throughout the day.\nAn extraordinary lightness that never feels like a burden.',
+    howToUse: 'At the final step of your skincare routine, blend an appropriate amount over the face and use as sun protection.',
+  },
+  'starter-set': {
+    name: 'Starter Set',
+    subtitle: 'The Power of Mitochondria + The Power of Herb',
+    description: 'The two-product set chosen by the most people as their first step into subtraction skincare.\nWhen The Power of Mitochondria and The Power of Herb come together,\nthe routine that awakens the skin\'s innate strength begins.',
+    howToUse: 'After cleansing, apply The Power of Herb over the face, then layer The Power of Mitochondria on top.',
+    features: ['Mitochondrial Activation Technology', 'Silica (Silicon Dioxide) Formulation', '11 botanical herb extracts', 'Paraben-free · Alcohol-free'],
+  },
+  kimajyoset: {
+    name: 'Kagayaki Majo Set',
+    subtitle: 'The Foundational Subtraction Set',
+    description: 'A set containing the essential steps to reinitialise the skin\'s operating system.\nWith this alone, your skincare is complete.',
+    howToUse: 'Follow the usage instructions for each item within the set.',
+  },
+  'kagayaki-majo': {
+    name: 'Kagayaki Majo Set',
+    subtitle: 'Ultimate Ageing Care',
+    description: 'The Power of Mitochondria, The Power of Herb, and Kihada — together in one set.\nThe brand\'s finest combination for awakening your skin\'s original beauty.',
+    howToUse: 'Follow the usage instructions for each item within the set.',
+  },
+  'minus20-set': {
+    name: 'Kagayaki Majo Set',
+    subtitle: 'The Foundational Subtraction Set',
+    description: 'A set containing the essential steps to reinitialise the skin\'s operating system.\nWith this alone, your skincare is complete.',
+    howToUse: 'Follow the usage instructions for each item within the set.',
+  },
+  premium: {
+    name: 'Kagayaki Majo Premium',
+    subtitle: 'Complete Supreme Collection',
+    description: 'A supreme full set that allows you to experience every facet of AKINORIO.\nUnshakeable confidence. The ultimate skin.',
+    howToUse: 'Follow the usage instructions for each item within the set.',
+  },
+  perfume: {
+    name: 'Perfume (Serum-Infused Shampoo)',
+    subtitle: 'Silicon-Free · 2-Bottle Set',
+    description: 'Luxury that cleanses with beauty actives and ultra-premium keratin.\nDiscard the conditioner. Discard the body soap. A new era of subtraction care.\nThe scalp\'s sagging is the face\'s sagging — we noticed the skin is one continuous surface.\nOne product that nourishes from head to toe: a supreme skincare formula.',
+    howToUse: 'Take an appropriate amount, work through the hair, and rinse. No conditioner required.',
+    features: ['Wine yeast · Keratin · Silk complex', 'No conditioner needed', 'Sold as a 2-bottle set'],
+  },
 }
 
 // ─── product detail ────────────────────────────────────
@@ -522,6 +705,8 @@ const jaProductDetail = {
   addToCart: 'この一本を選ぶ',
   ingredients: '全成分を表示する',
   startProgram: '21日間の引き算プログラムを始める',
+  usageWarningLabel: 'ご使用上の注意：',
+  usageWarning: 'お肌に異常が生じていないかよく注意して使用してください。お肌に合わないときは、使用を中止し皮膚科専門医にご相談ください。目に入った場合は、すぐに水または温水で十分に洗い流してください。',
 }
 
 const enProductDetail = {
@@ -536,6 +721,8 @@ const enProductDetail = {
   addToCart: 'Add to Cart',
   ingredients: 'View full ingredients',
   startProgram: 'Begin the 21-Day Programme',
+  usageWarningLabel: 'Precautions:',
+  usageWarning: 'Discontinue use if irritation or skin abnormality occurs and consult a dermatologist. If product enters the eyes, rinse immediately and thoroughly with water or warm water.',
 }
 
 // ─── cart ──────────────────────────────────────────────
@@ -608,6 +795,7 @@ const ja = {
   products: jaProducts,
   productDetail: jaProductDetail,
   cart: jaCart,
+  productContent: jaProductContent,
 }
 
 const en = {
@@ -619,6 +807,7 @@ const en = {
   products: enProducts,
   productDetail: enProductDetail,
   cart: enCart,
+  productContent: enProductContent,
 }
 
 export const translations: Record<Lang, typeof ja> = { ja, en }

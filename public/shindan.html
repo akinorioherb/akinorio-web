@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- OGP Tags for Instagram/SNS -->
+    <meta property="og:title" content="引き算スキンケア診断 | あなたの肌、やりすぎていませんか？">
+    <meta property="og:description" content="60秒でわかる「引き算スキンケア診断」。ちゃんとケアしているのに改善しない原因はスキンケアのしすぎかも。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://akinorioweb.com/shindan.html">
+    <meta property="og:image" content="https://akinorioweb.com/og-image-shindan.jpg"> <!-- TODO: OGP画像配置 -->
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>引き算スキンケア診断 | AKINORIO</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Serif+JP:wght@400;600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Challenge LP統一カラー */
+            --gold:            #cfaa70;
+            --gold-light:      #f0dc98;
+            --gold-rgb:        207, 170, 112;
+            --bg-base:         radial-gradient(ellipse 120% 80% at 50% 20%, #9e1023 0%, #7a0818 40%, #4a0210 70%, #1a0005 100%);
+            --card-bg:         rgba(26, 0, 8, 0.80);
+            --card-border:     rgba(207, 170, 112, 0.20);
+            --text-main:       rgba(255,255,255,0.90);
+            --text-sub:        rgba(255,255,255,0.55);
+            --text-muted:      rgba(255,255,255,0.30);
+            /* alias for既存コード互換 */
+            --accent-gold:       #cfaa70;
+            --accent-gold-light: #f0dc98;
+            --font-main: 'Noto Serif JP', 'Yu Mincho', serif;
+            --font-en: 'Cinzel', serif;
+            --primary-button: linear-gradient(135deg, #b8873a 0%, #d4af61 28%, #f0dc98 50%, #cfaa70 72%, #9e7030 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-main); }
+
+        body {
+            background: var(--bg-base);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Background Effects（不要になったが構造維持）*/
+        .bg-layer { display: none; }
+        .glow-orb { display: none; }
+
+        /* Container */
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 24px;
+            position: relative;
+        }
+
+        /* Top Progress Bar */
+        .progress-bar-container {
+            width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;
+            margin-bottom: 24px; display: none; overflow: hidden;
+        }
+        .progress-bar { height: 100%; background: var(--accent-gold); width: 0%; transition: width 0.4s ease; }
+        .progress-text { text-align: right; font-size: 0.8rem; color: var(--accent-gold); font-weight: 600; margin-top: 8px; display: none; letter-spacing: 1px; }
+
+        /* Step Panels */
+        .step-panel {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .step-panel.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header / Logo */
+        .brand-logo { text-align: center; font-size: 1.2rem; font-weight: 800; letter-spacing: 3px; color: var(--accent-gold); margin-bottom: 40px; }
+
+        /* Title Typography */
+        h1 { font-size: 1.8rem; font-weight: 800; line-height: 1.4; margin-bottom: 16px; text-align: center; }
+        h2.question-title { font-size: 1.4rem; font-weight: 600; line-height: 1.5; margin-bottom: 32px; color: #fff; }
+        .subtitle { font-size: 1rem; color: var(--text-muted); text-align: center; margin-bottom: 40px; line-height: 1.6; }
+
+        /* Options */
+        .options-group { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+        .option-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .option-btn:hover { border-color: var(--accent-gold); background: rgba(203, 162, 73, 0.1); }
+        .option-btn:active { transform: scale(0.98); }
+        .option-btn.selected { border-color: var(--accent-gold); background: rgba(203, 162, 73, 0.2); box-shadow: 0 0 15px rgba(203, 162, 73, 0.1); }
+        
+        /* Multiple Choice Specific */
+        .checkbox-indicator {
+            display: inline-block; width: 20px; height: 20px; border: 2px solid var(--card-border);
+            border-radius: 4px; margin-right: 12px; vertical-align: middle; transition: 0.2s; position: relative;
+        }
+        .option-btn.selected .checkbox-indicator { border-color: var(--accent-gold); background: var(--accent-gold); }
+        .option-btn.selected .checkbox-indicator::after {
+            content: ''; position: absolute; left: 5px; top: 1px; width: 4px; height: 10px;
+            border: solid #000; border-width: 0 2px 2px 0; transform: rotate(45deg);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: block; width: 100%; background: var(--primary-button);
+            color: #000; font-weight: 800; font-size: 1.1rem; padding: 20px;
+            border-radius: 30px; border: none; cursor: pointer; text-align: center;
+            text-decoration: none; margin-top: 32px; box-shadow: 0 8px 20px rgba(203, 162, 73, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(203, 162, 73, 0.2); }
+        .btn-primary.disabled { opacity: 0.5; pointer-events: none; }
+        
+        .btn-line {
+            background: #06C755; color: #fff; box-shadow: 0 8px 20px rgba(6, 199, 85, 0.3);
+        }
+
+        /* Loading Screen */
+        .loader {
+            width: 48px; height: 48px; border: 4px solid var(--card-border);
+            border-bottom-color: var(--accent-gold); border-radius: 50%;
+            display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Result Page Styles */
+        .result-type-badge {
+            background: rgba(212, 175, 55, 0.1); border: 1px solid var(--accent-gold);
+            color: var(--accent-gold); display: inline-block; padding: 8px 16px;
+            border-radius: 20px; font-weight: 800; font-size: 0.9rem; margin-bottom: 24px; letter-spacing: 1px;
+            font-family: var(--font-en);
+        }
+        .result-danger { color: #f87171; font-weight: 900; font-size: 1.25rem; margin-bottom: 32px; line-height: 1.6; }
+        .result-empathy { font-style: italic; color: #fdf9ec; opacity: 0.9; margin-bottom: 32px; padding-left: 16px; border-left: 3px solid var(--accent-gold); }
+        .result-body { color: var(--text-main); font-size: 1.05rem; line-height: 1.8; margin-bottom: 40px; }
+        .result-body p { margin-bottom: 16px; }
+
+        @media (max-width: 480px) {
+            .container { padding: 16px; }
+            h1 { font-size: 1.5rem; }
+            .option-btn { padding: 16px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-layer">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <div class="brand-logo" style="font-family: var(--font-en);">AKINORIO</div>
+        
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText">Q1 / 8</div>
+
+        <!-- Start Screen -->
+        <div class="step-panel active" id="step-start">
+            <h1>あなたの肌、<br><span style="color: var(--accent-gold)">やりすぎていませんか？</span></h1>
+            <p class="subtitle">「ちゃんとケアしているのに、なぜか改善しない」<br>その原因は、スキンケアのしすぎかもしれません。<br><br>60秒でわかる<br>「引き算スキンケア診断」</p>
+            <button class="btn-primary" onclick="nextStep('q1')">診断スタート →</button>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="step-panel" id="step-q1" data-q="1">
+            <h2 class="question-title">Q1. 毎日のスキンケアは何ステップ？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(1, 0, 'q2')">1〜2ステップ（洗顔 + 1アイテムなど）</button>
+                <button class="option-btn" onclick="selectSingle(1, 1, 'q2')">3〜4ステップ</button>
+                <button class="option-btn" onclick="selectSingle(1, 2, 'q2')">5ステップ以上</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="step-panel" id="step-q2" data-q="2">
+            <h2 class="question-title">Q2. 現在使っているスキンケアアイテムは何個？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(2, 0, 'q3')">1〜2個</button>
+                <button class="option-btn" onclick="selectSingle(2, 1, 'q3')">3〜5個</button>
+                <button class="option-btn" onclick="selectSingle(2, 2, 'q3')">6個以上</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="step-panel" id="step-q3" data-q="3">
+            <h2 class="question-title">Q3. 1日の洗顔回数は？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(3, 0, 'q4')">1回（夜のみ）</button>
+                <button class="option-btn" onclick="selectSingle(3, 1, 'q4')">2回（朝・夜）</button>
+                <button class="option-btn" onclick="selectSingle(3, 2, 'q4')">3回以上、または気になったら洗う</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="step-panel" id="step-q4" data-q="4">
+            <h2 class="question-title">Q4. クレンジングの使い心地は？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(4, 0, 'q5')">肌に優しいミルク・バームタイプ</button>
+                <button class="option-btn" onclick="selectSingle(4, 1, 'q5')">普通のオイル・ジェルタイプ</button>
+                <button class="option-btn" onclick="selectSingle(4, 2, 'q5')">しっかり落とせるオイルや拭き取りタイプ</button>
+            </div>
+        </div>
+
+        <!-- Question 5 (Multiple) -->
+        <div class="step-panel" id="step-q5" data-q="5">
+            <h2 class="question-title">Q5. 今の肌の悩みを選んでください（複数可）</h2>
+            <div class="options-group" id="q5-options">
+                <button class="option-btn multiple-btn" data-val="dry" onclick="toggleMultiple(this)"><span class="checkbox-indicator"></span>乾燥・カサつき</button>
+                <button class="option-btn multiple-btn" data-val="redness" onclick="toggleMultiple(this)"><span class="checkbox-indicator"></span>赤み・炎症</button>
+                <button class="option-btn multiple-btn" data-val="acne" onclick="toggleMultiple(this)"><span class="checkbox-indicator"></span>ニキビ・吹き出物</button>
+                <button class="option-btn multiple-btn" data-val="shine" onclick="toggleMultiple(this)"><span class="checkbox-indicator"></span>テカリ・べたつき</button>
+                <button class="option-btn multiple-btn" data-val="sting" onclick="toggleMultiple(this)"><span class="checkbox-indicator"></span>ヒリつき・刺激感</button>
+                <button class="option-btn multiple-btn none-btn" data-val="none" onclick="toggleMultipleNone(this)"><span class="checkbox-indicator"></span>特に悩みはない</button>
+            </div>
+            <button class="btn-primary" id="q5-next" onclick="submitMultiple('q6')" style="margin-top: 24px;">次へ →</button>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="step-panel" id="step-q6" data-q="6">
+            <h2 class="question-title">Q6. 新しいスキンケア商品を試す頻度は？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(6, 0, 'q7')">ほとんど試さない（気に入ったものを長く使う）</button>
+                <button class="option-btn" onclick="selectSingle(6, 1, 'q7')">気になったら試すことがある</button>
+                <button class="option-btn" onclick="selectSingle(6, 2, 'q7')">新商品や話題のアイテムはよく試す</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="step-panel" id="step-q7" data-q="7">
+            <h2 class="question-title">Q7. 保湿ケアのやり方は？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(7, 0, 'q8')">1アイテムを薄く1回</button>
+                <button class="option-btn" onclick="selectSingle(7, 1, 'q8')">化粧水 + 乳液など2種類程度</button>
+                <button class="option-btn" onclick="selectSingle(7, 2, 'q8')">化粧水を重ね付けしたり、3種以上使う</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="step-panel" id="step-q8" data-q="8">
+            <h2 class="question-title">Q8. 毎日のスキンケアにかける時間は？</h2>
+            <div class="options-group">
+                <button class="option-btn" onclick="selectSingle(8, 0, 'load')">60秒以下</button>
+                <button class="option-btn" onclick="selectSingle(8, 1, 'load')">2から4分</button>
+                <button class="option-btn" onclick="selectSingle(8, 2, 'load')">5分以上、またはじっくりケア</button>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div class="step-panel" id="step-load" style="text-align: center;">
+            <div class="loader"></div>
+            <h2 style="font-size: 1.2rem; margin-top: 16px;">肌タイプを診断中...</h2>
+            <p style="color: var(--text-muted); margin-top: 8px; font-size: 0.9rem;">回答を分析しています</p>
+        </div>
+
+        <!-- Result Frame -->
+        <div class="step-panel" id="step-result" style="text-align: left;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <span class="result-type-badge" id="res-badge">診断完了</span>
+                <h1 id="res-title" style="margin-bottom: 8px;">タイプ表示</h1>
+            </div>
+
+            <div class="result-danger" id="res-danger">危険性の提示</div>
+
+            <div class="result-empathy" id="res-empathy">
+                共感メッセージ
+            </div>
+
+            <div class="result-body" id="res-body">
+                原因と解決策
+            </div>
+
+            <!-- Sophie: タイプ別体験談 -->
+            <div id="res-voice" style="background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                <p style="font-size:0.7rem; letter-spacing:0.2em; color:var(--accent-gold); margin-bottom:12px;">VOICE — 同じタイプの方の21日後</p>
+                <p id="res-voice-text" style="font-size:0.92rem; color:var(--text-muted); line-height:1.85;"></p>
+                <p id="res-voice-meta" style="font-size:0.75rem; color:var(--accent-gold); margin-top:10px; opacity:0.7;"></p>
+            </div>
+
+            <!-- Marcus: 残枠 + CTA -->
+            <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--card-border);">
+                <div id="res-slots" style="display:inline-block; background:rgba(248,113,113,0.15); border:1px solid rgba(248,113,113,0.4); border-radius:20px; padding:6px 16px; font-size:0.8rem; color:#f87171; font-weight:700; margin-bottom:16px; letter-spacing:0.05em;">
+                    今月の無料サンプル枠 残り3名
+                </div>
+                <p style="font-size:0.95rem; font-weight:600; margin-bottom:16px;">「ミトコンドリアのちから」21日分を<br>無料でお届けします</p>
+                <a href="https://lin.ee/Sa4uQuI" class="btn-primary btn-line utm-link" style="margin-top: 0;">LINEで無料サンプルを受け取る</a>
+                <p style="font-size:0.75rem; color:var(--text-muted); margin-top:12px;">※ 送料無料・追加費用なし。診断タイプが自動で記録されます</p>
+                <!-- Keiko: チャレンジLP導線 -->
+                <a href="https://akinorio-challenge.vercel.app" style="display:block; margin-top:16px; font-size:0.82rem; color:var(--accent-gold); text-decoration:none; opacity:0.8;">21日間プログラムの詳細を先に見る →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="shindan.js"></script>
+</body>
+</html>

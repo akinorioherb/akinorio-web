@@ -3,9 +3,11 @@
   "configurations": [
     {
       "name": "akinorio-web",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeExecutable": "/Users/ichinoseshougo/.nvm/versions/node/v20.20.1/bin/node",
+      "runtimeArgs": ["/Users/ichinoseshougo/.nvm/versions/node/v20.20.1/bin/npm", "run", "dev"],
+      "port": 3000,
+      "autoPort": true,
+      "cwd": "/Users/ichinoseshougo/claude/akinorio-marketing-hq/akinorio-web"
     }
   ]
 }

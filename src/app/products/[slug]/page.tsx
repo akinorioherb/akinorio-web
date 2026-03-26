@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Container from '@/components/ui/Container'
 import ProductDetail from '@/components/product/ProductDetail'
 import ProductCard from '@/components/product/ProductCard'
+import ProductBreadcrumb from '@/components/product/ProductBreadcrumb'
+import RelatedProductsHeading from '@/components/product/RelatedProductsHeading'
 import { PRODUCTS, SITE_URL, SITE_NAME } from '@/lib/constants'
 
 interface PageProps {
@@ -143,13 +145,7 @@ export default async function ProductPage({ params }: PageProps) {
     <div>
       {/* Breadcrumb — dark theme */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-4 pb-0">
-        <nav aria-label="パンくずリスト" className="font-ui text-xs text-white/30">
-          <a href="/" className="hover:text-white/60 transition-colors">トップ</a>
-          <span className="mx-2">/</span>
-          <a href="/products" className="hover:text-white/60 transition-colors">商品一覧</a>
-          <span className="mx-2">/</span>
-          <span className="text-white/50">{product.name}</span>
-        </nav>
+        <ProductBreadcrumb productSlug={product.slug} />
       </div>
 
       {/* Product detail — full width, no container */}
@@ -160,8 +156,7 @@ export default async function ProductPage({ params }: PageProps) {
         <div className="py-16 md:py-24" style={{ background: '#0d0003' }}>
           <Container>
             <div className="text-center mb-10">
-              <p className="font-heading-en text-xs tracking-[0.4em] text-[#cfaa70]/60 uppercase mb-3">Related</p>
-              <h2 className="font-heading-ja text-2xl font-light text-white">関連商品</h2>
+              <RelatedProductsHeading />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedProducts.map((p) => (

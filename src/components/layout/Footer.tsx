@@ -9,6 +9,7 @@ import { translations } from '@/lib/i18n'
 export default function Footer() {
   const { lang } = useLanguage()
   const t = translations[lang].footer
+  const pc = translations[lang].productContent
 
   return (
     <footer className="bg-primary-800 text-white">
@@ -49,8 +50,8 @@ export default function Footer() {
                   if (!product) return null;
                   return (
                     <li key={product.id}>
-                      <Link href={`/products/${product.slug}`} className="font-ui text-sm text-primary-200 hover:text-white transition-colors block leading-relaxed" title={product.name}>
-                        {product.name}
+                      <Link href={`/products/${product.slug}`} className="font-ui text-sm text-primary-200 hover:text-white transition-colors block leading-relaxed" title={pc[product.slug]?.name ?? product.name}>
+                        {pc[product.slug]?.name ?? product.name}
                       </Link>
                     </li>
                   );
