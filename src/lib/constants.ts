@@ -104,8 +104,8 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62656776470899',
   },
   {
-    id: '12', slug: 'starter-set', name: 'スターターセット', subtitle: 'ミトコンドリアのちから＋ハーブのちから',
-    description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。',
+    id: '12', slug: 'starter-set', name: '輝く魔女セット', subtitle: 'ミトコンドリアのちから＋ハーブのちから',
+    description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。\n\n引き算ケアの真骨頂\nこの２つのセットで肌本来のちからを引き上げ、護る',
     category: 'set', price: 19800, subscriptionPrice: 18810, subscriptionDiscountPct: 5, volume: '2本セット',
     usageDuration: '約3ヶ月',
     ingredients: '',
@@ -119,7 +119,7 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62647648551283',
   },
   {
-    id: '8', slug: 'kimajyoset', name: '輝魔女セット', subtitle: '基本の引き算セット',
+    id: '8', slug: 'kimajyoset', name: '輝く魔女セット', subtitle: '基本の引き算セット',
     description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
     category: 'set', price: 22000, subscriptionPrice: 20900, subscriptionDiscountPct: 5, volume: '1セット',
     ingredients: '', features: [], skinConcerns: ['乾燥', '毛穴', '敏感肌'],
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62656776503667',
   },
   {
-    id: '9', slug: 'kagayaki-majo', name: '輝魔女セット', subtitle: '極上のエイジングケア',
+    id: '9', slug: 'kagayaki-majo', name: '輝く魔女セット', subtitle: '極上のエイジングケア',
     description: 'ミトコンドリアのちから、ハーブのちから、輝肌Kihadaがセットに。\n本来の美しさを呼び覚ます、ブランド最高峰の組み合わせ。',
     category: 'set', price: 33000, subscriptionPrice: 31900, subscriptionDiscountPct: 3, volume: '1セット',
     ingredients: '', features: [], skinConcerns: ['シミ・くすみ', 'ハリ・たるみ', '乾燥'],

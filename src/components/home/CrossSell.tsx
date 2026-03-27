@@ -58,7 +58,7 @@ export default function CrossSell() {
               単品ラインナップ
             </h3>
             <p className="text-sm md:text-base text-white/70 mt-4 tracking-wide" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              輝魔女セットに含まれる各アイテムは、単品でも追加・継続でご購入いただけます。
+              輝く魔女セットに含まれる各アイテムは、単品でも追加・継続でご購入いただけます。
             </p>
           </div>
 
