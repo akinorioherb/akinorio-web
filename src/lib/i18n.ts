@@ -425,7 +425,7 @@ const enCompany = {
 
 // ─── sample page ───────────────────────────────────────
 const jaSample = {
-  programLabel: '14 Days Program',
+  programLabel: '21 Days Coaching',
   title: '21日間の引き算プログラム',
   description: 'あなたの肌と、出会い直す21日間。\nミトコンドリアのちから21日分をお届けします。',
   fields: {
@@ -460,7 +460,7 @@ const jaSample = {
 }
 
 const enSample = {
-  programLabel: '21-Day Programme',
+  programLabel: '21-Day Coaching',
   title: 'The 21-Day Subtraction Programme',
   description: '21 days to rediscover your skin.\nWe\'ll deliver a 21-day supply of The Power of Mitochondria.',
   fields: {
