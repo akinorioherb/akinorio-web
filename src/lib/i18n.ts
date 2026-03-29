@@ -50,10 +50,10 @@ const jaBase = {
   },
 
   skinCareStep: {
-    sectionTitle: '輝く魔女セットの奇跡',
-    label: '輝く魔女セット - スキンケアステップ',
+    sectionTitle: '輝魔女セットの奇跡',
+    label: '輝魔女セット - スキンケアステップ',
     headline: 'なぜ、この順番なのか。',
-    body: '圧倒的な素肌力を引き出すための、究極の3ステップ「輝く魔女セット」。それぞれが明確な役割を持ち、完璧な連携で肌環境を整え、細胞からの自己再生を促します。',
+    body: '圧倒的な素肌力を引き出すための、究極の3ステップ「輝魔女セット」。それぞれが明確な役割を持ち、完璧な連携で肌環境を整え、細胞からの自己再生を促します。',
     steps: [
       {
         name: 'ハーブのちから',
@@ -501,9 +501,7 @@ const jaProducts = {
   tax: '税込',
   viewDetails: '詳細を見る',
   view: '詳細',
-  subscriptionBadge: '定期コース',
   trialBadge: '21日間体験',
-  from: '定期',
   includingTax: '（税込）',
 }
 
@@ -513,9 +511,7 @@ const enProducts = {
   tax: 'incl. tax',
   viewDetails: 'View Details',
   view: 'View',
-  subscriptionBadge: 'Subscription',
   trialBadge: '21-Day Trial',
-  from: 'Sub from',
   includingTax: '(incl. tax)',
 }
 
@@ -568,26 +564,26 @@ const jaProductContent: Record<string, ProductContent> = {
     howToUse: 'スキンケアの最後に適量を顔全体に伸ばし、日焼け止めとして使用してください。',
   },
   'starter-set': {
-    name: '輝く魔女セット',
+    name: '輝魔女セット',
     subtitle: 'ミトコンドリアのちから＋ハーブのちから',
     description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。\n\n引き算ケアの真骨頂\nこの２つのセットで肌本来のちからを引き上げ、護る',
     howToUse: '洗顔後、ハーブのちからを顔全体になじませてから、ミトコンドリアのちからを重ねてください。',
     features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
   },
   kimajyoset: {
-    name: '輝く魔女セット',
+    name: '輝魔女セット',
     subtitle: '基本の引き算セット',
     description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
     howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
   },
   'kagayaki-majo': {
-    name: '輝く魔女セット',
+    name: '輝魔女セット',
     subtitle: '極上のエイジングケア',
     description: 'ミトコンドリアのちから、ハーブのちから、輝肌Kihadaがセットに。\n本来の美しさを呼び覚ます、ブランド最高峰の組み合わせ。',
     howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',
   },
   'minus20-set': {
-    name: '輝く魔女セット',
+    name: '輝魔女セット',
     subtitle: '基本の引き算セット',
     description: '肌のOSを初期化するための、基本のステップが揃ったセット。\nこれだけで、あなたのスキンケアは完了します。',
     howToUse: 'セット内各アイテムの使用方法に従ってご使用ください。',

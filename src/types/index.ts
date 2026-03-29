@@ -10,8 +10,6 @@ export interface Product {
   description: string
   category: ProductCategory
   price: number
-  subscriptionPrice: number
-  subscriptionDiscountPct: number
   volume: string
   usageDuration?: string
   ingredients: string
@@ -23,12 +21,8 @@ export interface Product {
   isActive: boolean
   hikImage?: string
   howToUse?: string
-  sub1MonthPrice?: number
-  sub3MonthPrice?: number
   // Shopify連携
   shopifyVariantId?: string
-  shopifySub1SellingPlanId?: string
-  shopifySub3SellingPlanId?: string
 }
 
 export interface CartItem {

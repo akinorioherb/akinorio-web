@@ -10,8 +10,6 @@ import { translations } from '@/lib/i18n'
 
 interface Props { product: Product }
 
-type PurchaseType = 'sub3month' | 'sub1month' | 'normal'
-
 // 商品名SVG — フォントロード後にBBoxで実幅を計測してviewBoxを合わせる
 function ProductNameSvg({ name }: { name: string }) {
   const textRef = useRef<SVGTextElement>(null)
@@ -53,9 +51,6 @@ function ProductNameSvg({ name }: { name: string }) {
 }
 
 export default function ProductDetail({ product }: Props) {
-  const [selected, setSelected] = useState<PurchaseType>(
-    product.sub3MonthPrice ? 'sub3month' : 'normal'
-  )
   const [isAdded, setIsAdded] = useState(false)
   const { addItem } = useCart()
   const { lang } = useLanguage()
@@ -68,14 +63,7 @@ export default function ProductDetail({ product }: Props) {
   const displayFeatures = pc?.features ?? product.features
 
   const productImage = product.hikImage || product.image
-
-  const sub3price   = product.sub3MonthPrice ?? 0
-  const sub1price   = product.sub1MonthPrice ?? 0
-  const normalPrice = product.price
-
-  const selectedPrice =
-    selected === 'sub3month' ? sub3price :
-    selected === 'sub1month' ? sub1price : normalPrice
+  const selectedPrice = product.price
 
   const handleBuy = () => {
     addItem(product, 1)
@@ -85,42 +73,12 @@ export default function ProductDetail({ product }: Props) {
 
   if (product.price === 0) {
     return (
-      <a href="/sample" className="block w-full py-5 text-center rounded-sm font-ui font-bold tracking-widest text-[#120002]"
+      <a href="/coaching" className="block w-full py-5 text-center rounded-sm font-ui font-bold tracking-widest text-[#120002]"
         style={{ background: 'linear-gradient(135deg,#b8873a,#d4af61,#f0dc98,#cfaa70,#9e7030)', boxShadow: '0 4px 24px rgba(207,170,112,0.4)' }}>
         {t.startProgram}
       </a>
     )
   }
-
-  const plans: Array<{ key: PurchaseType; label: string; badge: string; priceFirst: number; priceSub: string; desc: string; available: boolean }> = [
-    {
-      key: 'sub3month',
-      label: t.plans.sub3.label,
-      badge: t.plans.sub3.badge,
-      priceFirst: sub3price,
-      priceSub: `${t.plans.sub3.subpricePrefix}${sub3price.toLocaleString()}${t.plans.sub3.subpriceSuffix}`,
-      desc: t.plans.sub3.desc,
-      available: sub3price > 0,
-    },
-    {
-      key: 'sub1month',
-      label: t.plans.sub1.label,
-      badge: t.plans.sub1.badge,
-      priceFirst: sub1price,
-      priceSub: `${t.plans.sub1.subpricePrefix}${sub1price.toLocaleString()}${t.plans.sub1.subpriceSuffix}`,
-      desc: t.plans.sub1.desc,
-      available: sub1price > 0,
-    },
-    {
-      key: 'normal',
-      label: t.plans.normal.label,
-      badge: t.plans.normal.badge,
-      priceFirst: normalPrice,
-      priceSub: t.plans.normal.subprice,
-      desc: t.plans.normal.desc,
-      available: true,
-    },
-  ]
 
   return (
     <div style={{ background: 'radial-gradient(ellipse 140% 80% at 60% 0%, #9e1023 0%, #7a0818 35%, #4a0210 65%, #1a0005 100%)' }}>
@@ -179,49 +137,18 @@ export default function ProductDetail({ product }: Props) {
             {displayDescription.split('\n')[0]}
           </p>
 
-          {/* ── 購入プラン ── */}
-          <div className="space-y-3 mb-6">
-            {plans.filter(p => p.available).map(plan => (
-              <button
-                key={plan.key}
-                onClick={() => setSelected(plan.key)}
-                className="w-full text-left rounded-sm transition-all duration-300 overflow-hidden"
-                style={{
-                  border: selected === plan.key ? '1px solid rgba(207,170,112,0.7)' : '1px solid rgba(207,170,112,0.2)',
-                  background: selected === plan.key ? 'rgba(207,170,112,0.08)' : 'rgba(207,170,112,0.02)',
-                }}
-              >
-                <div className="flex items-center justify-between px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-4 h-4 rounded-full border flex-shrink-0 flex items-center justify-center"
-                      style={{ borderColor: selected === plan.key ? '#D4AF37' : 'rgba(207,170,112,0.3)' }}>
-                      {selected === plan.key && (
-                        <div className="w-2 h-2 rounded-full" style={{ background: '#D4AF37' }} />
-                      )}
-                    </div>
-                    <div>
-                      <p className="font-ui text-sm font-medium text-white/90">{plan.label}</p>
-                      {plan.badge && (
-                        <span className="inline-block mt-0.5 text-[10px] tracking-widest font-ui px-2 py-0.5 rounded-sm"
-                          style={{ background: 'rgba(212,175,55,0.15)', color: '#D4AF37' }}>
-                          {plan.badge}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-heading-en text-xl font-light text-white">
-                      ¥{plan.priceFirst.toLocaleString()}
-                    </p>
-                    <p className="font-ui text-[10px] text-white/40 mt-0.5">{t.includingTax}</p>
-                  </div>
-                </div>
-                <div className="px-5 pb-3 border-t border-[#cfaa70]/10">
-                  <p className="font-ui text-xs text-white/40 mt-2 leading-relaxed">{plan.priceSub}</p>
-                  <p className="font-ui text-xs text-white/30 mt-1">{plan.desc}</p>
-                </div>
-              </button>
-            ))}
+          {/* ── 価格表示 ── */}
+          <div className="mb-6 px-5 py-4 rounded-sm" style={{ border: '1px solid rgba(207,170,112,0.4)', background: 'rgba(207,170,112,0.05)' }}>
+            <div className="flex items-baseline justify-between">
+              <p className="font-ui text-sm font-medium text-white/90">{t.plans.normal.label}</p>
+              <div className="text-right">
+                <p className="font-heading-en text-xl font-light text-white">
+                  ¥{selectedPrice.toLocaleString()}
+                </p>
+                <p className="font-ui text-[10px] text-white/40 mt-0.5">{t.includingTax}</p>
+              </div>
+            </div>
+            <p className="font-ui text-xs text-white/40 mt-2">{t.plans.normal.subprice}</p>
           </div>
 
           {/* カートに追加ボタン — ホバーで輝度UP */}

@@ -17,7 +17,7 @@ export default function Header() {
   const NAV_ITEMS = [
     { label: t.products, href: '/products' },
     { label: t.story, href: '/about' },
-    { label: t.trial, href: '/sample' },
+    { label: t.trial, href: '/coaching' },
     ...(lang === 'en' ? [{ label: '🌏 ' + t.global, href: '/global' }] : []),
   ]
 

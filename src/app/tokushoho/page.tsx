@@ -16,34 +16,32 @@ export default function TokushohoPage() {
 
         <div className="space-y-0 border-t border-neutral-200">
           {[
-            { label: '販売業者', value: '株式会社アキノリオ' },
-            { label: '所在地', value: '〒104-0061 東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階' },
-            { label: '電話番号', value: '（準備中）' },
+            { label: '会社名', value: 'AKINORIO' },
+            { label: '事業者の名称', value: '執行未奈子' },
+            { label: '事業者の所在地', value: '〒104-0061 東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階' },
+            { label: '事業者の連絡先', value: '080-3290-4118' },
+            { label: '営業時間', value: '12:00〜18:00　定休日：土日祝' },
             { label: 'メールアドレス', value: 'info@akinorio.com' },
             { label: 'URL', value: 'https://akinorio.com' },
             {
+              label: '販売価格',
+              value: '販売価格は、表示された金額（消費税別）と致します。',
+            },
+            {
+              label: '代金の支払方法・時期',
+              value: '支払方法：クレジットカードによる決済がご利用頂けます。支払時期：商品注文確定時でお支払いが確定致します。',
+            },
+            {
+              label: '商品のお届け時期',
+              value: '配送のご依頼を受けてから5日以内に発送いたします。（定休日除く）\n【重要】商品受け取りが出来なかった場合は運送業者不在票がポスト等に投函されております。保管期限を過ぎ弊社へ荷物が返送された場合、再配達手数料として全国一律5,500円（キャンセルの場合も同様）頂いております事、事前にご了承くださいませ。',
+            },
+            {
+              label: '返品について',
+              value: '商品に欠陥がある場合を除き、基本的には返品には応じません。\n未使用のもので商品到着後7日以内にご連絡をいただいた場合に限り、商品の不具合による交換を承ります。',
+            },
+            {
               label: '商品代金以外の必要料金',
-              value:
-                '送料: 全国一律600円（税込）※商品代金10,000円（税込）以上で送料無料',
-            },
-            {
-              label: 'お届け時期',
-              value: 'ご注文確定後、3営業日以内に発送いたします。',
-            },
-            {
-              label: 'お支払い方法',
-              value: 'クレジットカード（VISA/Mastercard/JCB/AMEX）',
-            },
-            { label: 'お支払い時期', value: 'ご注文時にお支払い' },
-            {
-              label: '返品・交換について',
-              value:
-                '商品到着後7日以内にご連絡ください。未開封・未使用の場合のみ承ります。お客様都合による返品の場合、送料はお客様負担となります。不良品・誤品の場合は当社負担で交換いたします。',
-            },
-            {
-              label: '定期購入について',
-              value:
-                '定期購入はいつでもマイページから変更・休止・解約が可能です。最低購入回数の縛りはございません。',
+              value: '送料：全国一律600円（税込）※商品代金10,000円（税込）以上で送料無料',
             },
           ].map((row) => (
             <div
@@ -53,7 +51,7 @@ export default function TokushohoPage() {
               <div className="font-ui text-sm font-medium text-neutral-700 mb-1 md:mb-0">
                 {row.label}
               </div>
-              <div className="font-ui text-sm text-neutral-600 md:col-span-2 leading-relaxed">
+              <div className="font-ui text-sm text-neutral-600 md:col-span-2 leading-relaxed whitespace-pre-line">
                 {row.value}
               </div>
             </div>

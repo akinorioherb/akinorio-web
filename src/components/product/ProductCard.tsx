@@ -7,6 +7,7 @@ import { formatPrice } from '@/lib/utils'
 import { useLanguage } from '@/context/LanguageContext'
 import { translations } from '@/lib/i18n'
 
+
 interface ProductCardProps {
   product: Product
 }
@@ -17,11 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const pc = translations[lang].productContent[product.slug]
   const displayName = pc?.name ?? product.name
   const displaySubtitle = pc?.subtitle ?? product.subtitle
-  // 商品一覧と同じ hikImage を使用。なければ旧 image にフォールバック
   const displayImage = product.hikImage || product.image
-
-  // 定期3ヶ月コース（最安値）があれば表示
-  const bestPrice = product.sub3MonthPrice ?? product.subscriptionPrice ?? product.price
 
   return (
     <Link
@@ -43,16 +40,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0003]/90 via-[#0d0003]/20 to-transparent" />
 
         {/* バッジ */}
-        {product.sub3MonthPrice && (
-          <div className="absolute top-3 left-3 z-10">
-            <span
-              className="font-ui text-[10px] tracking-widest px-2 py-1 rounded-sm"
-              style={{ background: 'rgba(212,175,55,0.18)', color: '#D4AF37', border: '1px solid rgba(212,175,55,0.3)' }}
-            >
-              {t.subscriptionBadge}
-            </span>
-          </div>
-        )}
         {product.price === 0 && (
           <div className="absolute top-3 left-3 z-10">
             <span
@@ -77,11 +64,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             <p className="font-heading-en text-lg text-white">
               {product.price === 0 ? '' : formatPrice(product.price)}
             </p>
-            {bestPrice > 0 && bestPrice < product.price && (
-              <p className="font-ui text-xs text-[#cfaa70]">
-                {t.from} {formatPrice(bestPrice)}〜
-              </p>
-            )}
           </div>
         </div>
 

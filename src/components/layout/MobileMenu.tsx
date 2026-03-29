@@ -17,7 +17,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const MENU_ITEMS = [
     { label: t.nav.products, href: '/products' },
     { label: t.nav.story, href: '/about' },
-    { label: t.nav.trial, href: '/sample' },
+    { label: t.nav.trial, href: '/coaching' },
     { label: t.nav.cart, href: '/cart' },
   ]
 

@@ -57,7 +57,7 @@ export default function Footer() {
                   );
                 })}
                 <li className="pt-3 mt-3 border-t border-primary-700/50">
-                  <Link href="/sample" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors font-bold block">
+                  <Link href="/coaching" className="font-ui text-sm text-gold-300 hover:text-gold-200 transition-colors font-bold block">
                     {t.nav.trial}
                   </Link>
                 </li>

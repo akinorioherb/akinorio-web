@@ -63,7 +63,7 @@ export default async function ProductPage({ params }: PageProps) {
     notFound()
   }
 
-  // 輝く魔女セット構成商品: これらを見ているときは必ずセットを関連に入れる
+  // 輝魔女セット構成商品: これらを見ているときは必ずセットを関連に入れる
   const KIMAJO_SET_MEMBERS = ['mitochondria', 'herb', 'kihada']
   const KIMAJO_SET_SLUG    = 'kagayaki-majo'
 
@@ -112,15 +112,6 @@ export default async function ProductPage({ params }: PageProps) {
         '@type': 'Organization',
         name: 'AKINORIO',
       },
-      ...(product.subscriptionPrice && product.subscriptionDiscountPct > 0 ? {
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: product.subscriptionPrice,
-          priceCurrency: 'JPY',
-          referenceQuantity: { '@type': 'QuantitativeValue', value: 1 },
-          description: `定期購入 ${product.subscriptionDiscountPct}%OFF`,
-        },
-      } : {}),
     },
     ...(product.features.length > 0 ? {
       additionalProperty: product.features.map((f) => ({
