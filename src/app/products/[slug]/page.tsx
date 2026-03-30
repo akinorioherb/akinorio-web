@@ -63,7 +63,7 @@ export default async function ProductPage({ params }: PageProps) {
     notFound()
   }
 
-  // 輝魔女セット構成商品: これらを見ているときは必ずセットを関連に入れる
+  // アキノリオセット構成商品: これらを見ているときは必ずセットを関連に入れる
   const KIMAJO_SET_MEMBERS = ['mitochondria', 'herb', 'kihada']
   const KIMAJO_SET_SLUG    = 'kagayaki-majo'
 

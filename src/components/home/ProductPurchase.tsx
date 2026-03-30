@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { shopifyCartUrl, shopifySubscriptionUrl } from '@/lib/shopify';
 
-// 輝魔女セット（kagayaki-majo）の Shopify Variant ID
+// アキノリオセット（kagayaki-majo）の Shopify Variant ID
 const KIMAJO_VARIANT_ID = '62647648584051'
 // 定期購入 Selling Plan ID は Shopify管理画面 → アプリ → サブスクリプション で確認し設定
 const KIMAJO_SUB3_SELLING_PLAN_ID = ''
@@ -28,7 +28,7 @@ export default function ProductPurchase() {
           <div className="relative w-[90%] aspect-[4/3] z-20 transform hover:scale-105 transition-transform duration-700">
             <Image
               src="/images/products/allseries.png"
-              alt="輝魔女セット"
+              alt="アキノリオセット"
               fill
               className="object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.8)] opacity-95"
               sizes="(max-width: 768px) 90vw, 50vw"
@@ -52,7 +52,7 @@ export default function ProductPurchase() {
               肌の可能性を100%呼び覚ます、究極の3ステップ
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-wider text-white mb-6 leading-tight" style={{ fontFamily: '"Noto Serif JP", serif' }}>
-              輝魔女セット
+              アキノリオセット
             </h2>
             <p className="text-base md:text-lg text-white/80 leading-[2.2] tracking-wide text-justify mb-6" style={{ fontFamily: '"Noto Serif JP", serif' }}>
               過剰なスキンケアをお休みし、ご自身の肌環境をリセットするための特別な3点セット。細胞（ミトコンドリア）から自己再生させるアキノリオの極地体験。<br/>
