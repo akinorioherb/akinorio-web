@@ -699,7 +699,7 @@ export default function CoachingPage() {
                 <svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.58 2 10c0 2.4 1.14 4.55 2.95 6.05L4 20l4.18-1.8C9.34 18.7 10.15 19 11 19c4.97 0 9-3.58 9-8s-4.03-9-9-9z" fill="#120002"/></svg>
                 無料で21日間引き算ケアコーチングを受ける
               </a>
-              <p className="final-note">LINEに登録後、お届け先の確認をお送りします。<br/>送料無料・追加費用なし。いつでも退会できます。</p>
+              <p className="final-note">LINEに登録後、お届け先の確認をお送りします。<br/>送料無料・追加費用なし。いつでも辞めていただけます。</p>
             </div>
             <div className="divider" style={{marginTop:'64px'}}></div>
             <p className="lp-js-reveal" style={{textAlign:'center', fontFamily:'Cinzel,serif', fontSize:'0.65rem', letterSpacing:'0.48em', color:'var(--text-muted)', marginTop:'40px'}}>AKINORIO</p>
