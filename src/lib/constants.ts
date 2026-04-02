@@ -1,10 +1,9 @@
 import type { Product, Testimonial } from '@/types'
 
 export const SITE_NAME = 'AKINORIO'
-export const SITE_URL = 'https://akinorio.com'
+export const SITE_URL = 'https://akinorioweb.com'
 export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリア×ケイ素の力で、肌のOSを初期化する引き算のスキンケア。'
 export const LINE_URL = 'https://lin.ee/Sa4uQuI'
-export const FREE_SHIPPING_THRESHOLD = 10000
 export const SHIPPING_FEE = 600
 
 export const PRODUCTS: Product[] = [
@@ -90,7 +89,7 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62656776470899',
   },
   {
-    id: '12', slug: 'starter-set', name: 'アキノリオセット', subtitle: 'ミトコンドリアのちから＋ハーブのちから',
+    id: '12', slug: 'starter-set', name: 'アキノリオセット', subtitle: 'ミトコンドリアのちから＋ハーブのちから', compareAtPrice: 22000,
     description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。\n\n引き算ケアの真骨頂\nこの２つのセットで肌本来のちからを引き上げ、護る',
     category: 'set', price: 19800, volume: '2本セット',
     usageDuration: '約3ヶ月',
@@ -100,7 +99,7 @@ export const PRODUCTS: Product[] = [
     image: '/images/products/starterset.png', images: [], sortOrder: 7.5, isActive: true,
     hikImage: '/images/products-bg-hik/starterset.png',
     howToUse: '洗顔後、ハーブのちからを顔全体になじませてから、ミトコンドリアのちからを重ねてください。',
-    shopifyVariantId: '62647648551283',
+    shopifyVariantId: '62673738826099',
   },
   {
     id: '8', slug: 'kimajyoset', name: 'アキノリオセット', subtitle: '基本の引き算セット',

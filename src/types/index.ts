@@ -10,6 +10,7 @@ export interface Product {
   description: string
   category: ProductCategory
   price: number
+  compareAtPrice?: number
   volume: string
   usageDuration?: string
   ingredients: string

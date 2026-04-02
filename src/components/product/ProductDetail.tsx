@@ -142,6 +142,12 @@ export default function ProductDetail({ product }: Props) {
             <div className="flex items-baseline justify-between">
               <p className="font-ui text-sm font-medium text-white/90">{t.plans.normal.label}</p>
               <div className="text-right">
+                {product.compareAtPrice && (
+                  <div className="flex items-center justify-end gap-2 mb-1">
+                    <span className="font-heading-en text-sm text-white/30 line-through">¥{product.compareAtPrice.toLocaleString()}</span>
+                    <span className="font-ui text-[10px] font-bold px-2 py-0.5 bg-[#E31633] text-white tracking-widest">10% OFF</span>
+                  </div>
+                )}
                 <p className="font-heading-en text-xl font-light text-white">
                   ¥{selectedPrice.toLocaleString()}
                 </p>

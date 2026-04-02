@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useCart } from '@/lib/cart'
 import { formatPrice } from '@/lib/utils'
 import { SHOPIFY_DOMAIN } from '@/lib/shopify'
-import { FREE_SHIPPING_THRESHOLD, SHIPPING_FEE } from '@/lib/constants'
+import { SHIPPING_FEE, PRODUCTS } from '@/lib/constants'
 import { getStoredAffiliateRef } from '@/hooks/useAffiliateTracking'
 import { useLanguage } from '@/context/LanguageContext'
 import { translations } from '@/lib/i18n'
@@ -64,8 +64,13 @@ export default function CartDrawer() {
   const handleCheckout = () => {
     if (!SHOPIFY_DOMAIN) return
     const cartLine = items
-      .filter(i => i.product.shopifyVariantId)
-      .map(i => `${i.product.shopifyVariantId}:${i.quantity}`)
+      .map(i => {
+        // 常に最新のPRODUCTSからvariant IDを取得（localStorageキャッシュ問題を回避）
+        const currentProduct = PRODUCTS.find(p => p.slug === i.product.slug)
+        const variantId = currentProduct?.shopifyVariantId ?? i.product.shopifyVariantId
+        return variantId ? `${variantId}:${i.quantity}` : null
+      })
+      .filter(Boolean)
       .join(',')
     if (!cartLine) return
 
@@ -81,8 +86,6 @@ export default function CartDrawer() {
     
     window.location.href = url
   }
-
-  const remaining = FREE_SHIPPING_THRESHOLD - subtotal
 
   return (
     <>
@@ -129,32 +132,6 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        {/* ── 送料ゲージ ── */}
-        {subtotal > 0 && (
-          <div className="px-6 py-3 border-b border-[#cfaa70]/10">
-            {shippingFee === 0 ? (
-              <p className="font-ui text-xs text-[#cfaa70] tracking-wider">
-                {t.freeShipping}
-              </p>
-            ) : (
-              <>
-                <div className="flex justify-between font-ui text-[10px] text-white/40 mb-1.5 tracking-wider">
-                  <span>{t.freeShippingRemaining}</span>
-                  <span>{formatPrice(remaining)}</span>
-                </div>
-                <div className="w-full h-0.5 bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className="h-full rounded-full transition-all duration-700"
-                    style={{
-                      width: `${Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100)}%`,
-                      background: 'linear-gradient(90deg, #b8873a, #d4af61)',
-                    }}
-                  />
-                </div>
-              </>
-            )}
-          </div>
-        )}
 
         {/* ── 商品リスト ── */}
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
@@ -238,7 +215,7 @@ export default function CartDrawer() {
               </div>
               <div className="flex justify-between font-ui text-xs text-white/40 tracking-wider">
                 <span>{t.shippingLabel}</span>
-                <span>{shippingFee === 0 ? t.free : formatPrice(SHIPPING_FEE)}</span>
+                <span>{formatPrice(SHIPPING_FEE)}</span>
               </div>
               <div className="flex justify-between font-heading-ja text-base text-white pt-2 border-t border-[#cfaa70]/10">
                 <span>{t.total}</span>

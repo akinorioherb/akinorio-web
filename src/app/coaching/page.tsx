@@ -631,7 +631,7 @@ export default function CoachingPage() {
             <div className="includes-box lp-js-reveal">
               <h3>INCLUDES</h3>
               <ul className="includes-list">
-                {['「ミトコンドリアのちから」21日分（¥3,080相当）を無料でお届け','21日間のガイドライン（PDF）','毎日の確認チェックリスト','LINEでのMINAKOさんによる個別サポート','参加者限定クローズドグループ','終了後の「次のステップ」相談（希望者）'].map((item, i) => (
+                {['「ミトコンドリアのちから」21日分（¥3,080相当）を無料でお届け','21日間のガイドライン（PDF）','LINEでのMINAKOさんによる個別サポート','終了後の「次のステップ」相談（希望者）'].map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
               </ul>

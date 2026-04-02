@@ -3,7 +3,6 @@
 import { useCart } from '@/lib/cart'
 import { formatPrice } from '@/lib/utils'
 import { SHOPIFY_DOMAIN } from '@/lib/shopify'
-import { FREE_SHIPPING_THRESHOLD } from '@/lib/constants'
 import { getStoredAffiliateRef } from '@/hooks/useAffiliateTracking'
 import Button from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
@@ -14,8 +13,6 @@ export default function CartSummary() {
   const { lang } = useLanguage()
   const t = translations[lang].cart
   const isEn = lang === 'en'
-  const remaining = FREE_SHIPPING_THRESHOLD - subtotal
-
   const handleCheckout = () => {
     if (!SHOPIFY_DOMAIN) {
       alert(isEn ? 'Shopify domain is not configured.' : 'Shopifyドメインが設定されていません（.env.local を確認してください）')
@@ -54,16 +51,9 @@ export default function CartSummary() {
         <div className="flex justify-between font-ui text-sm">
           <span className="text-neutral-500">{t.shipping}</span>
           <span className="text-neutral-800">
-            {shippingFee === 0 ? t.free : formatPrice(shippingFee)}
+            {formatPrice(shippingFee)}
           </span>
         </div>
-        {shippingFee > 0 && (
-          <p className="font-ui text-xs text-gold-700">
-            {isEn
-              ? `${formatPrice(remaining)} until free shipping`
-              : `あと${formatPrice(remaining)}で送料無料`}
-          </p>
-        )}
         <div className="border-t border-neutral-200 pt-3">
           <div className="flex justify-between">
             <span className="font-heading-ja text-base text-neutral-800">

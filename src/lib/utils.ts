@@ -17,10 +17,10 @@ export function formatPriceWithTax(price: number): string {
 }
 
 /**
- * 送料計算
+ * 送料計算（全国一律600円）
  */
-export function calculateShippingFee(subtotal: number): number {
-  return subtotal >= 10000 ? 0 : 600
+export function calculateShippingFee(_subtotal: number): number {
+  return 600
 }
 
 /**

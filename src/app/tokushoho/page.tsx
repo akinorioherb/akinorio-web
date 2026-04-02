@@ -41,7 +41,7 @@ export default function TokushohoPage() {
             },
             {
               label: '商品代金以外の必要料金',
-              value: '送料：全国一律600円（税込）※商品代金10,000円（税込）以上で送料無料',
+              value: '送料：全国一律600円（税込）',
             },
           ].map((row) => (
             <div

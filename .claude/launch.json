@@ -2,12 +2,15 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "akinorio-web",
+      "name": "akinorio-dev",
       "runtimeExecutable": "/Users/ichinoseshougo/.nvm/versions/node/v20.20.1/bin/node",
-      "runtimeArgs": ["/Users/ichinoseshougo/.nvm/versions/node/v20.20.1/bin/npm", "run", "dev"],
-      "port": 3000,
-      "autoPort": true,
-      "cwd": "/Users/ichinoseshougo/claude/akinorio-marketing-hq/akinorio-web"
+      "runtimeArgs": [
+        "/Users/ichinoseshougo/claude/akinorio-marketing-hq/akinorio-web/node_modules/.bin/next",
+        "dev",
+        "-p",
+        "3001"
+      ],
+      "port": 3001
     }
   ]
 }

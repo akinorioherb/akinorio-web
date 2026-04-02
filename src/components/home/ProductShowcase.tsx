@@ -126,6 +126,12 @@ export default function ProductShowcase() {
                 <div className="w-full border-t border-white/20 pt-8 mt-auto flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 drop-shadow-md">
                   <div className="flex flex-col mb-8 sm:mb-0">
                     <span className="text-[10px] tracking-[0.4em] text-white/60 font-bold mb-2 uppercase drop-shadow-sm" style={{ fontFamily: 'Neue Haas Grotesk, sans-serif' }}>PRICE</span>
+                    {product.compareAtPrice && (
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm text-white/40 line-through font-sans">¥{product.compareAtPrice.toLocaleString()}</span>
+                        <span className="text-[10px] font-bold tracking-widest px-2 py-0.5 bg-[#E31633] text-white">10% OFF</span>
+                      </div>
+                    )}
                     <div className="flex items-baseline">
                       <span className="text-xl md:text-2xl text-white font-medium mr-1 font-sans drop-shadow-md">¥</span>
                       <span className="text-4xl md:text-5xl tracking-normal text-white font-medium drop-shadow-md" style={{ fontFamily: 'Neue Haas Grotesk, "Helvetica Neue", Arial, sans-serif' }}>
@@ -209,7 +215,7 @@ export default function ProductShowcase() {
                         </span>
                       </div>
                     </div>
-                    <a href="#purchase" className="inline-flex items-center justify-center px-4 py-2 bg-white text-[#1A0005] hover:bg-[#E31633] hover:text-white transition-all duration-300 font-sans text-xs font-bold tracking-widest shadow-xl">
+                    <a href={`/products/${product.slug}`} className="inline-flex items-center justify-center px-4 py-2 bg-white text-[#1A0005] hover:bg-[#E31633] hover:text-white transition-all duration-300 font-sans text-xs font-bold tracking-widest shadow-xl">
                       {t.view}
                     </a>
                   </div>
