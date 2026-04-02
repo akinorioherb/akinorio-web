@@ -46,7 +46,10 @@ export default function SecretBookPage() {
               // カスタムスタイリング
               h2: ({node, ...props}) => <h2 className="text-2xl mt-20 mb-8 border-b border-zinc-800 pb-4 text-rose-50" {...props} />,
               h3: ({node, ...props}) => <h3 className="text-xl mt-12 mb-6 text-zinc-100 flex items-center before:content-[''] before:block before:w-1 before:h-6 before:bg-rose-800 before:mr-3" {...props} />,
-              img: ({node, ...props}) => <img className="w-full h-auto rounded-none md:rounded-lg shadow-black/50" {...props} />
+              img: ({node, ...props}) => {
+                const src = typeof props.src === 'string' ? props.src.replace(/^\.\/beforeafter\//, '/beforeafter/') : props.src;
+                return <img className="w-full h-auto rounded-none md:rounded-lg shadow-black/50 my-6" {...props} src={src} />;
+              }
             }}
           >
             {bookContent}
