@@ -2,18 +2,18 @@ import type { Product, Testimonial } from '@/types'
 
 export const SITE_NAME = 'AKINORIO'
 export const SITE_URL = 'https://akinorioweb.com'
-export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリア×ケイ素の力で、肌のOSを初期化する引き算のスキンケア。'
+export const SITE_DESCRIPTION = '何をつけるかより、何をやめるか。ミトコンドリアの力で、肌のOSを初期化する引き算のスキンケア。'
 export const LINE_URL = 'https://lin.ee/Sa4uQuI'
 export const SHIPPING_FEE = 600
 
 export const PRODUCTS: Product[] = [
   {
     id: '1', slug: 'mitochondria', name: 'ミトコンドリアのちから', subtitle: '細胞美容液',
-    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアとケイ素の力で、細胞が自ら美しくなる力を呼び覚まします。',
+    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアの力で、細胞が自ら美しくなる力を呼び覚まします。',
     category: 'single', price: 13200, volume: '50g',
-    ingredients: 'シリカ水、スクワラン、ホホバ種子油、ミトコンドリア活性成分配合',
+    ingredients: 'スクワラン、ホホバ種子油、ミトコンドリア活性成分配合',
     usageDuration: '約3ヶ月',
-    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'パラベンフリー・アルコールフリー'],
+    features: ['ミトコンドリア活性化テクノロジー', 'パラベンフリー・アルコールフリー'],
     skinConcerns: ['乾燥', '毛穴', 'シミ・くすみ', 'ハリ・たるみ', '敏感肌'],
     image: '/images/products-bg-hik/mitokondria.png', images: [], sortOrder: 1, isActive: true,
     hikImage: '/images/products-bg-hik/mitokondria.png',
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
     id: '6', slug: 'cleansing', name: 'クリアクリスタルクレンジング', subtitle: '摩擦ゼロのメイク落とし',
     description: 'ダブル洗顔という「余計な儀式」を終わらせるクレンジング。\nメイクも毛穴汚れも、するんと落とす。落とすたびに肌が整っていきます。',
     category: 'single', price: 6600, volume: '180ml',
-    ingredients: 'シリカ水、ヤシ油脂肪酸、グリセリン、ミトコンドリア活性成分配合',
+    ingredients: 'ヤシ油脂肪酸、グリセリン、ミトコンドリア活性成分配合',
     features: ['ジェルタイプで肌に優しい', 'ダブル洗顔不要', '毛穴汚れもすっきり'],
     skinConcerns: ['毛穴', '敏感肌'],
     image: '/images/products-bg-hik/cleansing.png', images: [], sortOrder: 3, isActive: true,
@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
     category: 'set', price: 19800, volume: '2本セット',
     usageDuration: '約3ヶ月',
     ingredients: '',
-    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
+    features: ['ミトコンドリア活性化テクノロジー', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
     skinConcerns: ['乾燥', '毛穴', 'シミ・くすみ', 'ハリ・たるみ', '敏感肌'],
     image: '/images/products/starterset.png', images: [], sortOrder: 7.5, isActive: true,
     hikImage: '/images/products-bg-hik/starterset.png',

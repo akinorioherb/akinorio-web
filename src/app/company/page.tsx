@@ -4,7 +4,7 @@ import CompanyContent from './CompanyContent'
 
 export const metadata: Metadata = {
   title: `会社概要 | ${SITE_NAME}`,
-  description: '株式会社アキノリオの会社概要。東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階。ミトコンドリア×ケイ素の引き算スキンケアブランドAKINORIOを運営。',
+  description: '株式会社アキノリオの会社概要。東京都中央区銀座一丁目22番11号 銀座大竹ビジデンス2階。ミトコンドリアの引き算スキンケアブランドAKINORIOを運営。',
   alternates: {
     canonical: `${SITE_URL}/company`,
   },
@@ -18,7 +18,7 @@ const organizationSchema = {
   alternateName: ['アキノリオ', 'アキノリオ公式', 'AKINORIO official'],
   url: SITE_URL,
   logo: `${SITE_URL}/images/og-image.png`,
-  description: 'AKINORIOは「引き算のスキンケア」をコンセプトとする日本のスキンケアブランドです。創業者MINAKOが構想した、ミトコンドリア活性化技術とケイ素（シリカ）を組み合わせた独自処方で、肌本来の力を引き出します。',
+  description: 'AKINORIOは「引き算のスキンケア」をコンセプトとする日本のスキンケアブランドです。創業者MINAKOが構想した、ミトコンドリア活性化技術を用いた独自処方で、肌本来の力を引き出します。',
   founder: {
     '@type': 'Person',
     name: 'MINAKO',

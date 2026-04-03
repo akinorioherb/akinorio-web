@@ -38,7 +38,7 @@ const personSchema = {
     name: 'AKINORIO',
     url: SITE_URL,
   },
-  description: '20歳でAKINORIOの構想を抱き、何十社もの工場に断られながらも諦めず、ミトコンドリアとケイ素を組み合わせた世界唯一の引き算スキンケアブランドを創業。',
+  description: '20歳でAKINORIOの構想を抱き、何十社もの工場に断られながらも諦めず、ミトコンドリア活性化技術を用いた世界唯一の引き算スキンケアブランドを創業。',
 }
 
 const breadcrumbSchema = {

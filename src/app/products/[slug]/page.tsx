@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     keywords: [
       product.name, product.subtitle, 'AKINORIO', 'アキノリオ',
-      '引き算スキンケア', 'ミトコンドリア', 'ケイ素',
+      '引き算スキンケア', 'ミトコンドリア',
       ...product.skinConcerns,
       ...product.features,
     ].filter(Boolean),

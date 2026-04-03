@@ -3,11 +3,11 @@ import { SITE_NAME, SITE_URL } from '@/lib/constants'
 import ProductShowcase from '@/components/home/ProductShowcase'
 
 export const metadata: Metadata = {
-  title: `スキンケア商品一覧 | ミトコンドリア×ケイ素の引き算処方`,
+  title: `スキンケア商品一覧 | ミトコンドリアの引き算処方`,
   description: 'AKINORIOのスキンケア全商品。細胞美容液「ミトコンドリアのちから」をはじめ、ハーブエッセンス・クレンジング・バームなど。パラベンフリー・アルコールフリーで敏感肌にも安心。引き算のスキンケアで肌本来の力を取り戻す。',
   keywords: [
-    'アキノリオ 商品一覧', 'ミトコンドリア 美容液', 'ケイ素 スキンケア',
-    '引き算スキンケア 購入', '細胞美容液', 'シリカ 化粧品',
+    'アキノリオ 商品一覧', 'ミトコンドリア 美容液',
+    '引き算スキンケア 購入', '細胞美容液',
     'ミトコンドリアのちから', 'アキノリオセット', '敏感肌 スキンケア',
     'パラベンフリー 美容液', 'AKINORIO 購入',
   ],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `スキンケア商品一覧 | ${SITE_NAME}`,
-    description: 'ミトコンドリア×ケイ素の引き算処方。AKINORIOの全スキンケアラインナップ。',
+    description: 'ミトコンドリアの引き算処方。AKINORIOの全スキンケアラインナップ。',
     url: `${SITE_URL}/products`,
     images: [
       {

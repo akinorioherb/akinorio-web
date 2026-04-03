@@ -309,7 +309,7 @@ const jaAbout = {
     '化粧品の世界では、常に「足し算」が行われてきました。新しい成分を加え、新しい効果を謳い、新しいステップを追加する。',
     '化粧品が「アプリの追加」だとすれば、アキノリオは「OSの再インストール」。余計なものを全て取り除き、肌という名のシステムを初期化する。',
     'もう、これ以上あなたの貴重なお金と時間を、一時の気休めのために使わないでください。',
-    '答えは、細胞の中にありました。ミトコンドリアとケイ素の力で、肌が自ら美しくなる力を取り戻す。それが私たちの答えです。',
+    '答えは、細胞の中にありました。ミトコンドリアの力で、肌が自ら美しくなる力を取り戻す。それが私たちの答えです。',
   ],
   ourWayLabel: 'Our Way',
   ourWayTitle: '売らないで広がる',
@@ -320,7 +320,7 @@ const jaAbout = {
   ],
   features: [
     { title: 'ミトコンドリア活性', desc: '細胞のエネルギー工場を活性化。肌のOSを初期化し、内側から目覚めさせます。' },
-    { title: 'ケイ素（シリカ）の力', desc: '美のミネラルがコラーゲン・エラスチンの生成を極限までサポート。' },
+    { title: 'ハーブのちから', desc: '植物由来の成分が肌の土台を整え、スキンケアの浸透力を高めます。' },
     { title: '引き算の処方', desc: '余計な成分を一切排除。必要なものだけで構成された処方。' },
     { title: '敏感肌にも安心', desc: 'パラベンフリー・アルコールフリー。薬剤アレルギーの肌が再生した実績。' },
   ],
@@ -349,7 +349,7 @@ const enAbout = {
     'The beauty industry has always spoken in addition. New ingredients, new claims, new steps. Always more.',
     'If conventional skincare is installing an app, AKINORIO is reinstalling the operating system. Stripping away the excess. Returning the skin — that living system — to its original state.',
     'Please. Stop spending your time and money on things that offer only temporary comfort.',
-    'The answer was always inside the cell. Through the power of mitochondria and silica, we help the skin remember how to be beautiful on its own. That is our answer.',
+    'The answer was always inside the cell. Through the power of mitochondria, we help the skin remember how to be beautiful on its own. That is our answer.',
   ],
   ourWayLabel: 'Our Way',
   ourWayTitle: 'Growing without selling.',
@@ -360,7 +360,7 @@ const enAbout = {
   ],
   features: [
     { title: 'Mitochondrial Activation', desc: 'Activating the cell\'s energy source. Rebooting the skin\'s operating system from within.' },
-    { title: 'The Power of Silica', desc: 'The mineral of beauty — supporting collagen and elastin production to the furthest extent.' },
+    { title: 'The Power of Herbs', desc: 'Plant-derived ingredients that strengthen the skin foundation and enhance absorption.' },
     { title: 'The Formula of Subtraction', desc: 'No unnecessary ingredients. Only what is truly needed — nothing more.' },
     { title: 'Safe for Sensitive Skin', desc: 'Paraben-free, alcohol-free. Documented results on skin with pharmaceutical allergies.' },
   ],
@@ -522,9 +522,9 @@ const jaProductContent: Record<string, ProductContent> = {
   mitochondria: {
     name: 'ミトコンドリアのちから',
     subtitle: '細胞美容液',
-    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアとケイ素の力で、細胞が自ら美しくなる力を呼び覚まします。',
+    description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアの力で、細胞が自ら美しくなる力を呼び覚まします。',
     howToUse: '洗顔後、適量を手に取り顔全体になじませてください。目元・口元など気になる部分には重ねづけが効果的です。',
-    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'パラベンフリー・アルコールフリー'],
+    features: ['ミトコンドリア活性化テクノロジー', 'パラベンフリー・アルコールフリー'],
   },
   herb: {
     name: 'ハーブのちから',
@@ -568,7 +568,7 @@ const jaProductContent: Record<string, ProductContent> = {
     subtitle: 'ミトコンドリアのちから＋ハーブのちから',
     description: '引き算スキンケアの入口として、最も多くの方に選ばれている2本セット。\nミトコンドリアのちから（細胞美容液）とハーブのちから（肌育エッセンス）が揃うことで、\n肌本来の力を呼び覚ます引き算ルーティンがはじまります。\n\n引き算ケアの真骨頂\nこの２つのセットで肌本来のちからを引き上げ、護る',
     howToUse: '洗顔後、ハーブのちからを顔全体になじませてから、ミトコンドリアのちからを重ねてください。',
-    features: ['ミトコンドリア活性化テクノロジー', 'ケイ素（シリカ）配合', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
+    features: ['ミトコンドリア活性化テクノロジー', 'ハーブ由来11種配合', 'パラベンフリー・アルコールフリー'],
   },
   kimajyoset: {
     name: 'アキノリオセット',
@@ -607,9 +607,9 @@ const enProductContent: Record<string, ProductContent> = {
   mitochondria: {
     name: 'The Power of Mitochondria',
     subtitle: 'Cellular Serum',
-    description: 'The ingredient supplier said: "With a concentration this high, please call it a serum."\nNo foundation. No toner. No double cleanse.\nBorn to guide the skin to its purest, truest form through the practice of subtraction.\nMitochondria and silica awaken the skin\'s innate capacity for beauty.',
+    description: 'The ingredient supplier said: "With a concentration this high, please call it a serum."\nNo foundation. No toner. No double cleanse.\nBorn to guide the skin to its purest, truest form through the practice of subtraction.\nMitochondria awaken the skin\'s innate capacity for beauty.',
     howToUse: 'After cleansing, take an appropriate amount and blend gently over the entire face. Apply an extra layer to areas of concern such as the eyes and mouth.',
-    features: ['Mitochondrial Activation Technology', 'Silica (Silicon Dioxide) Formulation', 'Paraben-free · Alcohol-free'],
+    features: ['Mitochondrial Activation Technology', 'Paraben-free · Alcohol-free'],
   },
   herb: {
     name: 'The Power of Herb',
@@ -653,7 +653,7 @@ const enProductContent: Record<string, ProductContent> = {
     subtitle: 'The Power of Mitochondria + The Power of Herb',
     description: 'The two-product set chosen by the most people as their first step into subtraction skincare.\nWhen The Power of Mitochondria and The Power of Herb come together,\nthe routine that awakens the skin\'s innate strength begins.',
     howToUse: 'After cleansing, apply The Power of Herb over the face, then layer The Power of Mitochondria on top.',
-    features: ['Mitochondrial Activation Technology', 'Silica (Silicon Dioxide) Formulation', '11 botanical herb extracts', 'Paraben-free · Alcohol-free'],
+    features: ['Mitochondrial Activation Technology', '11 botanical herb extracts', 'Paraben-free · Alcohol-free'],
   },
   kimajyoset: {
     name: 'Kagayaki Majo Set',
