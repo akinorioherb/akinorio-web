@@ -38,6 +38,11 @@ export default function SecretBookPage() {
 
       {/* メインの読書エリア */}
       <main className="max-w-2xl mx-auto px-6 pt-12 md:pt-20">
+        {/* 表紙画像 */}
+        <div className="mb-16 md:mb-20 rounded-sm md:rounded-lg shadow-2xl overflow-hidden shadow-rose-900/10 border border-zinc-800/50">
+          <img src="/kindle_cover.jpeg" alt="スキンケア引き算の美学 表紙" className="w-full h-auto" />
+        </div>
+
         <div className="prose prose-invert prose-rose md:prose-lg prose-headings:font-light prose-h1:text-3xl prose-h1:tracking-wider prose-h1:mb-12 prose-h1:text-center prose-h1:bg-clip-text prose-h1:text-transparent prose-h1:bg-gradient-to-r prose-h1:from-white prose-h1:to-zinc-400 prose-p:leading-loose prose-p:tracking-wide prose-p:text-zinc-300 prose-a:text-rose-400 prose-blockquote:border-l-rose-800 prose-blockquote:bg-rose-950/10 prose-blockquote:px-6 prose-blockquote:py-2 prose-blockquote:rounded-r prose-img:rounded-xl shadow-2xl">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
