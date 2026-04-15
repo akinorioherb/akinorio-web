@@ -9,7 +9,7 @@ const COMPANY_VALUES: Record<string, { value: string; href?: string }> = {
   name: { value: '株式会社アキノリオ' },
   address: { value: '〒104-0061\n東京都中央区銀座一丁目22番11号\n銀座大竹ビジデンス2階' },
   email: { value: 'info@akinorio.com', href: 'mailto:info@akinorio.com' },
-  website: { value: 'https://akinorio.com', href: 'https://akinorio.com' },
+  website: { value: 'https://akinorioweb.com', href: 'https://akinorioweb.com' },
   business: { value: '化粧品の企画・製造・販売\n引き算スキンケアブランド「AKINORIO」の運営' },
 }
 

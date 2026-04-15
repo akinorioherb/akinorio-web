@@ -8,21 +8,21 @@ import CTASection from '@/components/home/CTASection'
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | 引き算という、美しさの答え。`,
-  description: SITE_DESCRIPTION,
+  title: `アキノリオ（${SITE_NAME}）公式 | 引き算という、美しさの答え。`,
+  description: `アキノリオ（AKINORIO）公式サイト。${SITE_DESCRIPTION} ミトコンドリアのちから・ハーブのちからなど、東京銀座発の引き算スキンケアブランド。`,
   alternates: {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: `${SITE_NAME} | 引き算という、美しさの答え。`,
-    description: SITE_DESCRIPTION,
+    title: `アキノリオ（${SITE_NAME}）公式 | 引き算という、美しさの答え。`,
+    description: `アキノリオ（AKINORIO）公式サイト。${SITE_DESCRIPTION}`,
     url: SITE_URL,
     images: [
       {
         url: `${SITE_URL}/images/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'AKINORIO | 引き算という、美しさの答え。',
+        alt: 'アキノリオ（AKINORIO）公式 | 引き算という、美しさの答え。',
       },
     ],
   },
