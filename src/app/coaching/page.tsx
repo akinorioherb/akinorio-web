@@ -637,6 +637,20 @@ export default function CoachingPage() {
               </ul>
             </div>
             <p className="capacity-note lp-js-reveal">参加費：<strong>無料</strong>　／　定員：<strong>毎月10名限定</strong></p>
+            <div className="lp-js-reveal" style={{marginTop:'40px', padding:'32px', border:'1px solid rgba(212,175,55,0.3)', borderRadius:'2px', background:'rgba(212,175,55,0.05)'}}>
+              <p style={{textAlign:'center', fontFamily:'Cinzel,serif', fontSize:'0.6rem', letterSpacing:'0.4em', color:'var(--gold)', marginBottom:'20px'}}>APPLICATION REQUIREMENTS</p>
+              <p style={{textAlign:'center', fontWeight:'600', fontSize:'1rem', marginBottom:'16px', color:'var(--text-main)'}}>募集条件</p>
+              <ul style={{listStyle:'none', padding:'0', margin:'0', display:'flex', flexDirection:'column', gap:'12px'}}>
+                <li style={{display:'flex', alignItems:'flex-start', gap:'10px', fontSize:'0.93rem', color:'var(--text-sub)'}}>
+                  <span style={{color:'var(--gold)', flexShrink:0, marginTop:'2px'}}>✦</span>
+                  <span><strong style={{color:'var(--text-main)'}}>30歳以上</strong>の方</span>
+                </li>
+                <li style={{display:'flex', alignItems:'flex-start', gap:'10px', fontSize:'0.93rem', color:'var(--text-sub)'}}>
+                  <span style={{color:'var(--gold)', flexShrink:0, marginTop:'2px'}}>✦</span>
+                  <span><strong style={{color:'var(--text-main)'}}>アキノリオシリーズをまだお使いでない方</strong>のみ対象</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -700,6 +714,7 @@ export default function CoachingPage() {
                 無料で21日間引き算ケアコーチングを受ける
               </a>
               <p className="final-note">LINEに登録後、お届け先の確認をお送りします。<br/>送料無料・追加費用なし。いつでも辞めていただけます。</p>
+              <p className="final-note" style={{marginTop:'12px', fontSize:'0.8rem', opacity:'0.7'}}>※ 参加条件：30歳以上 ／ アキノリオシリーズ未使用の方のみ対象</p>
             </div>
             <div className="divider" style={{marginTop:'64px'}}></div>
             <p className="lp-js-reveal" style={{textAlign:'center', fontFamily:'Cinzel,serif', fontSize:'0.65rem', letterSpacing:'0.48em', color:'var(--text-muted)', marginTop:'40px'}}>AKINORIO</p>
