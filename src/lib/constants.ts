@@ -10,7 +10,7 @@ export const PRODUCTS: Product[] = [
   {
     id: '1', slug: 'mitochondria', name: 'ミトコンドリアのちから', subtitle: '細胞美容液',
     description: '原料メーカーが「これだけの配合量は美容液と呼んでください」と言った一本。\nファンデーションも化粧水もいらない。ダブル洗顔も不要。\n最終的にこの一本で済む素肌へ導くために生まれた、引き算のスキンケアの核心。\nミトコンドリアの力で、細胞が自ら美しくなる力を呼び覚まします。',
-    category: 'single', price: 13200, volume: '50g',
+    category: 'single', price: 13200, volume: '47g',
     ingredients: 'スクワラン、ホホバ種子油、ミトコンドリア活性成分配合',
     usageDuration: '約3ヶ月',
     features: ['ミトコンドリア活性化テクノロジー', 'パラベンフリー・アルコールフリー'],
@@ -55,7 +55,7 @@ export const PRODUCTS: Product[] = [
     shopifyVariantId: '62656776372595',
   },
   {
-    id: '4', slug: 'balm', name: '金の糸クリーム（クリアクリスタルバーム）', subtitle: '究極の細胞覚醒バーム',
+    id: '4', slug: 'balm', name: 'クリアクリスタルバーム', subtitle: '究極の細胞覚醒バーム',
     description: '最上級の保湿と細胞活性を両立させた奇跡のバーム。\n夜のスキンケアの最後に塗るだけで、翌朝の肌が見違えるように生まれ変わります。',
     category: 'single', price: 22000, volume: '100g',
     usageDuration: '約4〜6ヶ月',
