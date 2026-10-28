@@ -7,22 +7,22 @@ const crossSells = [
   {
     id: "01",
     title: "ミトコンドリアのちから",
-    image: "/images/products/mitochondria.png",
-    price: "¥22,000",
-    desc: "極限までピュアな状態で抽出された美容液。水のように軽やかに肌の奥深くへ浸透し、かつてないハリと弾力を目覚めさせます。"
+    image: "/images/products-official/mitokondria.jpg",
+    price: "¥13,200",
+    desc: "ハーブを特別に配合したゲルクリーム。使う回数に決まりはなく、お化粧直しや乾燥が気になるときにも使えます。"
   },
   {
     id: "02",
     title: "ハーブのちから",
-    image: "/images/products/herb.png",
-    price: "¥18,000",
+    image: "/images/products-official/herb.jpg",
+    price: "¥8,800",
     desc: "自然の生命力が宿るハーブの滴。肌の土台を整え、硬くなった角質をやさしく解きほぐすことで、美容成分の浸透を劇的に高めます。"
   },
   {
     id: "03",
     title: "輝肌Kihada",
-    image: "/images/products/kihada.png",
-    price: "¥12,000",
+    image: "/images/products-official/kihada.jpg",
+    price: "¥11,000",
     desc: "呼び覚ました肌本来のチカラを、極上のヴェールで閉じ込める。与えすぎない「引き算」が完成させる、圧倒的な艶と透明感。"
   }
 ]
