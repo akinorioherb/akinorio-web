@@ -8,18 +8,18 @@ import { translations } from '@/lib/i18n';
 
 // ec-site/products/*.png と各商品を紐付け
 const BG_MAP: Record<string, string> = {
-  'mitochondria': 'mitokondria.png',
-  'herb': 'herb.png',
-  'kihada': 'kihada.png',
-  'balm': 'kinnoito.png',
-  'serum': 'serum.png',
-  'cleansing': 'cleansing.png',
-  'uv': 'uv.png',
+  'mitochondria': '/images/products-official/mitokondria.jpg',
+  'herb': '/images/products-official/herb.jpg',
+  'kihada': '/images/products-official/kihada.jpg',
+  'balm': '/images/products-official/balm.jpg',
+  'serum': '/images/products-official/serum.jpg',
+  'cleansing': '/images/products-official/cleansing.jpg',
+  'uv': '/images/products-official/uv.jpg',
   'starter-set': 'starterset.png',
   'minus20-set': 'kimajyoset.png',
   'kagayaki-majo': 'allseries_fine.png',
   'premium': 'allseries_fine.png',
-  'perfume': 'shampoo.png',
+  'perfume': '/images/products-official/perfume.jpg',
 };
 
 const OBJECT_POSITION_MAP: Record<string, string> = {
@@ -63,13 +63,15 @@ export default function ProductShowcase() {
         <div className="absolute inset-0 z-0 bg-[#111111]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
-            src={`/images/products-bg-hik/${bgFileName}`} 
+            src={bgFileName.startsWith('/') ? bgFileName : `/images/products-bg-hik/${bgFileName}`} 
             alt={`${product.name} background`} 
             className="w-full h-full object-cover"
             style={{ 
               objectPosition: OBJECT_POSITION_MAP[product.slug] || 'center center'
             }}
           />
+          {/* 公式の商品写真は明るい背景のため、文字が読めるよう暗く重ねる */}
+          {bgFileName.startsWith('/') && <div className="absolute inset-0 bg-black/45" />}
         </div>
 
         <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 pointers-events-none">
@@ -189,7 +191,7 @@ export default function ProductShowcase() {
                 </div>
 
                 <Image
-                   src={`/images/products-bg-hik/${bgFileName}`}
+                   src={bgFileName.startsWith('/') ? bgFileName : `/images/products-bg-hik/${bgFileName}`}
                    alt={galleryName}
                    fill
                    className="object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-out z-10"
@@ -197,6 +199,7 @@ export default function ProductShowcase() {
                    priority={false}
                    quality={100}
                 />
+                {bgFileName.startsWith('/') && <div className="absolute inset-0 z-10 bg-black/35 pointer-events-none" />}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 flex flex-col justify-end p-5 md:p-8 z-20">
                   <div className="w-full flex justify-between items-start mb-6">
